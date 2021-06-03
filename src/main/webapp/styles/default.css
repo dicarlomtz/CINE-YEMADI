@@ -165,7 +165,7 @@ nav ul li a:hover {
 .input-login-register {
   background: transparent;
   border: 0 solid;
-  border-bottom: 1px solid rgba(white, 0.5);
+  border-bottom: 1px solid rgb(4, 170, 109);
   color: white;
   display: block;
   margin: 1rem;
@@ -181,7 +181,7 @@ textarea{
 }
 
 .login-submit {
-  border: 1px solid white;
+  border: 1px solid rgb(4, 170, 109);
   border-radius: 5px;
   background: transparent;
   color: white;
