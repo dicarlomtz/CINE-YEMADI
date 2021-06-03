@@ -1,61 +1,105 @@
-//Todo el documento, generales
-* , html{
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
+/*Todo el documento, generales*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
 }
-body{
-  font-family: montserrat;
+html {
+  font-family: "Source Sans Pro", sans-serif;
+  scroll-behavior: smooth;
 }
-//Nav bar
-
-nav{
+.max-width {
+  max-width: 1300px;
+  padding: 0 80px;
+  margin: auto;
+}
+/*Nav bar*/
+nav {
   height: 40px;
   width: 100%;
 }
-nav ul li{
+nav ul li {
   display: inline-block;
   line-height: 40px;
   margin: 0 5px;
-  
 }
-nav ul li a{
+nav ul li a {
   text-decoration: none;
   color: grey;
   font-size: 17px;
   padding: 7px 13px;
   border-radius: 3px;
- 
 }
 
 nav ul li:last-child {
-  text-align:right;
+  text-align: right;
   float: right;
 }
-nav ul li button{
-    background:green;
-    text-decoration: none;
-    color: white;
-    font-size: 17px;
-    border-radius: 3px;
+nav ul li button {
+  background: rgb(4, 170, 109);
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+  border-radius: 3px;
 }
-nav ul li button:hover{
-    background: blue;
-    cursor: pointer;
+nav ul li button:hover {
+  background: none;
+  color: rgb(4, 170, 109);
+  cursor: pointer;
 }
-nav ul li a:hover{
-    color: white;
-    background: blue;
+nav ul li a:hover {
+  color: white;
+  background: blue;
 }
-  
 
+/*section-img-header*/
+.img-section {
+  color: white;
+  width: 100%;
+  height: 150px;
+  justify-content: center;
+  text-align: center;
+  background-image: url("../img/imagen-banner.jpg");
+}
 
-//footer
+/*section-movies*/
+.section-movies {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+}
+.movie-box {
+  background-color: black;
+  width: 24%;
+  margin: 15px;
+  float: left;
+  height: 250px;
+  text-align: center;
+  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-top: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.4s;
+}
+.movie-box:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  transform: translate(0px, -8px);
+  transition: 0.6s;
+}
+
+/*footer*/
 footer {
-    background: black;
-    padding: 20px 23px;
-    color: white;
-    text-align: center;
+  background: black;
+  height: 60px;
+  color: white;
+  text-align: center;
+  position: fixed;
+  padding: 10px 10px 0px 10px;
+  bottom: 0;
+  width: 100%;
 }
