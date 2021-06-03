@@ -129,10 +129,20 @@ nav ul li a:hover {
 
 .desc {
   text-decoration: underline;
-  background-color: white;
+  background-color: rgb(4, 170, 109);
+  color:white;
   width: 100%;
   padding: 5px;
   text-align: center;
+}
+.desc a{
+  color:white;
+}
+.desc a:hover{
+  border: 5px solid rgb(28, 39, 39); 
+  background-color: rgb(28, 39, 39);
+  border-radius: 5px;
+  color:rgb(4, 170, 109);;
 }
 
 
