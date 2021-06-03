@@ -66,13 +66,13 @@ nav ul li a:hover {
   background-image: url("../img/imagen-banner.jpg");
   background-size: cover;
 }
-.img-section p{
+.img-section p {
   font-size: 30px;
 }
-.img-section p:last-child{
+.img-section p:last-child {
   text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
   font-size: 110px;
-  letter-spacing:50px
+  letter-spacing: 50px;
 }
 /*section-movies*/
 .section-movies {
@@ -103,7 +103,7 @@ nav ul li a:hover {
   transform: translate(0px, -8px);
   transition: 0.6s;
 }
-.movie-card{
+.movie-card {
   margin-left: 2%;
   width: 95%;
   height: 95%;
@@ -113,7 +113,7 @@ nav ul li a:hover {
 .dropdown {
   justify-content: center;
 }
-.dropdown img{
+.dropdown img {
   width: 100%;
   height: 100%;
 }
@@ -124,33 +124,82 @@ nav ul li a:hover {
 .dropdown:hover .dropdown-schedules {
   display: block;
   border-bottom-right-radius: 10px;
-  border: 5px solid black; 
+  border: 5px solid black;
 }
 
 .desc {
   text-decoration: underline;
   background-color: rgb(4, 170, 109);
-  color:white;
+  color: white;
   width: 100%;
   padding: 5px;
   text-align: center;
 }
-.desc a{
-  color:white;
+.desc a {
+  color: white;
 }
-.desc a:hover{
-  border: 5px solid rgb(28, 39, 39); 
+.desc a:hover {
+  border: 5px solid rgb(28, 39, 39);
   background-color: rgb(28, 39, 39);
   border-radius: 5px;
-  color:rgb(4, 170, 109);;
+  color: rgb(4, 170, 109);
 }
 
+/*login*/
+.form {
+  background: #222;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+  margin: auto;
+  margin-top: 150px;
+  max-width: 50%;
+}
+.form h1 {
+  color: azure;
+  text-align: center;
+}
+.login-text {
+  color: white;
+  text-align: center;
+}
+
+.input-login-register {
+  background: transparent;
+  border: 0 solid;
+  border-bottom: 1px solid rgba(white, 0.5);
+  color: white;
+  display: block;
+  margin: 1rem;
+  padding: 0.5rem;
+  width: calc(100% - 3rem);
+}
+
+textarea{
+  width: 100%;
+  height: 150px;
+  display: block;
+  resize: none;
+}
+
+.login-submit {
+  border: 1px solid white;
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+  display: block;
+  margin: 1rem auto;
+  min-width: 2px;
+  padding: 10px;
+}
+.login-submit:hover {
+  cursor: pointer;
+}
+/*register*/
 
 /*footer*/
 footer {
   background: black;
   height: 60px;
-  
+
   color: white;
   text-align: center;
   position: relative;
@@ -159,9 +208,9 @@ footer {
   width: 100%;
 }
 
-footer a{
+footer a {
   color: white;
 }
-footer a:hover{
-  color:rgb(4, 170, 109);
+footer a:hover {
+  color: rgb(4, 170, 109);
 }
