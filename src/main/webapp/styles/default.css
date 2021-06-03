@@ -6,6 +6,7 @@
   text-decoration: none;
 }
 html {
+  background-color: azure;
   font-family: "Source Sans Pro", sans-serif;
   scroll-behavior: smooth;
 }
@@ -16,18 +17,19 @@ html {
 }
 /*Nav bar*/
 nav {
-  height: 40px;
+  /*background-color: rgb(28, 39, 39);*/
+  height: 50px;
   width: 100%;
 }
 nav ul li {
   display: inline-block;
-  line-height: 40px;
+  line-height: 45px;
   margin: 0 5px;
 }
 nav ul li a {
   text-decoration: none;
   color: grey;
-  font-size: 17px;
+  font-size: 20px;
   padding: 7px 13px;
   border-radius: 3px;
 }
@@ -50,19 +52,27 @@ nav ul li button:hover {
 }
 nav ul li a:hover {
   color: white;
-  background: blue;
+  background: rgb(4, 170, 109);
 }
 
 /*section-img-header*/
 .img-section {
   color: white;
   width: 100%;
-  height: 150px;
+  height: 200px;
   justify-content: center;
   text-align: center;
   background-image: url("../img/imagen-banner.jpg");
+  background-size: cover;
 }
-
+.img-section p{
+  font-size: 30px;
+}
+.img-section p:last-child{
+  text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
+  font-size: 110px;
+  letter-spacing:50px
+}
 /*section-movies*/
 .section-movies {
   display: flex;
@@ -96,10 +106,18 @@ nav ul li a:hover {
 footer {
   background: black;
   height: 60px;
+  
   color: white;
   text-align: center;
   position: fixed;
   padding: 10px 10px 0px 10px;
   bottom: 0;
   width: 100%;
+}
+
+footer a{
+  color: white;
+}
+footer a:hover{
+  color:rgb(4, 170, 109);
 }
