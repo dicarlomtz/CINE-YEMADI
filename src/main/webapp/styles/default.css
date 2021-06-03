@@ -1,4 +1,61 @@
+//Todo el documento, generales
+* , html{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+body{
+  font-family: montserrat;
+}
+//Nav bar
 
-html * {
-    
+nav{
+  height: 40px;
+  width: 100%;
+}
+nav ul li{
+  display: inline-block;
+  line-height: 40px;
+  margin: 0 5px;
+  
+}
+nav ul li a{
+  text-decoration: none;
+  color: grey;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+ 
+}
+
+nav ul li:last-child {
+  text-align:right;
+  float: right;
+}
+nav ul li button{
+    background:green;
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+    border-radius: 3px;
+}
+nav ul li button:hover{
+    background: blue;
+    cursor: pointer;
+}
+nav ul li a:hover{
+    color: white;
+    background: blue;
+}
+  
+
+
+//footer
+footer {
+    background: black;
+    padding: 20px 23px;
+    color: white;
+    text-align: center;
 }
