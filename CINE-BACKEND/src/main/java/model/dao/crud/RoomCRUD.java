@@ -2,7 +2,7 @@ package model.dao.crud;
 
 import cr.ac.una.db.dao.crud.AbstractCRUD;
 
-public class CinemaCRUD extends AbstractCRUD {
+public class RoomCRUD extends AbstractCRUD {
 
     @Override
     public String getListAllCmd() {
@@ -31,26 +31,26 @@ public class CinemaCRUD extends AbstractCRUD {
 
     protected static final String LIST_CMD
             = "select "
-            + "id_cinema, nombre, direccion "
-            + "from bd_cinema.cinema order by id_cinema; ";
+            + "cinema_id, numero, capacidad "
+            + "from bd_cinema.sala order by cinema_id; ";
 
     protected static final String ADD_CMD
-            = "insert into bd_cinema.cinema "
-            + "(id_cinema, nombre, direccion) "
+            = "insert into bd_cinema.sala "
+            + "(cinema_id, numero, capacidad) "
             + "values (?, ?, ?); ";
     
     protected static final String RETRIEVE_CMD
             = "select "
-            + "id_cinema, nombre, direccion "
-            + "from bd_cinema.cinema where id_cinema = ?; ";
+            + "cinema_id, numero, capacidad "
+            + "from bd_cinema.sala where numero = ? and cinema_id = ?; ";
     
     protected static final String UPDATE_CMD
-            = "update bd_cinema.cinema "
-            + "set nombre = ?, direccion = ? "
-            + "where id_cinema = ?; ";
+            = "update bd_cinema.sala "
+            + "set capacidad = ? "
+            + "where numero = ? and cinema_id = ?; ";
     
     protected static final String DELETE_CMD
-            = "delete from bd_cinema.cinema "
-            + "where id_cinema = ?; ";
+            = "delete from bd_cinema.sala "
+            + "where numero = ? and cinema_id = ?; ";
 
 }

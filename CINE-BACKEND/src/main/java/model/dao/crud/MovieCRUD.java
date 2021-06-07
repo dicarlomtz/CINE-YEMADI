@@ -2,7 +2,7 @@ package model.dao.crud;
 
 import cr.ac.una.db.dao.crud.AbstractCRUD;
 
-public class CinemaCRUD extends AbstractCRUD {
+public class MovieCRUD extends AbstractCRUD {
 
     @Override
     public String getListAllCmd() {
@@ -31,26 +31,26 @@ public class CinemaCRUD extends AbstractCRUD {
 
     protected static final String LIST_CMD
             = "select "
-            + "id_cinema, nombre, direccion "
-            + "from bd_cinema.cinema order by id_cinema; ";
+            + "id_pelicula, titulo, poster_path, movie_data "
+            + "from bd_cinema.pelicula order by id_pelicula; ";
 
     protected static final String ADD_CMD
-            = "insert into bd_cinema.cinema "
-            + "(id_cinema, nombre, direccion) "
-            + "values (?, ?, ?); ";
+            = "insert into bd_cinema.pelicula "
+            + "(id_pelicula, titulo, poster_path, movie_data) "
+            + "values (?, ?, ?, ?); ";
     
     protected static final String RETRIEVE_CMD
             = "select "
-            + "id_cinema, nombre, direccion "
-            + "from bd_cinema.cinema where id_cinema = ?; ";
+            + "id_pelicula, titulo, poster_path, movie_data "
+            + "from bd_cinema.pelicula where id_pelicula = ?; ";
     
     protected static final String UPDATE_CMD
-            = "update bd_cinema.cinema "
-            + "set nombre = ?, direccion = ? "
-            + "where id_cinema = ?; ";
+            = "update bd_cinema.pelicula "
+            + "set titulo = ?, poster_path = ?, movie_data = ? "
+            + "where id_pelicula = ?; ";
     
     protected static final String DELETE_CMD
-            = "delete from bd_cinema.cinema "
-            + "where id_cinema = ?; ";
+            = "delete from bd_cinema.pelicula "
+            + "where id_pelicula = ?; ";
 
 }
