@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    public User(String id, Client userClientInfo, String password, Rol rol) {
+    public User(String id, Customer userClientInfo, String password, Rol rol) {
         this.id = id;
         this.userClientInfo = userClientInfo;
         this.password = password;
@@ -23,11 +23,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public Client getUserClientInfo() {
+    public Customer getUserClientInfo() {
         return userClientInfo;
     }
 
-    public void setUserClientInfo(Client userClientInfo) {
+    public void setUserClientInfo(Customer userClientInfo) {
         this.userClientInfo = userClientInfo;
     }
 
@@ -48,7 +48,7 @@ public class User implements Serializable {
     }
     
     private String id;
-    private Client userClientInfo;
+    private Customer userClientInfo;
     private String password;
     private Rol rol;
     

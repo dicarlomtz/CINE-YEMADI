@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Invoice implements Serializable {
 
-    public Invoice(int id, Date date, Client client, PaymentCard paymentCard) {
+    public Invoice(int id, Date date, Customer client, PaymentCard paymentCard) {
         this.id = id;
         this.date = date;
         this.client = client;
@@ -32,11 +32,11 @@ public class Invoice implements Serializable {
         this.date = date;
     }
 
-    public Client getClient() {
+    public Customer getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(Customer client) {
         this.client = client;
     }
 
@@ -50,7 +50,7 @@ public class Invoice implements Serializable {
     
     private int id;
     private Date date;
-    private Client client;
+    private Customer client;
     private PaymentCard paymentCard;
     
 }

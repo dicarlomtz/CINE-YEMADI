@@ -2,9 +2,9 @@ package model.entities;
 
 import java.io.Serializable;
 
-public class Client implements Serializable {
+public class Customer implements Serializable {
 
-    public Client(String id, String surnames, String name, String telephone, PaymentCard paymentCard) {
+    public Customer(String id, String surnames, String name, String telephone, PaymentCard paymentCard) {
         this.id = id;
         this.surnames = surnames;
         this.name = name;
@@ -12,7 +12,7 @@ public class Client implements Serializable {
         this.paymentCard = paymentCard;
     }
 
-    public Client() {
+    public Customer() {
         this(null, null, null, null, null);
     }
 
