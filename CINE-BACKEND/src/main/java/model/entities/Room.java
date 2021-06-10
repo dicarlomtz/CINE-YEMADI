@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import org.json.JSONObject;
 
 public class Room implements Serializable {
 
@@ -36,6 +37,18 @@ public class Room implements Serializable {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+    
+    public JSONObject toJSON(){
+        JSONObject json = new JSONObject();
+        json.put("cinema", getCinema().toJSON());
+        json.put("number", getNumber());
+        json.put("capacity", getCapacity());
+        return json;
+    }
+    
+    public String buildKey(){
+       return String.format("%d%d", getCinema().getId(), getNumber());
     }
     
     private Cinema cinema;

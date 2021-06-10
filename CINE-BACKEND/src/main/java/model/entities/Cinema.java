@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import org.json.JSONObject;
 
 public class Cinema implements Serializable {
 
@@ -36,6 +37,14 @@ public class Cinema implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("id", getId());
+        json.put("name", getName());
+        json.put("address", getAddress());
+        return json;
     }
     
     private int id;
