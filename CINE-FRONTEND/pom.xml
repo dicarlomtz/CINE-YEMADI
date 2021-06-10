@@ -16,9 +16,14 @@
     
     <dependencies>
         <dependency>
-            <groupId>com.mycompany</groupId>
-            <artifactId>JSONLib</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CINE-BACKEND</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
