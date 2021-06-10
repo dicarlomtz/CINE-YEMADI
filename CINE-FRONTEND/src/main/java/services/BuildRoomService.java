@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
@@ -24,20 +25,27 @@ public class BuildRoomService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
-            response.setContentType("application/json;charset=UTF-8");
-            encoding = Optional.of(request.getCharacterEncoding());
-            
-            JSONObject json = new JSONObject(toUTF8String(request.getParameter("room")));
-            
-            Room room = new Room(
-                    new CinemaDAO().retrieve(json.getInt("cinema-id")),
-                    json.getInt("number"),
-                    json.getInt("capacity"));
-            new RoomDAO().add(room.buildKey(), room);
-        } catch (SQLException ex) {
-            Logger.getLogger(BuildRoomService.class.getName()).log(Level.SEVERE, null, ex);
+        request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setContentType("application/json;charset=UTF-8");
+        encoding = Optional.of(request.getCharacterEncoding());
+        try (PrintWriter out = response.getWriter()) {
+            JSONObject res = new JSONObject();
+            try {
+                JSONObject json = new JSONObject(toUTF8String(request.getParameter("room")));
+
+                Room room = new Room(
+                        new CinemaDAO().retrieve(json.getInt("cinema-id")),
+                        json.getInt("number"),
+                        json.getInt("capacity"));
+
+                new RoomDAO().add(room.buildKey(), room);
+                res.put("result",
+                        String.format("Agregando sala con código: '%s'%n",
+                                room.buildKey()));
+            } catch (SQLException | IOException ex) {
+                res.put("result", String.format("La sala no se pudo agregar%n"));
+            }
+            out.println(res.toString(4));
         }
     }
 
