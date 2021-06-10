@@ -19,7 +19,11 @@ function cargarCartelera(datos)
             var nuevaCelda;
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.informacion;
+            nuevaCelda.textContent = fila.secuencia;
+            nuevaCelda.setAttribute('class', 'd1');
+            
+            nuevaCelda = nuevaFila.insertCell(-1);
+            nuevaCelda.textContent = fila.nombre;
             nuevaCelda.setAttribute('class', 'd1');
         });
     }
