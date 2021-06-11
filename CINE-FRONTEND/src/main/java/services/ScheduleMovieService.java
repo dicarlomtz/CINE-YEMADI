@@ -2,31 +2,56 @@ package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Optional;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.CinemaDAO;
+import model.dao.FunctionDAO;
+import model.dao.MovieDAO;
 import model.dao.RoomDAO;
-import model.entities.RoomList;
+import model.entities.Function;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-@WebServlet(name = "RoomService", urlPatterns = {"/RoomService"})
-public class RoomService extends HttpServlet {
+@WebServlet(name = "ScheduleMovieService", urlPatterns = {"/ScheduleMovieService"})
+@MultipartConfig
+public class ScheduleMovieService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         response.setContentType("application/json;charset=UTF-8");
+        encoding = Optional.of(request.getCharacterEncoding());
         try (PrintWriter out = response.getWriter()) {
+            JSONObject res = new JSONObject();
             try {
-                out.println(RoomListJSON());
-            } catch (IOException | SQLException ex) {
-                System.err.printf("Excepción: '%s'%n", ex.getMessage());
-                out.println(new JSONObject());
-            }
-        }
+                JSONObject json = new JSONObject(toUTF8String(request.getParameter("screening")));
 
+                Function function = new Function(
+                        new CinemaDAO().retrieve(json.getInt("cinema")),
+                        new RoomDAO().retrieve(json.getString("room")),
+                        new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(json.getString("date")),
+                        new MovieDAO().retrieve(json.getString("movie"))
+                );
+
+                new FunctionDAO().add(function.buildKey(), function);
+                res.put("result",
+                        String.format("Agregando proyección con código: '%s'%n",
+                                function.buildKey()));
+            } catch (IOException | SQLException | ParseException | JSONException ex) {
+                res.put("result", String.format("La proyección no se pudo agregar%n"));
+            }
+            out.println(res.toString(4));
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,8 +93,10 @@ public class RoomService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public String RoomListJSON()
-            throws IOException, SQLException {
-        return new RoomList(new RoomDAO().listAll()).toJSON().toString(4);
+    private String toUTF8String(String s) throws UnsupportedEncodingException {
+        return encoding.isPresent() ? s : new String(s.getBytes(), StandardCharsets.UTF_8);
     }
+
+    private Optional<String> encoding;
+
 }

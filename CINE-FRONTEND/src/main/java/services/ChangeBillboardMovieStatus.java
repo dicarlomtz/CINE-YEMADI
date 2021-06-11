@@ -2,31 +2,41 @@ package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.Optional;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.RoomDAO;
-import model.entities.RoomList;
+import model.dao.MovieDAO;
+import model.entities.Movie;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-@WebServlet(name = "RoomService", urlPatterns = {"/RoomService"})
-public class RoomService extends HttpServlet {
+public class ChangeBillboardMovieStatus extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            JSONObject res = new JSONObject();
             try {
-                out.println(RoomListJSON());
-            } catch (IOException | SQLException ex) {
-                System.err.printf("Excepción: '%s'%n", ex.getMessage());
-                out.println(new JSONObject());
-            }
-        }
+                JSONObject json = new JSONObject(toUTF8String(request.getParameter("movie")));
 
+                Movie movie = new MovieDAO().retrieve(json.getString("id"));
+                //falta cambiar estado
+                new MovieDAO().update(movie.getId(), movie);
+
+                res.put("result",
+                        String.format("Cambiando estado de cartelera a película: '%s'%n",
+                                movie.getId()));
+            } catch (IOException | SQLException | JSONException ex) {
+                res.put("result", String.format("No se logró realizar el cambio%n"));
+            }
+            out.println(res.toString(4));
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,8 +78,9 @@ public class RoomService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public String RoomListJSON()
-            throws IOException, SQLException {
-        return new RoomList(new RoomDAO().listAll()).toJSON().toString(4);
+    private String toUTF8String(String s) throws UnsupportedEncodingException {
+        return encoding.isPresent() ? s : new String(s.getBytes(), StandardCharsets.UTF_8);
     }
+
+    private Optional<String> encoding;
 }

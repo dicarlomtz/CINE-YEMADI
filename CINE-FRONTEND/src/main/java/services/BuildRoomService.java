@@ -6,8 +6,6 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +17,7 @@ import model.dao.RoomDAO;
 import model.entities.Room;
 import org.json.JSONObject;
 
-@WebServlet(name = "ServicioFormulario", urlPatterns = {"/ServicioFormulario"})
+@WebServlet(name = "BuildRoomService", urlPatterns = {"/BuildRoomService"})
 @MultipartConfig
 public class BuildRoomService extends HttpServlet {
 
@@ -34,7 +32,7 @@ public class BuildRoomService extends HttpServlet {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("room")));
 
                 Room room = new Room(
-                        new CinemaDAO().retrieve(json.getInt("cinema-id")),
+                        new CinemaDAO().retrieve(json.getInt("cinema")),
                         json.getInt("number"),
                         json.getInt("capacity"));
 

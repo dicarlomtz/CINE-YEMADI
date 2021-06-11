@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import org.json.JSONObject;
 
 public class Movie implements Serializable {
 
@@ -45,6 +46,15 @@ public class Movie implements Serializable {
 
     public void setData(String data) {
         this.data = data;
+    }
+    
+     public JSONObject toJSON(){
+        JSONObject json = new JSONObject();
+        json.put("id", getId());
+        json.put("title", getTitle());
+        json.put("poster-path", getPosterPath());
+        json.put("data", getData());
+        return json;
     }
     
     private String id;

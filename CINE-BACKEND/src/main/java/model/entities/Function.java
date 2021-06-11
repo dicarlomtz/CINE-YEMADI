@@ -47,10 +47,14 @@ public class Function implements Serializable {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
-    
+
+    public String buildKey() {
+        return String.format("%d%d%s", getCinema().getId(), getRoom().getNumber(), getDate().toString());
+    }
+
     private Cinema cinema;
     private Room room;
     private Date date;
     private Movie movie;
-    
+
 }

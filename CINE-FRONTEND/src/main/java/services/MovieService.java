@@ -8,25 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.RoomDAO;
-import model.entities.RoomList;
+import model.dao.MovieDAO;
+import model.entities.MovieList;
 import org.json.JSONObject;
 
-@WebServlet(name = "RoomService", urlPatterns = {"/RoomService"})
-public class RoomService extends HttpServlet {
+@WebServlet(name = "MovieService", urlPatterns = {"/MovieService"})
+public class MovieService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
+       response.setContentType("application/json;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             try {
-                out.println(RoomListJSON());
+                out.println(MovieListJSON());
             } catch (IOException | SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
                 out.println(new JSONObject());
             }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,8 +67,9 @@ public class RoomService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public String RoomListJSON()
+    
+        public String MovieListJSON()
             throws IOException, SQLException {
-        return new RoomList(new RoomDAO().listAll()).toJSON().toString(4);
+        return new MovieList(new MovieDAO().listAll()).toJSON().toString(4);
     }
 }
