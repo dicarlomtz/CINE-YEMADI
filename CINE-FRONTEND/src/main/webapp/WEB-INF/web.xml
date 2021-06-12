@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
-     <servlet>
+    <servlet>
         <servlet-name>MoviesListService</servlet-name>
         <servlet-class>services.MoviesListService</servlet-class>
     </servlet>
@@ -12,7 +12,11 @@
         <servlet-name>BuildRoomService</servlet-name>
         <servlet-class>services.BuildRoomService</servlet-class>
     </servlet>
-      <servlet-mapping>
+    <servlet>
+        <servlet-name>LoginService</servlet-name>
+        <servlet-class>services.LoginService</servlet-class>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
         <url-pattern>/MoviesListService</url-pattern>
     </servlet-mapping>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>BuildRoomService</servlet-name>
         <url-pattern>/BuildRoomService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginService</servlet-name>
+        <url-pattern>/LoginService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
