@@ -13,8 +13,21 @@
         <servlet-class>services.BuildRoomService</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>LoginService</servlet-name>
         <servlet-class>services.LoginService</servlet-class>
+=======
+        <servlet-name>ScheduleMovieService</servlet-name>
+        <servlet-class>services.ScheduleMovieService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MovieService</servlet-name>
+        <servlet-class>services.MovieService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeBillboardMovieStatus</servlet-name>
+        <servlet-class>services.ChangeBillboardMovieStatus</servlet-class>
+>>>>>>> origin/main
     </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
@@ -29,8 +42,21 @@
         <url-pattern>/BuildRoomService</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>LoginService</servlet-name>
         <url-pattern>/LoginService</url-pattern>
+=======
+        <servlet-name>ScheduleMovieService</servlet-name>
+        <url-pattern>/ScheduleMovieService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MovieService</servlet-name>
+        <url-pattern>/MovieService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeBillboardMovieStatus</servlet-name>
+        <url-pattern>/ChangeBillboardMovieStatus</url-pattern>
+>>>>>>> origin/main
     </servlet-mapping>
     <session-config>
         <session-timeout>
