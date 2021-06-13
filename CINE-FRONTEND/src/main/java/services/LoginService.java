@@ -3,11 +3,15 @@ package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.dao.UserDAO;
+import model.entities.User;
 
 @WebServlet(name = "LoginService", urlPatterns = {"/LoginService"})
 public class LoginService extends HttpServlet {
@@ -23,9 +27,25 @@ public class LoginService extends HttpServlet {
     String mail =request.getParameter("mail");  
     String pass =request.getParameter("password");  
     
-    System.out.println(mail +"-" +pass);
     
-    response.sendRedirect("index.html");
+    HttpSession session = request.getSession(true);
+    
+    User user = null;
+        try {
+            user = new UserDAO().retrieve(mail);
+        } catch (Exception ex) {
+            
+        }
+
+        if (Objects.isNull(user) || !user.getPassword().equals(pass)) {
+            throw new IllegalArgumentException();
+        }
+        
+        session.setAttribute("user", user);
+        session.setAttribute("id", user.getId());
+        response.sendRedirect("index.html");
+   
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
