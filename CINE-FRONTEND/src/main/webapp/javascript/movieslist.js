@@ -3,7 +3,7 @@ function init()
     fetch('MoviesListService').then(function(resultado) {
         return resultado.json();
     }).then(function(datos) {
-       cargarCartelera(datos['datos_peliculas']);
+       cargarCartelera(datos['room-list']);
     });
 }
 
@@ -19,11 +19,19 @@ function cargarCartelera(datos)
             var nuevaCelda;
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.secuencia;
+            nuevaCelda.textContent = fila.id;
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.nombre;
+            nuevaCelda.textContent = fila.title;
+            nuevaCelda.setAttribute('class', 'd1');
+            
+            nuevaCelda = nuevaFila.insertCell(-1);
+            nuevaCelda.textContent = fila.poster-patch;
+            nuevaCelda.setAttribute('class', 'd1');
+            
+            nuevaCelda = nuevaFila.insertCell(-1);
+            nuevaCelda.textContent = fila.data;
             nuevaCelda.setAttribute('class', 'd1');
         });
     }
