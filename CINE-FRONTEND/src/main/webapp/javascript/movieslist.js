@@ -33,6 +33,15 @@ function cargarCartelera(datos)
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.textContent = fila.data;
             nuevaCelda.setAttribute('class', 'd1');
+            
+            var boton = document.creatElement("INPUT");
+            boton.setAttribute('type', 'button');
+            boton.setAttribute('value', 'Cambiar Estado');
+            boton.setAttribute('onclick', `ChangeBillboardMovieStatus?movie=${id}`);
+            
+            nuevaCelda = nuevaFila.insertCell(-1);
+            nuevaCelda.appendChild(boton);
+            nuevaCelda.setAttribute('class', 'd1');
         });
     }
 }

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.dao.TicketDAO;
 import model.entities.TicketList;
 import org.json.JSONObject;
@@ -19,10 +20,13 @@ public class UserHistoryService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        HttpSession session = request.getSession(true);
+        String id = (String) session.getAttribute("id");
+        
         try(PrintWriter out = response.getWriter())
         {
             try {
-                out.println(TicketListJSON(request.getParameter("id")));
+                out.println(TicketListJSON(id));
             } catch (IOException | SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
                 out.println(new JSONObject());
