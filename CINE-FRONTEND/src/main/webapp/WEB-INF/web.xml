@@ -28,6 +28,14 @@
         <servlet-name>ChangeBillboardMovieStatus</servlet-name>
         <servlet-class>services.ChangeBillboardMovieStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TicketsSoldService</servlet-name>
+        <servlet-class>services.TicketsSoldService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserHistoryService</servlet-name>
+        <servlet-class>services.UserHistoryService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
         <url-pattern>/MoviesListService</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>ChangeBillboardMovieStatus</servlet-name>
         <url-pattern>/ChangeBillboardMovieStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TicketsSoldService</servlet-name>
+        <url-pattern>/TicketsSoldService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserHistoryService</servlet-name>
+        <url-pattern>/UserHistoryService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

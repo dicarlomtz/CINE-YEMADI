@@ -2,6 +2,7 @@ package model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import org.json.JSONObject;
 
 public class Ticket implements Serializable {
 
@@ -74,6 +75,21 @@ public class Ticket implements Serializable {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+    
+    public JSONObject toJSON()
+    {
+        JSONObject json = new JSONObject();
+        
+        json.put("id", this.getId());
+        json.put("invoice", this.getInvoice().getId());
+        json.put("cinema", this.getCinema().getName());
+        json.put("room", this.getRoom().getNumber());
+        json.put("date", this.getDate());
+        json.put("seat", String.format("%s-%d",this.getSeat().getRow(), this.getSeat().getPosition()));
+        json.put("amount", this.getAmount());
+        
+        return json;
     }
     
     private int id;
