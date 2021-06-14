@@ -27,7 +27,7 @@ function cargarCartelera(datos)
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.poster-patch;
+            nuevaCelda.textContent = fila.poster-path;
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
@@ -37,7 +37,7 @@ function cargarCartelera(datos)
             var boton = document.creatElement("INPUT");
             boton.setAttribute('type', 'button');
             boton.setAttribute('value', 'Cambiar Estado');
-            boton.setAttribute('onclick', `ChangeBillboardMovieStatus?movie=${id}`);
+            boton.setAttribute('onclick', `ChangeBillboardMoviatus?movie=${fila.id}`);
             
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.appendChild(boton);
