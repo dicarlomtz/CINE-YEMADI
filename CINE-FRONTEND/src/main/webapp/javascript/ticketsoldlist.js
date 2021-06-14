@@ -39,11 +39,30 @@ function cargarTickets(datos)
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.function-seat;
+            nuevaCelda.textContent = fila.seat;
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.textContent = fila.amount;
+            nuevaCelda.setAttribute('class', 'd1');
+            
+            var boton = document.createElement("BUTTON");
+            boton.setAttribute('onclick', function() {
+                var doc = new jsPDF();
+    
+                doc.text(10, 10, fila.id);
+                doc.text(10, 10, fila.invoice);
+                doc.text(10, 10, fila.cinema);
+                doc.text(10, 10, fila.room);
+                doc.text(10, 10, fila.date);
+                doc.text(10, 10, fila.seat);
+                doc.text(10, 10, fila.amount);
+    
+                doc.save("tickets.pdf");
+            });
+            
+            nuevaCelda = nuevaFila.insertCell(-1);
+            nuevaCelda.appendChild(boton);
             nuevaCelda.setAttribute('class', 'd1');
         });
     }

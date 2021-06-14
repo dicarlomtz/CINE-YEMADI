@@ -12,8 +12,8 @@ import model.dao.TicketDAO;
 import model.entities.TicketList;
 import org.json.JSONObject;
 
-@WebServlet(name = "TicketsSoldService", urlPatterns = {"/TicketsSoldService"})
-public class TicketsSoldService extends HttpServlet {
+@WebServlet(name = "UserHistoryListService", urlPatterns = {"/UserHistoryService"})
+public class UserHistoryService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,7 +22,7 @@ public class TicketsSoldService extends HttpServlet {
         try(PrintWriter out = response.getWriter())
         {
             try {
-                out.println(TicketListJSON());
+                out.println(TicketListJSON(request.getParameter("id")));
             } catch (IOException | SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
                 out.println(new JSONObject());
@@ -41,9 +41,9 @@ public class TicketsSoldService extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
-    public String TicketListJSON()
+
+    public String TicketListJSON(String id)
             throws IOException, SQLException {
-        return new TicketList(new TicketDAO().listAll()).toJSON().toString(4);
+        return new TicketList(new TicketDAO().listAll()).toJSONbyId(id).toString(4);
     }
 }

@@ -86,7 +86,7 @@ public class Ticket implements Serializable {
         json.put("cinema", this.getCinema().getName());
         json.put("room", this.getRoom().getNumber());
         json.put("date", this.getDate());
-        json.put("function-seat", String.format("%s-%d",this.getSeat().getRow(), this.getSeat().getPosition()));
+        json.put("seat", String.format("%s-%d",this.getSeat().getRow(), this.getSeat().getPosition()));
         json.put("amount", this.getAmount());
         
         return json;
