@@ -2,6 +2,7 @@ package model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import org.json.JSONObject;
 
 public class Ticket implements Serializable {
 
@@ -74,6 +75,17 @@ public class Ticket implements Serializable {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+    
+    public JSONObject toJSON()
+    {
+        JSONObject json = new JSONObject();
+        
+        json.put("id", this.getId());
+        // Faltan los demás atributos
+        json.put("amount", this.getAmount());
+        
+        return json;
     }
     
     private int id;
