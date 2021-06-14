@@ -98,5 +98,5 @@ public abstract class AbstractDAO<K, V> implements DAO<K, V> {
     }
 
     protected final Database db;
-    private final AbstractCRUD crud;
+    public final AbstractCRUD crud;
 }
