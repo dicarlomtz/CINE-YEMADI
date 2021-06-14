@@ -37,7 +37,7 @@ function cargarCartelera(datos)
             var boton = document.creatElement("INPUT");
             boton.setAttribute('type', 'button');
             boton.setAttribute('value', 'Cambiar Estado');
-            boton.setAttribute('onclick', `ChangeBillboardMoviatus?movie=${fila.id}`);
+            boton.setAttribute('onclick', `ChangeBillboardMovieStatus?movie=${fila.id}`);
             
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.appendChild(boton);
