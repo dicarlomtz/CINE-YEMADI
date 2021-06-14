@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Optional;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import model.entities.Movie;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@WebServlet(name = "ChangeBillboardMovieStatus", urlPatterns = {"/ChangeBillboardMovieStatus"})
 public class ChangeBillboardMovieStatus extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

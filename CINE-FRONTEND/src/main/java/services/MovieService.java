@@ -17,7 +17,7 @@ public class MovieService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("application/json;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             try {
                 out.println(MovieListJSON());
@@ -67,8 +67,7 @@ public class MovieService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
-        public String MovieListJSON()
+    public String MovieListJSON()
             throws IOException, SQLException {
         return new MovieList(new MovieDAO().listAll()).toJSON().toString(4);
     }
