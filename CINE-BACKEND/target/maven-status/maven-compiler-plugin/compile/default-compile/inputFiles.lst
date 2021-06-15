@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\RoomCRUD.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\UserCRUD.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\FunctionSeat.java
@@ -35,3 +36,40 @@ C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Roo
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\RoomDAO.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\TicketCRUD.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\MovieList.java
+=======
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\MovieCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Invoice.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\MovieList.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\CustomerDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\CustomerCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\User.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\CinemaDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\RoomDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\InvoiceCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\FunctionCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\FunctionSeatDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Room.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\CinemaCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Cinema.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\RoomSeatCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\InvoiceDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Rol.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\DaoDB.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\UserDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\UserCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Ticket.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\RoomSeatDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\RoomList.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\FunctionSeat.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\FunctionDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\FunctionSeatCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\PaymentCard.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\TicketDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\MovieDAO.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Function.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\RoomSeat.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Movie.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\TicketCRUD.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Customer.java
+C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\RoomCRUD.java
+>>>>>>> 1d03fbdfbe9098de4751dc975e9136871f213dc6

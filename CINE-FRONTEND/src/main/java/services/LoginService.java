@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.dao.UserDAO;
 import model.entities.User;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 @WebServlet(name = "LoginService", urlPatterns = {"/LoginService"})
 public class LoginService extends HttpServlet {
@@ -20,11 +22,10 @@ public class LoginService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-    PrintWriter out = response.getWriter();  
              
     System.out.println("servlet is working   ");
 
-    String mail =request.getParameter("mail");  
+    String id =request.getParameter("id");  
     String pass =request.getParameter("password");  
     
     
@@ -32,17 +33,32 @@ public class LoginService extends HttpServlet {
     
     User user = null;
         try {
-            user = new UserDAO().retrieve(mail);
+            //se conecta a la bd y devuelve al usuario
+            user = new UserDAO().loginUser(id, pass);
         } catch (Exception ex) {
             
         }
-
-        if (Objects.isNull(user) || !user.getPassword().equals(pass)) {
+        System.out.println(user.getId());
+            //verifica que se haya traido al usuario
+        if (Objects.isNull(user) ) { 
             throw new IllegalArgumentException();
         }
         
-        session.setAttribute("user", user);
-        session.setAttribute("id", user.getId());
+        try (PrintWriter out = response.getWriter()) {
+            JSONObject r = new JSONObject();
+            JSONArray a = new JSONArray();
+            
+                JSONObject e = new JSONObject();
+                e.put("Nombre", user.getRol());
+                e.put("Identificacion", user.getId());
+                e.put("Clave", user.getPassword());
+                e.put("InfoCliente", user.getUserClientInfo());
+                a.put(e);
+           
+            r.put("datos-user", a);
+            System.out.println(r.toString(4));
+            out.println(r);
+        }
         response.sendRedirect("index.html");
    
 
@@ -87,4 +103,6 @@ public class LoginService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    
+    
 }

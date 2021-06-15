@@ -27,11 +27,20 @@ function cargarCartelera(datos)
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.poster-patch;
+            nuevaCelda.textContent = fila.poster-path;
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.textContent = fila.data;
+            nuevaCelda.setAttribute('class', 'd1');
+            
+            var boton = document.creatElement("INPUT");
+            boton.setAttribute('type', 'button');
+            boton.setAttribute('value', 'Cambiar Estado');
+            boton.setAttribute('onclick', `ChangeBillboardMovieStatus?movie=${fila.id}`);
+            
+            nuevaCelda = nuevaFila.insertCell(-1);
+            nuevaCelda.appendChild(boton);
             nuevaCelda.setAttribute('class', 'd1');
         });
     }
