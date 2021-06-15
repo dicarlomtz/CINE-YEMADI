@@ -13,7 +13,7 @@ import model.dao.TicketDAO;
 import model.entities.TicketList;
 import org.json.JSONObject;
 
-@WebServlet(name = "UserHistoryListService", urlPatterns = {"/UserHistoryService"})
+@WebServlet(name = "UserHistoryService", urlPatterns = {"/UserHistoryService"})
 public class UserHistoryService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

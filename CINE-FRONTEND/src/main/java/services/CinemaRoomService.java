@@ -16,7 +16,7 @@ import model.dao.RoomDAO;
 import model.entities.RoomList;
 import org.json.JSONObject;
 
-@WebServlet(name = "BuildRoomService", urlPatterns = {"/BuildRoomService"})
+@WebServlet(name = "CinemaRoomService", urlPatterns = {"/CinemaRoomService"})
 @MultipartConfig
 public class CinemaRoomService extends HttpServlet {
 

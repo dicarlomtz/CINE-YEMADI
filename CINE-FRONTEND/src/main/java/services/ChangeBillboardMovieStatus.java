@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Optional;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +18,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 @WebServlet(name = "ChangeBillboardMovieStatus", urlPatterns = {"/ChangeBillboardMovieStatus"})
+@MultipartConfig
 public class ChangeBillboardMovieStatus extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setContentType("application/json;charset=UTF-8");
+        encoding = Optional.of(request.getCharacterEncoding());
         try (PrintWriter out = response.getWriter()) {
             JSONObject res = new JSONObject();
             try {

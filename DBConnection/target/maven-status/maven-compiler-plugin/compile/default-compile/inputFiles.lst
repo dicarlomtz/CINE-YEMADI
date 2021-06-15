@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 C:\Users\dicar\Desktop\CINE-YEMADI\DBConnection\src\main\java\cr\ac\una\db\Database.java
 C:\Users\dicar\Desktop\CINE-YEMADI\DBConnection\src\main\java\cr\ac\una\db\dao\crud\AbstractCRUD.java
 C:\Users\dicar\Desktop\CINE-YEMADI\DBConnection\src\main\java\cr\ac\una\db\dao\AbstractDAO.java
 C:\Users\dicar\Desktop\CINE-YEMADI\DBConnection\src\main\java\cr\ac\una\db\dao\DAO.java
-=======
-C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\DBConnection\src\main\java\cr\ac\una\db\dao\DAO.java
-C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\DBConnection\src\main\java\cr\ac\una\db\dao\crud\AbstractCRUD.java
-C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\DBConnection\src\main\java\cr\ac\una\db\Database.java
-C:\Users\yeiko\AppData\Roaming\NetBeans\CINE-YEMADI\DBConnection\src\main\java\cr\ac\una\db\dao\AbstractDAO.java
->>>>>>> 1d03fbdfbe9098de4751dc975e9136871f213dc6

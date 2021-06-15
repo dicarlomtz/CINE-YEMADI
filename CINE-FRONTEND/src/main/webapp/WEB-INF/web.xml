@@ -39,6 +39,8 @@
     <servlet>
         <servlet-name>FunctionService</servlet-name>
         <servlet-class>services.FunctionService</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>TicketsSoldService</servlet-name>
         <servlet-class>services.TicketsSoldService</servlet-class>
     </servlet>
@@ -85,6 +87,8 @@
     <servlet-mapping>
         <servlet-name>FunctionService</servlet-name>
         <url-pattern>/FunctionService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>TicketsSoldService</servlet-name>
         <url-pattern>/TicketsSoldService</url-pattern>
     </servlet-mapping>

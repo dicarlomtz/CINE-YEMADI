@@ -11,6 +11,7 @@ model\entities\Room.class
 model\entities\Rol.class
 model\entities\Ticket.class
 model\dao\crud\MovieCRUD.class
+model\entities\TicketList.class
 model\dao\crud\FunctionSeatCRUD.class
 model\dao\MovieDAO.class
 model\dao\crud\RoomCRUD.class
