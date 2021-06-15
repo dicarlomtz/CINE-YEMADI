@@ -30,6 +30,7 @@ model\dao\TicketDAO.class
 model\dao\UserDAO.class
 model\dao\InvoiceDAO.class
 model\dao\FunctionDAO.class
+model\entities\IOUtilities.class
 model\entities\FunctionSeat.class
 model\entities\Invoice.class
 model\dao\crud\CustomerCRUD.class

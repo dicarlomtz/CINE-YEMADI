@@ -48,6 +48,14 @@
         <servlet-name>UserHistoryService</servlet-name>
         <servlet-class>services.UserHistoryService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MovieImageService</servlet-name>
+        <servlet-class>services.MovieImageService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddMovieService</servlet-name>
+        <servlet-class>services.AddMovieService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
         <url-pattern>/MoviesListService</url-pattern>
@@ -95,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>UserHistoryService</servlet-name>
         <url-pattern>/UserHistoryService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MovieImageService</servlet-name>
+        <url-pattern>/MovieImageService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMovieService</servlet-name>
+        <url-pattern>/AddMovieService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
