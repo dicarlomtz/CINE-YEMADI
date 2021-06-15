@@ -21,18 +21,29 @@ public class CinemaDAO extends AbstractDAO<Integer, Cinema> {
     }
 
     @Override
-    public Cinema getRecord(ResultSet rs) throws SQLException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cinema getRecord(ResultSet rs)
+            throws SQLException, IOException {
+        return new Cinema(
+                rs.getInt("id_cinema"),
+                rs.getString("nombre"),
+                rs.getString("direccion")
+        );
     }
 
     @Override
-    public void setAddParameters(PreparedStatement stm, Integer id, Cinema value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setAddParameters(PreparedStatement stm, Integer id, Cinema value)
+            throws SQLException {
+        stm.setInt(1, id);
+        stm.setString(2, value.getName());
+        stm.setString(3, value.getAddress());
     }
 
     @Override
-    public void setUpdateParameters(PreparedStatement stm, Integer id, Cinema value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setUpdateParameters(PreparedStatement stm, Integer id, Cinema value)
+            throws SQLException {
+        stm.setString(1, value.getName());
+        stm.setString(2, value.getAddress());
+        stm.setInt(3, id);
     }
 
 }

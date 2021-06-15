@@ -4,40 +4,86 @@
         <title>Program movie</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="styles/default.css">
-
+        <script src="javascript/getJson.js" type="text/javascript"></script>
+        <script src="javascript/schedulemovie.js" type="text/javascript"></script>
     </head>
-    <body>
-    <!---SECCION CON LA BARRA DE NAVEGACION--->
-    <nav class="max-width">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="contact.html">Contact us</a></li>
-        <li><a href="signup.html">Register</a></li>
-        <li>   
-            <form action="">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit">Search Movie</button>
-            </form>
-        </li>
-        <li><a href="login.html">Login</a></li>
-        
-      </ul>
-    </nav>
+    <body onload="init();">
+        <!---SECCION CON LA BARRA DE NAVEGACION--->
+        <nav class="max-width">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+                <li><a href="signup.html">Register</a></li>
+                <li>   
+                    <form action="">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit">Search Movie</button>
+                    </form>
+                </li>
+                <li><a href="login.html">Login</a></li>
+
+            </ul>
+        </nav>
         <!---SECCION CON EL BANNER--->
         <header class="img-section "> 
             <p> <b>NCG </b> <br> CINEMA</p>
             <p>NOW OPEN</p>
         </header> 
-        
+
         <!---SECCION PARA PROGRAMAR PROYECCIONES--->
         <main>
+            <form id="room" name="form" onsubmit="collectFormData()">
+                <table>
+                    <caption>Agregar proyección</caption>
+                    <thead>
+                        <tr>
+                            <th>Cine</th>
+                            <th>Sala</th>
+                            <th>Pelicula</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> 
+                                <select id="menuCinema" name="menuCinema" onchange="retrieveCinemaRooms();" required>
+                                </select>
+                            </td>
+                            <td><select id="menuRoom" name="menuRoom" required>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="menuMovie" name="menuMovie" required>
+                                </select>
+                            </td>
+                            <td><input type="date" id="date" name="date" required></td>
+                            <td><input type="time" id="time" name="time" required></td>
+                            <td><button type="submit">Agregar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
 
-
+            <table class="tablaGeneral">
+                <caption>Proyecciones</caption>
+                <thead>
+                    <tr>
+                        <th>Cine</th>
+                        <th>Sala</th>
+                        <th>Fecha</th>
+                        <th>Pelicula</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyFunctionsT"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
 
         </main>
-        
-           <!---SECCION CON EL FIN DE PAGINA--->
-           <footer style=" position:fixed">
+
+        <!---SECCION CON EL FIN DE PAGINA--->
+        <footer style=" position:fixed">
             <p>
                 Total Soft Inc &copy; 2021
             </p>

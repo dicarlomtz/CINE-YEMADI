@@ -48,7 +48,7 @@ public class Room implements Serializable {
     }
     
     public String buildKey(){
-       return String.format("%d%d", getCinema().getId(), getNumber());
+       return String.format("%d-%d", getCinema().getId(), getNumber());
     }
     
     private Cinema cinema;

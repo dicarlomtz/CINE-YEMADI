@@ -30,7 +30,7 @@ public class MovieList {
         });
         
         JSONObject json = new JSONObject();
-        json.put("room-list", a);
+        json.put("movie-list", a);
         return json;
     }
     

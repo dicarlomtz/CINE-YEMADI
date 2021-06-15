@@ -29,6 +29,10 @@ public class RoomCRUD extends AbstractCRUD {
         return DELETE_CMD;
     }
 
+    public String getListCinemaRoomCmd() {
+        return LIST_CINEMA_ROOM_CMD;
+    }
+
     protected static final String LIST_CMD
             = "select "
             + "cinema_id, numero, capacidad "
@@ -38,19 +42,24 @@ public class RoomCRUD extends AbstractCRUD {
             = "insert into bd_cinema.sala "
             + "(cinema_id, numero, capacidad) "
             + "values (?, ?, ?); ";
-    
+
     protected static final String RETRIEVE_CMD
             = "select "
             + "cinema_id, numero, capacidad "
             + "from bd_cinema.sala where numero = ? and cinema_id = ?; ";
-    
+
     protected static final String UPDATE_CMD
             = "update bd_cinema.sala "
             + "set capacidad = ? "
             + "where numero = ? and cinema_id = ?; ";
-    
+
     protected static final String DELETE_CMD
             = "delete from bd_cinema.sala "
             + "where numero = ? and cinema_id = ?; ";
+
+    protected static final String LIST_CINEMA_ROOM_CMD
+            = "select "
+            + "cinema_id, numero, capacidad "
+            + "from bd_cinema.sala where cinema_id = ?; ";
 
 }

@@ -22,17 +22,31 @@ public class MovieDAO extends AbstractDAO<String, Movie> {
 
     @Override
     public Movie getRecord(ResultSet rs) throws SQLException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Movie(
+                rs.getString("id_pelicula"),
+                rs.getString("titulo"),
+                rs.getString("poster_path"),
+                rs.getString("movie_data"),
+                rs.getBoolean("cartelera")
+        );
     }
 
     @Override
     public void setAddParameters(PreparedStatement stm, String id, Movie value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stm.setString(1, id);
+        stm.setString(2, value.getTitle());
+        stm.setString(3, value.getPosterPath());
+        stm.setString(4, value.getData());
+        stm.setBoolean(5, value.isBillboard());
     }
 
     @Override
     public void setUpdateParameters(PreparedStatement stm, String id, Movie value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stm.setString(1, value.getTitle());
+        stm.setString(2, value.getPosterPath());
+        stm.setString(3, value.getData());
+        stm.setBoolean(4, value.isBillboard());
+        stm.setString(5, id);
     }
 
 }

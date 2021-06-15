@@ -31,22 +31,22 @@ public class MovieCRUD extends AbstractCRUD {
 
     protected static final String LIST_CMD
             = "select "
-            + "id_pelicula, titulo, poster_path, movie_data "
+            + "id_pelicula, titulo, poster_path, movie_data, cartelera "
             + "from bd_cinema.pelicula order by id_pelicula; ";
 
     protected static final String ADD_CMD
             = "insert into bd_cinema.pelicula "
-            + "(id_pelicula, titulo, poster_path, movie_data) "
-            + "values (?, ?, ?, ?); ";
+            + "(id_pelicula, titulo, poster_path, movie_data, cartelera) "
+            + "values (?, ?, ?, ?, ?); ";
     
     protected static final String RETRIEVE_CMD
             = "select "
-            + "id_pelicula, titulo, poster_path, movie_data "
+            + "id_pelicula, titulo, poster_path, movie_data, cartelera "
             + "from bd_cinema.pelicula where id_pelicula = ?; ";
     
     protected static final String UPDATE_CMD
             = "update bd_cinema.pelicula "
-            + "set titulo = ?, poster_path = ?, movie_data = ? "
+            + "set titulo = ?, poster_path = ?, movie_data = ?, cartelera = ? "
             + "where id_pelicula = ?; ";
     
     protected static final String DELETE_CMD

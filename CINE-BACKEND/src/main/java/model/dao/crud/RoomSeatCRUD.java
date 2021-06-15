@@ -29,6 +29,10 @@ public class RoomSeatCRUD extends AbstractCRUD {
         return DELETE_CMD;
     }
 
+    public String getListCinemaRoomSeatCmd() {
+        return LIST_CINEMA_ROOM_SEAT;
+    }
+
     protected static final String LIST_CMD
             = "select "
             + "sala_cinema_id, sala_numero, fila, posicion, disponible "
@@ -38,19 +42,25 @@ public class RoomSeatCRUD extends AbstractCRUD {
             = "insert into bd_cinema.asiento_sala "
             + "(sala_cinema_id, sala_numero, fila, posicion, disponible) "
             + "values (?, ?, ?, ?, ?); ";
-    
+
     protected static final String RETRIEVE_CMD
             = "select "
             + "sala_cinema_id, sala_numero, fila, posicion, disponible "
             + "from bd_cinema.asiento_sala where sala_cinema_id = ? and sala_numero = ? and fila = ? and posicion = ?; ";
-    
+
     protected static final String UPDATE_CMD
             = "update bd_cinema.asiento_sala "
             + "set disponible = ? "
             + "where sala_cinema_id = ? and sala_numero = ? and fila = ? and posicion = ?; ";
-    
+
     protected static final String DELETE_CMD
             = "delete from bd_cinema.asiento_sala "
             + "where sala_cinema_id = ? and sala_numero = ? and fila = ? and posicion = ?; ";
+
+    protected static final String LIST_CINEMA_ROOM_SEAT
+            = "select "
+            + "sala_cinema_id, sala_numero, fila, posicion, disponible "
+            + "from bd_cinema.asiento_sala where sala_cinema_id = ? and sala_numero = ? "
+            + "order by sala_numero; ";
 
 }

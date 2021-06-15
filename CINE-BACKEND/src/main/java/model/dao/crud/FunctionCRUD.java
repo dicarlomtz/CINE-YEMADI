@@ -32,7 +32,7 @@ public class FunctionCRUD extends AbstractCRUD {
     protected static final String LIST_CMD
             = "select "
             + "sala_cinema_id, sala_numero, fecha, pelicula_id "
-            + "from bd_cinema.funcion order by numero; ";
+            + "from bd_cinema.funcion order by sala_numero; ";
 
     protected static final String ADD_CMD
             = "insert into bd_cinema.funcion "

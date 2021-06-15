@@ -28,7 +28,7 @@ public class ChangeBillboardMovieStatus extends HttpServlet {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("movie")));
 
                 Movie movie = new MovieDAO().retrieve(json.getString("id"));
-                //falta cambiar estado
+                movie.setBillboard(json.getBoolean("billboard"));
                 new MovieDAO().update(movie.getId(), movie);
 
                 res.put("result",

@@ -1,7 +1,13 @@
 package model.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import model.dao.CinemaDAO;
+import model.dao.MovieDAO;
+import model.dao.RoomDAO;
+import org.json.JSONObject;
 
 public class Function implements Serializable {
 
@@ -48,8 +54,17 @@ public class Function implements Serializable {
         this.movie = movie;
     }
 
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("cinema", getCinema().toJSON());
+        json.put("room", getRoom().toJSON());
+        json.put("date", getDate().toString());
+        json.put("movie", getMovie().toJSON());
+        return json;
+    }
+
     public String buildKey() {
-        return String.format("%d%d%s", getCinema().getId(), getRoom().getNumber(), getDate().toString());
+        return String.format("%d-%d-%d", getCinema().getId(), getRoom().getNumber(), getDate().getTime());
     }
 
     private Cinema cinema;

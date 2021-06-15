@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -38,8 +39,8 @@ public class ScheduleMovieService extends HttpServlet {
 
                 Function function = new Function(
                         new CinemaDAO().retrieve(json.getInt("cinema")),
-                        new RoomDAO().retrieve(json.getString("room")),
-                        new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(json.getString("date")),
+                        new RoomDAO().retrieve(json.getString("room") + "-" + json.getString("cinema")),
+                       (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(json.getString("date")),
                         new MovieDAO().retrieve(json.getString("movie"))
                 );
 

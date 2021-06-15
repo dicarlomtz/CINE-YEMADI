@@ -56,6 +56,10 @@ public class RoomSeat implements Serializable {
         this.available = available;
     }
     
+    public String buildKey(){
+        return String.format("%d-%d-%c-%d", getCinema().getId(), getRoom().getNumber(), getRow(), getPosition());
+    }
+    
     private Cinema cinema;
     private Room room;
     private char row;

@@ -28,6 +28,18 @@
         <servlet-name>ChangeBillboardMovieStatus</servlet-name>
         <servlet-class>services.ChangeBillboardMovieStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CinemaService</servlet-name>
+        <servlet-class>services.CinemaService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CinemaRoomService</servlet-name>
+        <servlet-class>services.CinemaRoomService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FunctionService</servlet-name>
+        <servlet-class>services.FunctionService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
         <url-pattern>/MoviesListService</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>ChangeBillboardMovieStatus</servlet-name>
         <url-pattern>/ChangeBillboardMovieStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CinemaService</servlet-name>
+        <url-pattern>/CinemaService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CinemaRoomService</servlet-name>
+        <url-pattern>/CinemaRoomService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FunctionService</servlet-name>
+        <url-pattern>/FunctionService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

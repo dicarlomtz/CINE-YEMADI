@@ -65,12 +65,16 @@ public class FunctionSeat implements Serializable {
     public void setAvailable(boolean available) {
         this.available = available;
     }
-    
-   private Cinema cinema;
-   private Room room;
-   private Date date;
-   private char row;
-   private int position;
-   private boolean available;
-   
+
+    public String buildKey() {
+        return String.format("%d-%d-%d-%c-%d", getCinema().getId(), getRoom().getNumber(), getDate().getTime(), getRow(), getPosition());
+    }
+
+    private Cinema cinema;
+    private Room room;
+    private Date date;
+    private char row;
+    private int position;
+    private boolean available;
+
 }
