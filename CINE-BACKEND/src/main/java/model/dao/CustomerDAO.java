@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.dao.crud.CustomerCRUD;
 import model.entities.Customer;
+import model.entities.PaymentCard;
 
 public class CustomerDAO extends AbstractDAO<String, Customer> {
 
@@ -22,17 +23,31 @@ public class CustomerDAO extends AbstractDAO<String, Customer> {
 
     @Override
     public Customer getRecord(ResultSet rs) throws SQLException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Customer(
+                rs.getString("id_cliente"),
+                rs.getString("apellidos"),
+                rs.getString("nombre"),
+                rs.getString("telefono"),
+                new PaymentCard(rs.getString("tarjeta_pago"))
+        );
     }
 
     @Override
     public void setAddParameters(PreparedStatement stm, String id, Customer value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stm.setString(1, value.getId());
+        stm.setString(2, value.getSurnames());
+        stm.setString(3, value.getName());
+        stm.setString(4, value.getTelephone());
+        stm.setString(5, value.getPaymentCard().getNumber());
     }
 
     @Override
     public void setUpdateParameters(PreparedStatement stm, String id, Customer value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stm.setString(1, value.getSurnames());
+        stm.setString(2, value.getName());
+        stm.setString(3, value.getTelephone());
+        stm.setString(4, value.getPaymentCard().getNumber());
+        stm.setString(5, value.getId());
     }
 
 }

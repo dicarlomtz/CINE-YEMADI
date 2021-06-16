@@ -130,14 +130,5 @@ public class RoomSeatDAO extends AbstractDAO<String, RoomSeat> {
             throw new SQLException();
         }
     }
-    
-    public static void main(String[] args){
-        try {
-            new FunctionSeatDAO().addFunctionSeats(new FunctionDAO().listAll().get(0));
-            System.out.println("asd");
-        } catch (IOException | SQLException ex) {
-            Logger.getLogger(RoomSeatDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
 }
