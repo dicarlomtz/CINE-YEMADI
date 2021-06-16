@@ -1,73 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.dao.UserDAO;
-import model.entities.User;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-@WebServlet(name = "LoginService", urlPatterns = {"/LoginService"})
-public class LoginService extends HttpServlet {
+@WebServlet(name = "NewAccountService", urlPatterns = {"/NewAccountService"})
+public class NewAccountService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         response.setContentType("application/json;charset=UTF-8");
         encoding = Optional.of(request.getCharacterEncoding());
-
-        System.out.println("servlet is working... ");
-        JSONObject json = new JSONObject(toUTF8String(request.getParameter("LoginData")));
-
-        System.out.print(json.toString());
-        
-        String id = json.getString("identification");
-        
-        String pass = json.getString("password");
-
-        System.out.println(id + pass);
-        
-      
-        User user = null;
-        try {
-            //se conecta a la bd y devuelve al usuario
-            user = new UserDAO().loginUser(id, pass);
-        } catch (Exception ex) {
-
-        }
-        System.out.println(user.getId());
-        //verifica que se haya traido al usuario
-        if (Objects.isNull(user)) {
-            throw new IllegalArgumentException();
-        }
-
         try (PrintWriter out = response.getWriter()) {
-            JSONObject r = new JSONObject();
-            JSONArray a = new JSONArray();
-
-            JSONObject e = new JSONObject();
-            e.put("Nombre", user.getRol());
-            e.put("Identificacion", user.getId());
-            e.put("Clave", user.getPassword());
-            e.put("InfoCliente", user.getUserClientInfo());
-            a.put(e);
-
-            r.put("datos-user", a);
-            System.out.println(r.toString(4));
-            out.println(r);
+           JSONObject res = new JSONObject();
+           JSONObject json = new JSONObject(request.getParameter("NewAccount"));
+           //falta implementar el codigo para extraer los datos e introducirlos en la bd
+           out.println(res.toString(4));
         }
-        response.sendRedirect("index.html");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -108,10 +71,5 @@ public class LoginService extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private String toUTF8String(String s) throws UnsupportedEncodingException {
-        return encoding.isPresent() ? s : new String(s.getBytes(), StandardCharsets.UTF_8);
-    }
-
     private Optional<String> encoding;
 }
