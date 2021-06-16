@@ -33,13 +33,13 @@
         <!---SECCION CON EL FORMULARIO REGISTRO--->
                 <main>
 
-                    <form class="form">
+                    <form class="form" onsubmit="collectData()">
                         <h1>Register</h1>
-                        <input type="text" class="input-login-register" autofocus="true" required="true" placeholder="Nombre" />
+                        <input type="text" id="name" class="input-login-register" autofocus="true" required="true" placeholder="Name" />
 
-                        <input type="email" class="input-login-register" autofocus="true" required="true" placeholder="Email" />
-                        <input type="password" class="input-login-register" required="true" placeholder="Password" />
-                        <input type="password" class="input-login-register" required="true" placeholder="Confirm" />
+                        <input type="number" id="identification" class="input-login-register" autofocus="true" required="true" placeholder="Identification" />
+                        <input type="password" id="password" class="input-login-register" required="true" placeholder="Password" />
+                        <input type="password" id="checkpassword" class="input-login-register" required="true" placeholder="Confirm" />
 
                         <input type="submit" name="Register" value="Register" class="login-submit" />
                     </form>
