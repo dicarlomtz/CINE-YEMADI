@@ -1,5 +1,6 @@
 model\entities\PaymentCard.class
 model\dao\RoomSeatDAO.class
+model\entities\InvoiceList.class
 model\dao\crud\RoomSeatCRUD.class
 model\entities\User.class
 model\entities\Function.class

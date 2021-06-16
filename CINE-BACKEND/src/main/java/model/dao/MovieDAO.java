@@ -4,13 +4,18 @@ import cr.ac.una.db.Database;
 import cr.ac.una.db.dao.AbstractDAO;
 import cr.ac.una.db.dao.crud.AbstractCRUD;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.dao.crud.MovieCRUD;
+import model.dao.crud.RoomSeatCRUD;
 import model.entities.Movie;
+import model.entities.RoomSeat;
 
 public class MovieDAO extends AbstractDAO<String, Movie> {
 
@@ -60,6 +65,22 @@ public class MovieDAO extends AbstractDAO<String, Movie> {
     public static boolean validate(final String fileName) {
         Matcher matcher = PATERN.matcher(fileName);
         return matcher.matches();
+    }
+
+    public List<Movie> listCinemaRoomSeats()
+            throws SQLException, IOException {
+        List<Movie> r = new ArrayList<>();
+        MovieCRUD rcrud = (MovieCRUD) getCRUD();
+        try (Connection cnx = db.getConnection();
+            PreparedStatement stm = cnx.prepareStatement(rcrud.getBillboardListMovies())) {
+            stm.clearParameters();
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    r.add(getRecord(rs));
+                }
+            }
+        }
+        return r;
     }
 
     private static final String IMAGE_PATERN

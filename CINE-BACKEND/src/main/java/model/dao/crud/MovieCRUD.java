@@ -29,6 +29,10 @@ public class MovieCRUD extends AbstractCRUD {
         return DELETE_CMD;
     }
 
+    public String getBillboardListMovies() {
+        return LIST_BILLBOARD_MOVIES;
+    }
+
     protected static final String LIST_CMD
             = "select "
             + "id_pelicula, titulo, movie_data, cartelera, tipo_imagen, imagen, tamaño "
@@ -38,19 +42,24 @@ public class MovieCRUD extends AbstractCRUD {
             = "insert into bd_cinema.pelicula "
             + "(id_pelicula, titulo, movie_data, cartelera, tipo_imagen, imagen, tamaño) "
             + "values (?, ?, ?, ?, ?, ?, ?); ";
-    
+
     protected static final String RETRIEVE_CMD
             = "select "
             + "id_pelicula, titulo, movie_data, cartelera, tipo_imagen, imagen, tamaño "
             + "from bd_cinema.pelicula where id_pelicula = ?; ";
-    
+
     protected static final String UPDATE_CMD
             = "update bd_cinema.pelicula "
             + "set titulo = ?, movie_data = ?, cartelera = ?, tipo_imagen = ?, imagen = ?, tamaño = ? "
             + "where id_pelicula = ?; ";
-    
+
     protected static final String DELETE_CMD
             = "delete from bd_cinema.pelicula "
             + "where id_pelicula = ?; ";
+
+    protected static final String LIST_BILLBOARD_MOVIES
+            = "select "
+            + "id_pelicula, titulo, movie_data, cartelera, tipo_imagen, imagen, tamaño "
+            + "from bd_cinema.pelicula where cartelera = true; ";
 
 }

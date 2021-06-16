@@ -29,6 +29,10 @@ public class FunctionCRUD extends AbstractCRUD {
         return DELETE_CMD;
     }
 
+    public String getFunctionsBillboardCmd() {
+        return LIST_FUNCTIONS_BILLBOARD;
+    }
+
     protected static final String LIST_CMD
             = "select "
             + "sala_cinema_id, sala_numero, fecha, pelicula_id "
@@ -38,19 +42,24 @@ public class FunctionCRUD extends AbstractCRUD {
             = "insert into bd_cinema.funcion "
             + "(sala_cinema_id, sala_numero, fecha, pelicula_id) "
             + "values (?, ?, ?, ?); ";
-    
+
     protected static final String RETRIEVE_CMD
             = "select "
             + "sala_cinema_id, sala_numero, fecha, pelicula_id "
             + "from bd_cinema.funcion where sala_cinema_id = ? and sala_numero = ? and fecha = ?; ";
-    
+
     protected static final String UPDATE_CMD
             = "update bd_cinema.funcion "
             + "set pelicula_id = ? "
             + "where sala_cinema_id = ? and sala_numero = ? and fecha = ?; ";
-    
+
     protected static final String DELETE_CMD
             = "delete from bd_cinema.funcion "
             + "where sala_cinema_id = ? and sala_numero = ? and fecha = ?; ";
+
+    protected static final String LIST_FUNCTIONS_BILLBOARD
+            = "select "
+            + "sala_cinema_id, sala_numero, fecha, pelicula_id "
+            + "from bd_cinema.funcion where pelicula_id = ? order by sala_numero; ";
 
 }

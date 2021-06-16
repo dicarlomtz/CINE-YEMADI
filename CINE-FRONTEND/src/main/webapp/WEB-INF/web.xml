@@ -56,6 +56,14 @@
         <servlet-name>AddMovieService</servlet-name>
         <servlet-class>services.AddMovieService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BillboardService</servlet-name>
+        <servlet-class>services.BillboardService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FunctionBillboardService</servlet-name>
+        <servlet-class>services.FunctionBillboardService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
         <url-pattern>/MoviesListService</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>AddMovieService</servlet-name>
         <url-pattern>/AddMovieService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BillboardService</servlet-name>
+        <url-pattern>/BillboardService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FunctionBillboardService</servlet-name>
+        <url-pattern>/FunctionBillboardService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
