@@ -19,31 +19,35 @@ function cargarTickets(datos)
             var nuevaCelda;
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.id;
+            nuevaCelda.textContent = fila["id"];
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.invoice;
+            nuevaCelda.textContent = fila["invoice"]["id"];
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.cinema;
+            nuevaCelda.textContent = fila["cinema"]["name"];
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.room;
+            nuevaCelda.textContent = fila["room"]["number"];
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.date;
+            nuevaCelda.textContent = fila["date"];
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.seat;
+            nuevaCelda.textContent = fila["seat"]["row"];
             nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila.amount;
+            nuevaCelda.textContent = fila["seat"]["position"];
+            nuevaCelda.setAttribute('class', 'd1');
+            
+            nuevaCelda = nuevaFila.insertCell(-1);
+            nuevaCelda.textContent = fila["amount"];
             nuevaCelda.setAttribute('class', 'd1');
             
             var boton = document.creatElement("INPUT");
@@ -60,7 +64,7 @@ function cargarTickets(datos)
                 doc.text(10, 10, fila.seat);
                 doc.text(10, 10, fila.amount);
     
-                doc.save("tickets.pdf");
+                doc.save("ticket.pdf");
             });
             
             nuevaCelda = nuevaFila.insertCell(-1);

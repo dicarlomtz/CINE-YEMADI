@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.CinemaDAO;
 import model.dao.FunctionDAO;
+import model.dao.FunctionSeatDAO;
 import model.dao.MovieDAO;
 import model.dao.RoomDAO;
 import model.entities.Function;
@@ -45,6 +46,7 @@ public class ScheduleMovieService extends HttpServlet {
                 );
 
                 new FunctionDAO().add(function.buildKey(), function);
+                new FunctionSeatDAO().addFunctionSeats(function);
                 res.put("result",
                         String.format("Agregando proyección con código: '%s'%n",
                                 function.buildKey()));

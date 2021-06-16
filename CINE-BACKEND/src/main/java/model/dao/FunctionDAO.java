@@ -9,16 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.dao.crud.FunctionCRUD;
 import model.entities.Function;
 import model.entities.FunctionList;
-import model.entities.FunctionSeat;
-import model.entities.RoomSeat;
 
 public class FunctionDAO extends AbstractDAO<String, Function> {
 
@@ -59,28 +53,17 @@ public class FunctionDAO extends AbstractDAO<String, Function> {
                 new CinemaDAO().retrieve(rs.getInt("sala_cinema_id")),
                 new RoomDAO().retrieve(String.format("%d-%d",
                         rs.getInt("sala_numero"), rs.getInt("sala_cinema_id"))),
-                new java.util.Date(rs.getDate("fecha").getTime()),
+                new java.util.Date(rs.getTimestamp("fecha").getTime()),
                 new MovieDAO().retrieve(rs.getString("pelicula_id"))
         );
     }
 
     @Override
     public void setAddParameters(PreparedStatement stm, String id, Function value) throws SQLException {
-        try {
-            stm.setInt(1, value.getCinema().getId());
-            stm.setInt(2, value.getRoom().getNumber());
-            stm.setTimestamp(3, new Timestamp(((Date) value.getDate()).getTime()));
-            stm.setString(4, value.getMovie().getId());
-
-            FunctionSeatDAO fsd = new FunctionSeatDAO();
-            RoomSeatDAO rsd = new RoomSeatDAO();
-            for (RoomSeat rs : rsd.listCinemaRoom(value.getCinema().getId(), value.getRoom().getNumber())) {
-                FunctionSeat st = new FunctionSeat(rs.getCinema(), rs.getRoom(), value.getDate(), rs.getRow(), rs.getPosition(), false);
-                fsd.add(st.buildKey(), st);
-            }
-        } catch (IOException ex) {
-            throw new SQLException();
-        }
+        stm.setInt(1, value.getCinema().getId());
+        stm.setInt(2, value.getRoom().getNumber());
+        stm.setTimestamp(3, new Timestamp(((Date) value.getDate()).getTime()));
+        stm.setString(4, value.getMovie().getId());
     }
 
     @Override

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.CinemaDAO;
 import model.dao.RoomDAO;
+import model.dao.RoomSeatDAO;
 import model.entities.Room;
 import org.json.JSONObject;
 
@@ -37,6 +38,7 @@ public class BuildRoomService extends HttpServlet {
                         json.getInt("capacity"));
 
                 new RoomDAO().add(room.buildKey(), room);
+                new RoomSeatDAO().addRoomSeats(room);
                 res.put("result",
                         String.format("Agregando sala con código: '%s'%n",
                                 room.buildKey()));

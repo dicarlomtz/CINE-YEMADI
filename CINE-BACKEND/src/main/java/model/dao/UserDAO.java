@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.dao.crud.UserCRUD;
+import model.entities.Rol;
 import model.entities.User;
 
 public class UserDAO extends AbstractDAO<String, User> {
@@ -20,7 +21,7 @@ public class UserDAO extends AbstractDAO<String, User> {
     public UserDAO() throws IOException {
         this(new DaoDB(), new UserCRUD());
     }
-    
+
     public User loginUser(String usuario, String clave) {
         boolean found = false;
         User user;
@@ -32,7 +33,7 @@ public class UserDAO extends AbstractDAO<String, User> {
                 stm.setString(2, clave);
                 ResultSet rs = stm.executeQuery();
                 found = rs.next();
-                user = (User)rs;
+                user = (User) rs;
                 return user;
             }
 
@@ -44,17 +45,28 @@ public class UserDAO extends AbstractDAO<String, User> {
 
     @Override
     public User getRecord(ResultSet rs) throws SQLException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new User(
+                rs.getString("id_usuario"),
+                new CustomerDAO().retrieve(rs.getString("cliente_id")),
+                rs.getString("clave"),
+                new Rol(rs.getBoolean("rol"))
+        );
     }
 
     @Override
     public void setAddParameters(PreparedStatement stm, String id, User value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stm.setString(1, "id_usuario");
+        stm.setString(2, "cliente_id");
+        stm.setString(3, "clave");
+        stm.setBoolean(4, value.getRol().isIsAdmin());
     }
 
     @Override
     public void setUpdateParameters(PreparedStatement stm, String id, User value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stm.setString(1, "cliente_id");
+        stm.setString(2, "clave");
+        stm.setBoolean(3, value.getRol().isIsAdmin());
+        stm.setString(4, "id_usuario");
     }
 
 }

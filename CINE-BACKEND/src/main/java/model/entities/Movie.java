@@ -1,20 +1,23 @@
 package model.entities;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import org.json.JSONObject;
 
 public class Movie implements Serializable {
 
-    public Movie(String id, String title, String posterPath, String data, boolean billboard) {
+    public Movie(String id, String title, String data, boolean billboard, String type, InputStream image, int length) {
         this.id = id;
         this.title = title;
-        this.posterPath = posterPath;
         this.data = data;
         this.billboard = billboard;
+        this.type = type;
+        this.image = image;
+        this.length = length;
     }
 
     public Movie() {
-        this(null, null, null, null, true);
+        this(null, null, null, true, null, null, 0);
     }
 
     public String getId() {
@@ -33,14 +36,6 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public String getPosterPath() {
-        return posterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
     public String getData() {
         return data;
     }
@@ -56,21 +51,48 @@ public class Movie implements Serializable {
     public void setBillboard(boolean billboard) {
         this.billboard = billboard;
     }
-    
-     public JSONObject toJSON(){
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public InputStream getImage() {
+        return image;
+    }
+
+    public void setImage(InputStream image) {
+        this.image = image;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void getLength(int length) {
+        this.length = length;
+    }
+
+    public JSONObject toJSON() {
         JSONObject json = new JSONObject();
         json.put("id", getId());
         json.put("title", getTitle());
-        json.put("poster-path", getPosterPath());
         json.put("data", getData());
         json.put("billboard", isBillboard());
+        json.put("type", getType());
+        json.put("length", getLength());
         return json;
     }
-    
+
     private String id;
     private String title;
-    private String posterPath;
     private String data;
     private boolean billboard;
-    
+    private String type;
+    private InputStream image;
+    private int length;
+
 }

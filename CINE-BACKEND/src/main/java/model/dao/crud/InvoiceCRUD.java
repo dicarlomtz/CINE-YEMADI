@@ -36,8 +36,8 @@ public class InvoiceCRUD extends AbstractCRUD {
 
     protected static final String ADD_CMD
             = "insert into bd_cinema.factura "
-            + "(seq_factura, fecha, cliente_id, tarjeta_pago) "
-            + "values (?, ?, ?, ?); ";
+            + "(fecha, cliente_id, tarjeta_pago) "
+            + "values (?, ?, ?); ";
     
     protected static final String RETRIEVE_CMD
             = "select "

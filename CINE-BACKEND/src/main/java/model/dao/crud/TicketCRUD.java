@@ -29,6 +29,10 @@ public class TicketCRUD extends AbstractCRUD {
         return DELETE_CMD;
     }
 
+    public String getListInvoiceTickets() {
+        return LIST_INVOICE_TICKETS;
+    }
+
     protected static final String LIST_CMD
             = "select "
             + "id_tiquete, factura_seq, asiento_funcion_sala_cinema_id, asiento_funcion_sala_numero, "
@@ -37,9 +41,9 @@ public class TicketCRUD extends AbstractCRUD {
 
     protected static final String ADD_CMD
             = "insert into bd_cinema.tiquete "
-            + "(id_tiquete, factura_seq, asiento_funcion_sala_cinema_id, asiento_funcion_sala_numero, "
+            + "(factura_seq, asiento_funcion_sala_cinema_id, asiento_funcion_sala_numero, "
             + "asiento_funcion_fecha, asiento_funcion_fila, asiento_funcion_posicion, monto) "
-            + "values (?, ?, ?, ?, ?, ?, ?, ?); ";
+            + "values (?, ?, ?, ?, ?, ?, ?); ";
 
     protected static final String RETRIEVE_CMD
             = "select "
@@ -56,5 +60,11 @@ public class TicketCRUD extends AbstractCRUD {
     protected static final String DELETE_CMD
             = "delete from bd_cinema.tiquete "
             + "where id_tiquete = ?; ";
+
+    protected static final String LIST_INVOICE_TICKETS
+            = "select "
+            + "id_tiquete, factura_seq, asiento_funcion_sala_cinema_id, asiento_funcion_sala_numero, "
+            + "asiento_funcion_fecha, asiento_funcion_fila, asiento_funcion_posicion, monto "
+            + "from bd_cinema.tiquete where factura_seq = ? order by seq_factura; ";
 
 }
