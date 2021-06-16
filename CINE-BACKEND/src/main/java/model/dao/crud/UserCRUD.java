@@ -29,6 +29,10 @@ public class UserCRUD extends AbstractCRUD {
         return DELETE_CMD;
     }
 
+    public String getLoginCmd() {
+        return LOGIN_CMD;
+    }
+
     protected static final String LIST_CMD
             = "select "
             + "id_usuario, cliente_id, clave, rol "
@@ -38,19 +42,24 @@ public class UserCRUD extends AbstractCRUD {
             = "insert into bd_cinema.usuario "
             + "(id_usuario, cliente_id, clave, rol) "
             + "values (?, ?, ?, ?); ";
-    
+
     protected static final String RETRIEVE_CMD
             = "select "
             + "id_usuario, cliente_id, clave, rol "
             + "from bd_cinema.usuario where id_usuario = ?; ";
-    
+
     protected static final String UPDATE_CMD
             = "update bd_cinema.usuario "
             + "set cliente_id = ?, clave = ?, rol = ? "
             + "where id_usuario = ?; ";
-    
+
     protected static final String DELETE_CMD
             = "delete from bd_cinema.usuario "
             + "where id_usuario = ?; ";
+
+    protected static final String LOGIN_CMD
+            = "select "
+            + "id_usuario, cliente_id, clave, rol "
+            + "from bd_cinema.usuario where id_usuario = ? and clave = ?; ";
 
 }

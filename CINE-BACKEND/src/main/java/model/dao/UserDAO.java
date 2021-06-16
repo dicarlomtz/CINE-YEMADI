@@ -22,25 +22,24 @@ public class UserDAO extends AbstractDAO<String, User> {
         this(new DaoDB(), new UserCRUD());
     }
 
-    public User loginUser(String usuario, String clave) {
-        boolean found = false;
-        User user;
-        try (Connection cnx = db.getConnection()) {
-            UserCRUD ucrud = (UserCRUD) crud;
-            try (PreparedStatement stm = cnx.prepareStatement(ucrud.getRetrieveCmd())) {
-                stm.clearParameters();
-                stm.setString(1, usuario);
-                stm.setString(2, clave);
-                ResultSet rs = stm.executeQuery();
-                found = rs.next();
-                user = (User) rs;
-                return user;
+    public User loginUser(String usuario, String clave) 
+            throws SQLException, IOException {
+        User user = null;
+        UserCRUD ucrud = (UserCRUD) crud;
+        try (Connection cnx = db.getConnection();
+                PreparedStatement stm = cnx.prepareStatement(ucrud.getLoginCmd())) {
+            stm.clearParameters();
+            stm.setString(1, usuario);
+            stm.setString(2, clave);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    user = getRecord(rs);
+                } else {
+                    throw new IllegalArgumentException();
+                }
             }
-
-        } catch (SQLException ex) {
-            System.err.printf("Excepción: '%s'%n", ex.getMessage());
         }
-        return null;
+        return user;
     }
 
     @Override

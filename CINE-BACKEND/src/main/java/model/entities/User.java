@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import org.json.JSONObject;
 
 public class User implements Serializable {
 
@@ -45,6 +46,15 @@ public class User implements Serializable {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+    
+    public JSONObject toJSON(){
+        JSONObject json = new JSONObject();
+        json.put("id", getId());
+        json.put("customer", getUserClientInfo().toJSON());
+        json.put("password", getPassword());
+        json.put("rol", getRol().isIsAdmin());
+        return json;
     }
     
     private String id;
