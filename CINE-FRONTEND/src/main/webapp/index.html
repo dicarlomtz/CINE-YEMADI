@@ -39,29 +39,28 @@
         <!---SECCION CON LAS PELICULAS--->
         <main class="section-movies" id="billboard">
 
-            <!-- Asi se debe crear en javascript -->
-            <div class="movie-box dropdown">
-                <div class="movie-card"><img src="Movies/movie00.jpg" alt="" /></div>
-                <div class="dropdown-schedules">
-                    <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
-                </div>
-            </div>
-            <!-- Final asi se debe crear en javascript -->
-
          
 
+            <!-- Asi se debe crear en javascript -->
+            <div >
+                <div class="movie-box dropdown" id="asdasd" onmouseover="addFunctions();">
+                    <div class="movie-card"><img src="Movies/movie00.jpg" alt="" /></div>
+                    <div class="dropdown-schedules" id="asdasdfuncs">
+                        <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
+                        <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
+                        <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
+                    </div>
+                </div>
+                <!-- Final asi se debe crear en javascript -->
+            </div>
 
-            <!--SECCION CON EL MODAL DE ASIENTOS -->
+        </main>
+        
+           <!--SECCION CON EL MODAL DE ASIENTOS -->
             <!-- The Modal -->
             <div id="myModal" class="modal">
-
-
-
                 <!-- Modal content -->
                 <div class="modal-content">
-
                     <span onclick="closeSeatSelector()" class="close">&times;</span>
                     <div id="About-movie">
                         <a>MAY 28 , 11 am/A5</a>
@@ -141,53 +140,51 @@
                     </div><!-- final SECCION CON EL MODAL DE ASIENTOS -->
                 </div>
             </div>
-        </main>
-
 
 
         <!---SECCION CON EL FIN DE PAGINA--->
         <footer>
             <p>Total Soft Inc &copy; 2021</p>
-            <a href="https://github.com/yeikol2703">Yeikol2703
-                <a href="https://github.com/dicarlomtz">Dicarlomtz
-                    <a href="https://github.com/maugv80">Maugv80
-                        </footer>
+            <a href="https://github.com/yeikol2703">Yeikol2703</a>
+            <a href="https://github.com/dicarlomtz">Dicarlomtz</a>
+            <a href="https://github.com/maugv80">Maugv80</a>
+        </footer>
 
 
-                        <script src="javascript/pop-up.js"></script>
+        <script src="javascript/pop-up.js"></script>
 
-                        <script>
-                        /**CONTROL DE ASIENROS***/
-                        const container = document.querySelector('.container');
-                        const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-                        const count = document.getElementById('count');
-                        const total = document.getElementById('total');
-                        const movieSelect = document.getElementById('movie');
+        <script>
+                            /**CONTROL DE ASIENROS***/
+                            const container = document.querySelector('.container');
+                            const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+                            const count = document.getElementById('count');
+                            const total = document.getElementById('total');
+                            const movieSelect = document.getElementById('movie');
 
-                        let ticketPrice = +movieSelect.value;
+                            let ticketPrice = +movieSelect.value;
 
-                        //Update total and count
-                        function updateSelectedCount() {
-                            const selectedSeats = document.querySelectorAll('.row .seat.selected');
-                            const selectedSeatsCount = selectedSeats.length;
-                            count.innerText = selectedSeatsCount;
-                            total.innerText = selectedSeatsCount * ticketPrice;
-                        }
-
-                        //Movie Select Event
-                        movieSelect.addEventListener('change', e => {
-                            ticketPrice = +e.target.value;
-                            updateSelectedCount();
-                        })
-
-                        //Seat click event
-                        container.addEventListener('click', e => {
-                            if (e.target.classList.contains('seat') &&
-                                    !e.target.classList.contains('occupied')) {
-                                e.target.classList.toggle('selected');
+                            //Update total and count
+                            function updateSelectedCount() {
+                                const selectedSeats = document.querySelectorAll('.row .seat.selected');
+                                const selectedSeatsCount = selectedSeats.length;
+                                count.innerText = selectedSeatsCount;
+                                total.innerText = selectedSeatsCount * ticketPrice;
                             }
-                            updateSelectedCount();
-                        })
-                        </script>
-                        </body>
-                        </html>
+
+                            //Movie Select Event
+                            movieSelect.addEventListener('change', e => {
+                                ticketPrice = +e.target.value;
+                                updateSelectedCount();
+                            })
+
+                            //Seat click event
+                            container.addEventListener('click', e => {
+                                if (e.target.classList.contains('seat') &&
+                                        !e.target.classList.contains('occupied')) {
+                                    e.target.classList.toggle('selected');
+                                }
+                                updateSelectedCount();
+                            })
+        </script>
+    </body>
+</html>

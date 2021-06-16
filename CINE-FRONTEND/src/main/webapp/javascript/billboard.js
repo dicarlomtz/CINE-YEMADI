@@ -71,11 +71,12 @@ function addFunctions() {
                     functions.forEach((f) => {
                         fdiv = document.createElement("DIV");
                         fdiv.setAttribute("class", "desc");
-
-                        enF = document.createElement("A");
+                        
+                        let enF = document.createElement("A");
                         enF.appendChild(document.createTextNode(f["date"]));
+                        enF.setAttribute("href", "#");
                         enF.addEventListener("click", seatSelector);
-
+                        
                         fdiv.appendChild(enF);
                         ref.appendChild(fdiv);
                     });
