@@ -4,9 +4,9 @@
         <title>Home</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="styles/default.css" />
+        <script src="javascript/pop-up.js"></script>
         <script src="javascript/getJson.js" type="text/javascript"></script>
         <script src="javascript/billboard.js" type="text/javascript"></script>
-        <script src="javascript/pop-up.js"></script>
     </head>
     <body onload="init();">
         <!---SECCION CON LA BARRA DE NAVEGACION--->
@@ -22,6 +22,7 @@
                     </form>
                 </li>
                 <li><a href="login.html">Login</a></li>
+
             </ul>
         </nav>
         <!---SECCION CON EL BANNER--->
@@ -33,71 +34,160 @@
             <p>NOW OPEN</p>
         </header>
 
+
+
         <!---SECCION CON LAS PELICULAS--->
         <main class="section-movies" id="billboard">
+
+            <!-- Asi se debe crear en javascript -->
             <div class="movie-box dropdown">
                 <div class="movie-card"><img src="Movies/movie00.jpg" alt="" /></div>
                 <div class="dropdown-schedules">
-                    <div class="desc"><a onclick="ventanaSecundaria()" href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
+                    <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
+                    <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
+                    <div class="desc"><a onclick="seatSelector()" href="#"> MAY 28 , 11 am/A5 </a></div>
                 </div>
             </div>
+            <!-- Final asi se debe crear en javascript -->
 
-            <div class="movie-box dropdown">
-                <div class="movie-card"><img src="Movies/movie01.jpg" alt="" /></div>
-                <div class="dropdown-schedules">
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                </div>
-            </div>
+         
 
-            <div class="movie-box dropdown">
-                <div class="movie-card"><img src="Movies/movie02.jpg" alt="" /></div>
-                <div class="dropdown-schedules">
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                </div>
-            </div>
 
-            <div class="movie-box dropdown">
-                <div class="movie-card"><img src="Movies/movie03.jpg" alt="" /></div>
-                <div class="dropdown-schedules">
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                </div>
-            </div>
+            <!--SECCION CON EL MODAL DE ASIENTOS -->
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
 
-            <div class="movie-box dropdown">
-                <div class="movie-card"><img src="Movies/movie04.jpg" alt="" /></div>
-                <div class="dropdown-schedules">
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                </div>
-            </div>
 
-            <div class="movie-box dropdown">
-                <div class="movie-card"><img src="Movies/movie05.jpg" alt="" /></div>
-                <div class="dropdown-schedules">
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
-                    <div class="desc"><a href="#"> MAY 28 , 11 am/A5 </a></div>
+
+                <!-- Modal content -->
+                <div class="modal-content">
+
+                    <span onclick="closeSeatSelector()" class="close">&times;</span>
+                    <div id="About-movie">
+                        <a>MAY 28 , 11 am/A5</a>
+                        <img style="width: 250px ; height: 200px;" align="center" src="Movies/movie05.jpg" alt="IMAGEN" />
+                    </div>
+                    <div class="movie-container">
+                        <ul class="showcase">
+                            <li>
+                                <div class="seat"></div>
+                                <small>N/A</small>
+                            </li>
+                            <li>
+                                <div class="seat selected"></div>
+                                <small>Selected</small>
+                            </li>
+                            <li>
+                                <div class="seat occupied"></div>
+                                <small>Occupied</small>
+                            </li>
+                        </ul>
+
+                        <div class="container">
+                            <div class="screen"></div>
+
+                            <div class="row">
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                            </div>
+                            <div class="row">
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                            </div>
+                            <div class="row">
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                            </div>
+                            <div class="row">
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                            </div>
+                            <div class="row">
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                            </div>
+
+
+                            <p class="text">
+                                You have selected <span id="count">0</span> seats for the total price of Rs. <span id="total">0</span>
+                            </p>
+                            <button type="submit"> Purchase </button>
+                        </div>
+                    </div><!-- final SECCION CON EL MODAL DE ASIENTOS -->
                 </div>
             </div>
         </main>
 
+
+
         <!---SECCION CON EL FIN DE PAGINA--->
         <footer>
             <p>Total Soft Inc &copy; 2021</p>
-            <a href="https://github.com/yeikol2703">Yeikol2703</a>
-            <a href="https://github.com/dicarlomtz">Dicarlomtz</a>
-            <a href="https://github.com/maugv80">Maugv80</a>
-        </footer>
+            <a href="https://github.com/yeikol2703">Yeikol2703
+                <a href="https://github.com/dicarlomtz">Dicarlomtz
+                    <a href="https://github.com/maugv80">Maugv80
+                        </footer>
 
 
-    </body>
-</html>
+                        <script src="javascript/pop-up.js"></script>
+
+                        <script>
+                        /**CONTROL DE ASIENROS***/
+                        const container = document.querySelector('.container');
+                        const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+                        const count = document.getElementById('count');
+                        const total = document.getElementById('total');
+                        const movieSelect = document.getElementById('movie');
+
+                        let ticketPrice = +movieSelect.value;
+
+                        //Update total and count
+                        function updateSelectedCount() {
+                            const selectedSeats = document.querySelectorAll('.row .seat.selected');
+                            const selectedSeatsCount = selectedSeats.length;
+                            count.innerText = selectedSeatsCount;
+                            total.innerText = selectedSeatsCount * ticketPrice;
+                        }
+
+                        //Movie Select Event
+                        movieSelect.addEventListener('change', e => {
+                            ticketPrice = +e.target.value;
+                            updateSelectedCount();
+                        })
+
+                        //Seat click event
+                        container.addEventListener('click', e => {
+                            if (e.target.classList.contains('seat') &&
+                                    !e.target.classList.contains('occupied')) {
+                                e.target.classList.toggle('selected');
+                            }
+                            updateSelectedCount();
+                        })
+                        </script>
+                        </body>
+                        </html>
