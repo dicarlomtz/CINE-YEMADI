@@ -64,6 +64,10 @@
         <servlet-name>FunctionBillboardService</servlet-name>
         <servlet-class>services.FunctionBillboardService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TicketListService</servlet-name>
+        <servlet-class>services.TicketListService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
         <url-pattern>/MoviesListService</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>FunctionBillboardService</servlet-name>
         <url-pattern>/FunctionBillboardService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TicketListService</servlet-name>
+        <url-pattern>/TicketListService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

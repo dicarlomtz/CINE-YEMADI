@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.InvoiceDAO;
-import model.entities.InvoiceList;
+import model.dao.TicketDAO;
+import model.entities.TicketList;
 import org.json.JSONObject;
 
-@WebServlet(name = "InvoiceListService", urlPatterns = {"/InvoiceListService"})
-public class InvoiceListService extends HttpServlet {
+@WebServlet(name = "TicketListService", urlPatterns = {"/TicketListService"})
+public class TicketListService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        try(PrintWriter out = response.getWriter())
+     
+        try (PrintWriter out = response.getWriter())
         {
             try {
-                out.println(InvoiceListJSON());
+                out.println(TicketListJSON());
             } catch (IOException | SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
                 out.println(new JSONObject());
@@ -41,9 +41,9 @@ public class InvoiceListService extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
-    public String InvoiceListJSON()
+
+    public String TicketListJSON()
             throws IOException, SQLException {
-        return new InvoiceList(new InvoiceDAO().listAll()).toJSONbyId("").toString(4);
+        return new TicketList(new TicketDAO().listAll()).toJSON().toString(4);
     }
 }
