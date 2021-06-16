@@ -2,6 +2,7 @@ package model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import org.json.JSONObject;
 
 public class Invoice implements Serializable {
 
@@ -46,6 +47,15 @@ public class Invoice implements Serializable {
 
     public void setPaymentCard(PaymentCard paymentCard) {
         this.paymentCard = paymentCard;
+    }
+    
+    public JSONObject toJSON(){
+        JSONObject r = new JSONObject();
+        r.put("id", getId());
+        r.put("date", getDate().toString());
+        r.put("customer", getClient().toJSON());
+        r.put("payment-card", getPaymentCard().toJSON());
+        return r;
     }
     
     private int id;

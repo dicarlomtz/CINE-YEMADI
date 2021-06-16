@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 public class Ticket implements Serializable {
 
-    public Ticket(int id, Invoice invoice, Cinema cinema, Room room, Date date, FunctionSeat seat, 
+    public Ticket(int id, Invoice invoice, Cinema cinema, Room room, Date date, FunctionSeat seat,
             double amount) {
         this.id = id;
         this.invoice = invoice;
@@ -64,7 +64,7 @@ public class Ticket implements Serializable {
     public FunctionSeat getSeat() {
         return seat;
     }
-    
+
     public void setSeat(FunctionSeat seat) {
         this.seat = seat;
     }
@@ -76,22 +76,21 @@ public class Ticket implements Serializable {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-    
-    public JSONObject toJSON()
-    {
+
+    public JSONObject toJSON() {
         JSONObject json = new JSONObject();
-        
-        json.put("id", this.getId());
-        json.put("invoice", this.getInvoice().getId());
-        json.put("cinema", this.getCinema().getName());
-        json.put("room", this.getRoom().getNumber());
-        json.put("date", this.getDate());
-        json.put("seat", String.format("%s-%d",this.getSeat().getRow(), this.getSeat().getPosition()));
-        json.put("amount", this.getAmount());
-        
+
+        json.put("id", getId());
+        json.put("invoice", getInvoice().toJSON());
+        json.put("cinema", getCinema().toJSON());
+        json.put("room", getRoom().toJSON());
+        json.put("date", getDate().toString());
+        json.put("seat", getSeat().toJSON());
+        json.put("amount", getAmount());
+
         return json;
     }
-    
+
     private int id;
     private Invoice invoice;
     private Cinema cinema;
@@ -99,5 +98,5 @@ public class Ticket implements Serializable {
     private Date date;
     private FunctionSeat seat;
     private double amount;
-    
+
 }

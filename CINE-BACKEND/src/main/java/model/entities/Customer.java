@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import org.json.JSONObject;
 
 public class Customer implements Serializable {
 
@@ -54,6 +55,16 @@ public class Customer implements Serializable {
 
     public void setPaymentCard(PaymentCard paymentCard) {
         this.paymentCard = paymentCard;
+    }
+    
+    public JSONObject toJSON(){
+        JSONObject r = new JSONObject();
+        r.put("id", getId());
+        r.put("surnames", getSurnames());
+        r.put("name", getName());
+        r.put("telephone", getTelephone());
+        r.put("payment-card", getPaymentCard().toJSON());
+        return r;
     }
     
     private String id;

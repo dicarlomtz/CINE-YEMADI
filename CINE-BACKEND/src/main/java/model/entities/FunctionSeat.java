@@ -2,6 +2,7 @@ package model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import org.json.JSONObject;
 
 public class FunctionSeat implements Serializable {
 
@@ -64,6 +65,17 @@ public class FunctionSeat implements Serializable {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+    
+    public JSONObject toJSON(){
+        JSONObject r = new JSONObject();
+        r.put("cinema", getCinema().toJSON());
+        r.put("room", getRoom().toJSON());
+        r.put("date", getDate().toString());
+        r.put("row", getRow());
+        r.put("position", getPosition());
+        r.put("available", isAvailable());
+        return r;
     }
 
     public String buildKey() {
