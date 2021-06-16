@@ -8,12 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.TicketDAO;
-import model.entities.TicketList;
+import model.dao.InvoiceDAO;
+import model.entities.InvoiceList;
 import org.json.JSONObject;
 
 @WebServlet(name = "TicketsSoldService", urlPatterns = {"/TicketsSoldService"})
-public class TicketsSoldService extends HttpServlet {
+public class InvoiceListService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,7 +22,7 @@ public class TicketsSoldService extends HttpServlet {
         try(PrintWriter out = response.getWriter())
         {
             try {
-                out.println(TicketListJSON());
+                out.println(InvoiceListJSON());
             } catch (IOException | SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
                 out.println(new JSONObject());
@@ -42,8 +42,8 @@ public class TicketsSoldService extends HttpServlet {
         processRequest(request, response);
     }
     
-    public String TicketListJSON()
+    public String InvoiceListJSON()
             throws IOException, SQLException {
-        return new TicketList(new TicketDAO().listAll()).toJSON().toString(4);
+        return new InvoiceList(new InvoiceDAO().listAll()).toJSON().toString(4);
     }
 }

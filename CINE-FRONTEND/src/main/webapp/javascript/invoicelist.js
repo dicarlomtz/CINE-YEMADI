@@ -1,6 +1,6 @@
 function init()
 {
-    fetch('UserHistoryService').then(function(resultado) {
+    fetch('TicketsSoldService').then(function(resultado) {
         return resultado.json();
     }).then(function(datos){
         cargarTickets(datos['invoice-list']);

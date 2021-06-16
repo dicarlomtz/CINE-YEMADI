@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.dao.TicketDAO;
-import model.entities.TicketList;
+import model.dao.InvoiceDAO;
+import model.entities.InvoiceList;
 import org.json.JSONObject;
 
 @WebServlet(name = "UserHistoryService", urlPatterns = {"/UserHistoryService"})
@@ -26,7 +26,7 @@ public class UserHistoryService extends HttpServlet {
         try(PrintWriter out = response.getWriter())
         {
             try {
-                out.println(TicketListJSON(id));
+                out.println(InvoiceListJSON(id));
             } catch (IOException | SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
                 out.println(new JSONObject());
@@ -46,8 +46,8 @@ public class UserHistoryService extends HttpServlet {
         processRequest(request, response);
     }
 
-    public String TicketListJSON(String id)
+    public String InvoiceListJSON(String id)
             throws IOException, SQLException {
-        return new TicketList(new TicketDAO().listAll()).toJSONbyId(id).toString(4);
+        return new InvoiceList(new InvoiceDAO().listAll()).toJSONbyId(id).toString(4);
     }
 }

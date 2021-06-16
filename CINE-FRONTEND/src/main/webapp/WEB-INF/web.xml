@@ -41,8 +41,8 @@
         <servlet-class>services.FunctionService</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TicketsSoldService</servlet-name>
-        <servlet-class>services.TicketsSoldService</servlet-class>
+        <servlet-name>InvoiceListService</servlet-name>
+        <servlet-class>services.InvoiceListService</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserHistoryService</servlet-name>
@@ -97,8 +97,8 @@
         <url-pattern>/FunctionService</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TicketsSoldService</servlet-name>
-        <url-pattern>/TicketsSoldService</url-pattern>
+        <servlet-name>InvoiceListService</servlet-name>
+        <url-pattern>/InvoiceListService</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserHistoryService</servlet-name>
