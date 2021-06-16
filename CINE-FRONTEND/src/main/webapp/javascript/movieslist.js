@@ -3,7 +3,7 @@ function init()
     fetch('MoviesListService').then(function(resultado) {
         return resultado.json();
     }).then(function(datos) {
-       cargarCartelera(datos['room-list']);
+       cargarCartelera(datos['movie-list']);
     });
 }
 
