@@ -85,7 +85,7 @@ function collectFormData() {
             data.append("room", JSON.stringify(room));
 
             sendForm(data);
-
+            init();
         } else {
             console.error("Faltan agregar datos");
             alert("Faltan agregar datos");

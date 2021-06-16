@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import model.dao.crud.FunctionSeatCRUD;
+import model.entities.Function;
 import model.entities.FunctionSeat;
 import model.entities.RoomSeat;
 
@@ -55,7 +57,7 @@ public class FunctionSeatDAO extends AbstractDAO<String, FunctionSeat> {
                 new CinemaDAO().retrieve(rs.getInt("funcion_sala_cinema_id")),
                 new RoomDAO().retrieve(String.format("%d-%d", rs.getInt("sala_cinema_id"),
                         rs.getInt("sala_numero"))),
-                new java.util.Date(rs.getDate("funcion_fecha").getTime()),
+                new java.util.Date(rs.getTimestamp("funcion_fecha").getTime()),
                 rs.getString("fila").charAt(0),
                 rs.getInt("posicion"),
                 rs.getBoolean("ocupado")
@@ -80,6 +82,25 @@ public class FunctionSeatDAO extends AbstractDAO<String, FunctionSeat> {
         stm.setTimestamp(4, new Timestamp(((Date) value.getDate()).getTime()));
         stm.setString(5, String.valueOf(value.getRow()));
         stm.setInt(6, value.getPosition());
+    }
+
+    public void addFunctionSeats(Function value)
+            throws SQLException {
+
+        try {
+            FunctionSeatDAO fsd = new FunctionSeatDAO();
+
+            List<RoomSeat> l = new RoomSeatDAO().listCinemaRoomSeats(value.getCinema().getId(),
+                    value.getRoom().getNumber());
+
+            for (RoomSeat rs : l) {
+                FunctionSeat fs = new FunctionSeat(rs.getCinema(), rs.getRoom(), value.getDate(), rs.getRow(), rs.getPosition(), false);
+                fsd.add(fs.buildKey(), fs);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+            throw new SQLException();
+        }
     }
 
 }

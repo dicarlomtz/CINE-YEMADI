@@ -62,38 +62,9 @@ public class RoomDAO extends AbstractDAO<String, Room> {
     @Override
     public void setAddParameters(PreparedStatement stm, String id, Room value)
             throws SQLException {
-        try {
             stm.setInt(1, value.getCinema().getId());
             stm.setInt(2, value.getNumber());
             stm.setInt(3, value.getCapacity());
-            
-            RoomSeatDAO rmsd = new RoomSeatDAO();
-            char[] row = new char[10];
-            row[0] = 'A';
-            row[1] = 'B';
-            row[2] = 'C';
-            row[3] = 'D';
-            row[4] = 'E';
-            row[5] = 'F';
-            row[6] = 'G';
-            row[7] = 'H';
-            row[8] = 'I';
-            row[9] = 'J';
-            for (int i = 0, r = 0, c = 0; i < value.getCapacity(); i++, c++) {
-                if (c == 25) {
-                    r++;
-                    if (r == 9) {
-                        r = 0;
-                    }
-                    c = 0;
-                }
-                RoomSeat rs = new RoomSeat(value.getCinema(), value, row[r], i, true);
-                rmsd.add(rs.buildKey(), rs);
-            }
-        } catch (IOException ex) {
-            System.out.println(ex.toString());
-            throw new SQLException();
-        }
     }
 
     @Override
