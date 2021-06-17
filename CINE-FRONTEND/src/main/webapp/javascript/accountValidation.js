@@ -59,7 +59,6 @@ function collectDataLogin() {
             console.error("Faltan agregar datos");
             alert("Faltan agregar datos");
         }
-
 }
 /*
 *   se envian los datos del usuario hacia el servlet para verificalos y hacer el login
@@ -69,11 +68,18 @@ function sendDataLogin(data) {
 }
 /*
 * se encarga de manejar la respuesta que recibe del servlet
+* si el usuario es correcto, cambia el contenido del elemento por el id y asigna un enlace segun el rol de la persona que loggea
 */
 function manageResponseLogin(data) {
     console.log(data['result']);
     alert(data["result"]);
-    var account = document.getElementById("account");
     
-    
+    if(data['result'] === "valid" ){
+        var id = data['rol'];
+        var account = document.getElementById("account").innerHTML = id;
+        account.setAttribute("href", "buildrooms.html");
+        
+    }else{
+        alert("ha ocurrido un error!");
+    }
 }
