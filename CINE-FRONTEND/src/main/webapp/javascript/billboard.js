@@ -1,10 +1,6 @@
-const container = document.querySelector('.container');
-const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-const count = document.getElementById('count');
-const total = document.getElementById('total');
-const movieSelect = document.getElementById('movie');
-
-let ticketPrice = +movieSelect.value;
+const ticketPrice = 3000;
+let selectedSeats = 0;
+let seats = {};
 
 function init() {
     retrieveBillboard();
@@ -94,26 +90,9 @@ function addFunctions() {
 
 //Update total and count
 function updateSelectedCount() {
-    const selectedSeats = document.querySelectorAll('.row .seat.selected');
-    const selectedSeatsCount = selectedSeats.length;
-    count.innerText = selectedSeatsCount;
-    total.innerText = selectedSeatsCount * ticketPrice;
+    document.getElementById("count").innerHTML = selectedSeats;
+    document.getElementById("total").innerHTML = selectedSeats * ticketPrice;
 }
-
-//Movie Select Event
-movieSelect.addEventListener('change', e => {
-    ticketPrice = +e.target.value;
-    updateSelectedCount();
-});
-
-//Seat click event
-container.addEventListener('click', e => {
-    if (e.target.classList.contains('seat') &&
-            !e.target.classList.contains('occupied')) {
-        e.target.classList.toggle('selected');
-    }
-    updateSelectedCount();
-});
 
 /**MODAL ASIENTOS***/
 function seatSelector() {
@@ -145,7 +124,6 @@ function displaySeats(data) {
     let container = document.getElementById("seats");
     if (container) {
         container.innerHTML = "";
-
         let functionSeats = data["function-seat-list"];
         let currentRow = "";
         let lastRow = "";
@@ -168,9 +146,53 @@ function displaySeats(data) {
             let seat = document.createElement("DIV");
             seat.setAttribute("id", fs["key"]);
             seat.setAttribute("class", "seat");
+            seat.setAttribute("value", fs["available"]);
+            if (fs["available"]) {
+                seat.style.background = "red";
+            }
+            seat.addEventListener("click", selectSeat);
             row.appendChild(seat);
-            
+
         });
 
+    }
+}
+
+function selectSeat() {
+    if (this) {
+        if (this.getAttribute("value") !== "true") {
+            if (this.getAttribute("value") !== "selected") {
+                this.style.background = "blue";
+                selectedSeats++;
+                seats[this.id] = ticketPrice;
+                this.setAttribute("value", "selected");
+            } else {
+                this.style.background = "#444451";
+                this.setAttribute("value", false);
+                selectedSeats--;
+                delete seats[this.id];
+            }
+            updateSelectedCount();
+        } else {
+            alert("Ocuppied");
+        }
+    }
+}
+
+function cleanSeats() {
+    selectedSeats = 0;
+    seats = {};
+    updateSelectedCount();
+    closeSeatSelector();
+}
+
+function purchase() {
+    if (selectedSeats > 0) {
+        let user = sessionStorage.getItem("user");
+        if (user) {
+            
+        }
+    } else {
+        alert("No ha seleccionado asientos");
     }
 }

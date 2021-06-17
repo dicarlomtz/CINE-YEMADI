@@ -68,7 +68,7 @@ public class TicketDAO extends AbstractDAO<Integer, Ticket> {
         stm.setInt(8, id);
     }
 
-    public List<Ticket> listInvoiceTicets(Integer invoice)
+    public List<Ticket> listInvoiceTickets(Integer invoice)
             throws SQLException, IOException {
         List<Ticket> r = new ArrayList<>();
         TicketCRUD rcrud = (TicketCRUD) getCRUD();
