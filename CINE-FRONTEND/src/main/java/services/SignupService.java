@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.CustomerDAO;
 import model.dao.UserDAO;
 import model.entities.Customer;
 import model.entities.PaymentCard;
@@ -20,10 +21,10 @@ import model.entities.Rol;
 import model.entities.User;
 import org.json.JSONObject;
 
-@WebServlet(name = "LoginService", urlPatterns = {"/LoginService"})
+@WebServlet(name = "SignupService", urlPatterns = {"/SignupService"})
 @MultipartConfig
 public class SignupService extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
@@ -33,15 +34,17 @@ public class SignupService extends HttpServlet {
             JSONObject res = new JSONObject();
             try {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("user")));
+                Customer cust = new Customer(
+                        json.getString("identification"),
+                        json.getString("surnames"),
+                        json.getString("name"),
+                        json.getString("telephone"),
+                        new PaymentCard(json.getString("card"))
+                );
+                new CustomerDAO().add(cust.getId(), cust);
                 User user = new User(
                         json.getString("identification"),
-                        new Customer(
-                                json.getString("identification"),
-                                json.getString("surnames"),
-                                json.getString("name"),
-                                json.getString("telephone"),
-                                new PaymentCard(json.getString("card"))
-                        ),
+                        cust,
                         json.getString("password"),
                         new Rol(false)
                 );
@@ -101,7 +104,7 @@ public class SignupService extends HttpServlet {
     private String toUTF8String(String s) throws UnsupportedEncodingException {
         return encoding.isPresent() ? s : new String(s.getBytes(), StandardCharsets.UTF_8);
     }
-
+    
     private Optional<String> encoding;
-
+    
 }

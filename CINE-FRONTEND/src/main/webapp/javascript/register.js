@@ -12,10 +12,9 @@ function getRegisterData() {
         if (refId.value !== "" && refSrnms !== "" && refNm !== "" && refPsw !== "") {
 
             let data = new FormData();
-            registerData = {"identification": refId.value, "surnames": refSrnms.value, "name": refNm.value,
-                "telephone": refTel.value, "card": refCrd.value, "password": refPsw.value};
+            let registerData = {"identification": refId.value, "surnames": refSrnms.value, "name": refNm.value, "telephone": refTel.value, "card": refCrd.value, "password": refPsw.value};
 
-            data.append("user", JSON.Stringify(registerData));
+            data.append("user", JSON.stringify(registerData));
             
             sendForm(data);
         }
@@ -29,4 +28,5 @@ function sendForm(data) {
 
 function handleResponse(data) {
     console.log(data["result"]);
+    alert(data["result"])
 }
