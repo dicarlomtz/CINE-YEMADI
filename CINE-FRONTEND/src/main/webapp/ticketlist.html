@@ -55,8 +55,12 @@
                         <th>Precio</th>
                     </tr>
                 </thead>
-                <tbody id="ticketList"> </tbody>
+                <tbody id="ticketList"></tbody>
+                <tfoot id="ticketFoot"></tfoot>
             </table>
+            <form class="form" onsubmit="ticketsPDF()">
+                <button class="btn-submit" type="submit" id="buttonPDF">Imprimir tickets</button>
+            </form>
         </main>
         
            <!---SECCION CON EL FIN DE PAGINA--->

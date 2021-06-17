@@ -38,7 +38,7 @@ function cargarTickets(datos)
     
                 doc.text(10, 10, 'ID de factura: ' + fila['id']);
                 doc.text(10, 10, 'Fecha: ' + fila['date']);
-                doc.text(10, 10, 'Nombre del cliente: ' + fila['customer']['name']);
+                doc.text(10, 10, 'Nombre del cliente: ' + fila['customer']['name'] + fila['customer']['surnames']);
                 doc.text(10, 10, 'Tarjeta: ' + fila['payment-card']['number']);
     
                 doc.save("ticket.pdf");
@@ -46,7 +46,6 @@ function cargarTickets(datos)
             
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.appendChild(boton);
-            nuevaCelda.setAttribute('class', 'd1');
         });
     }
 }

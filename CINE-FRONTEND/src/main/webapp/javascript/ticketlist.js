@@ -50,21 +50,23 @@ function searchInvoice()
     }
 }
 
-function cargarTickets(datos, idInvoice)
+function cargarTickets(datos, invoice)
 {
-    var ref = document.getElementById('ticketList');
+    var refTable = document.getElementById('ticketList');
+    var refFoot = document.getElementById('ticketList');
+    var precioTotal = 0.0;
     
-    if(ref)
+    if(refTable && refFoot)
     {
         datos.forEach((fila) => {
             
-            if(idInvoice === fila['invoice']['id'])
+            if(invoice === fila['invoice']['id'])
             {            
-                var nuevaFila = ref.insertRow(-1);
+                var nuevaFila = refTable.insertRow(-1);
                 var nuevaCelda;
             
                 nuevaCelda = nuevaFila.insertCell(-1);
-                nuevaCelda.textContent = fila['invoice'];
+                nuevaCelda.textContent = fila['invoice']['id'];
                 
                 nuevaCelda = nuevaFila.insertCell(-1);
                 nuevaCelda.textContent = fila['cinema']['name'];
@@ -80,8 +82,77 @@ function cargarTickets(datos, idInvoice)
                 
                 nuevaCelda = nuevaFila.insertCell(-1);
                 nuevaCelda.textContent = fila['amount'];
+                precioTotal += fila['amount'];
             }
         });
+        
+        var nuevaFila = refFoot.insertRow(-1);
+        var nuevaCelda;
+        
+        nuevaCelda = nuevaFila.insertCell(-1);
+        nuevaCelda.setAttribute('colspan', '6');
+        nuevaCelda.textContent = precioTotal;
+    }
+}
+
+function generatePDF(datos, invoice)
+{
+    var selectValue = document.getElementById('selectInvoice').value;
+    var doc = new jsPDF();
+    var precioTotal = 0.0;
+    
+    invoice.forEach(fila => {
+        if(selectValue === fila['id'])
+        {
+            doc.text(10, 10, 'ID de factura: ' + fila['id']);
+            doc.text(10, 10, 'Fecha: ' + fila['date']);
+            doc.text(10, 10, 'Nombre del cliente: ' + fila['customer']['name'] + fila['customer']['surnames']);
+            doc.text(10, 10, 'Tarjeta: ' + fila['payment-card']['number']);
+        }
+    });
+    
+    datos.forEach(fila => {
+        if(selectValue === fila['invoice']['id'])
+        {
+            doc.text(10, 10, '--------------------------------------------------');
+            doc.text(10, 10, 'Cine: ' + fila['cinema']['name']);
+            doc.text(10, 10, 'Sala: ' + fila['room']['number']);
+            doc.text(10, 10, 'Asiento: ' + fila['seat']['row'] + fila['seat']['position']);
+            doc.text(10, 10, 'Precio: ' + fila['amount']);
+            doc.text(10, 10, '--------------------------------------------------');
+            precioTotal += fila['amount'];
+        }
+    });
+    
+    doc.text(10, 10, 'Precio total: ' + precioTotal);
+    doc.save("ticket.pdf");
+}
+
+function ticketsPDF()
+{
+    var selectValue = document.getElementById('selectInvoice').value;
+    var invoice;
+    var tickets;
+    
+    if(selectValue !== 'null')
+    {
+        fetch('InvoiceListService').then(function(resultado) {
+            return resultado.json();
+        }).then(function(datos){
+            invoice = datos['invoice-list'];
+        });
+        
+        fetch('TicketListService').then(function(resultado) {
+            return resultado.json();
+        }).then(function(datos){
+            tickets = datos['ticket-list'];
+        });
+        
+        generatePDF(tickets, invoice);
+    }
+    else
+    {
+        alert('Debe seleccionar una factura');
     }
 }
 
