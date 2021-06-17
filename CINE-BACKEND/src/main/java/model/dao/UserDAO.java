@@ -22,7 +22,7 @@ public class UserDAO extends AbstractDAO<String, User> {
         this(new DaoDB(), new UserCRUD());
     }
 
-    public User loginUser(String usuario, String clave) 
+    public User loginUser(String usuario, String clave)
             throws SQLException, IOException {
         User user = null;
         UserCRUD ucrud = (UserCRUD) crud;
@@ -54,18 +54,18 @@ public class UserDAO extends AbstractDAO<String, User> {
 
     @Override
     public void setAddParameters(PreparedStatement stm, String id, User value) throws SQLException {
-        stm.setString(1, "id_usuario");
-        stm.setString(2, "cliente_id");
-        stm.setString(3, "clave");
+        stm.setString(1, id);
+        stm.setString(2, value.getUserClientInfo().getId());
+        stm.setString(3, value.getPassword());
         stm.setBoolean(4, value.getRol().isIsAdmin());
     }
 
     @Override
     public void setUpdateParameters(PreparedStatement stm, String id, User value) throws SQLException {
-        stm.setString(1, "cliente_id");
-        stm.setString(2, "clave");
+        stm.setString(1, value.getUserClientInfo().getId());
+        stm.setString(2, value.getPassword());
         stm.setBoolean(3, value.getRol().isIsAdmin());
-        stm.setString(4, "id_usuario");
+        stm.setString(4, id);
     }
 
 }

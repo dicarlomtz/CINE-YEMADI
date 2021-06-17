@@ -68,6 +68,10 @@
         <servlet-name>TicketListService</servlet-name>
         <servlet-class>services.TicketListService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignupService</servlet-name>
+        <servlet-class>services.SignupService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
         <url-pattern>/MoviesListService</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>TicketListService</servlet-name>
         <url-pattern>/TicketListService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignupService</servlet-name>
+        <url-pattern>/SignupService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

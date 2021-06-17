@@ -14,12 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.UserDAO;
+import model.entities.Customer;
+import model.entities.PaymentCard;
+import model.entities.Rol;
 import model.entities.User;
 import org.json.JSONObject;
 
 @WebServlet(name = "LoginService", urlPatterns = {"/LoginService"})
 @MultipartConfig
-public class LoginService extends HttpServlet {
+public class SignupService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,23 +33,30 @@ public class LoginService extends HttpServlet {
             JSONObject res = new JSONObject();
             try {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("user")));
-                User user = new UserDAO().loginUser(json.getString("identification"), json.getString("password"));
+                User user = new User(
+                        json.getString("identification"),
+                        new Customer(
+                                json.getString("identification"),
+                                json.getString("surnames"),
+                                json.getString("name"),
+                                json.getString("telephone"),
+                                new PaymentCard(json.getString("card"))
+                        ),
+                        json.getString("password"),
+                        new Rol(false)
+                );
                 if (Objects.isNull(user)) {
                     throw new IllegalArgumentException();
                 }
+                new UserDAO().add(user.getId(), user);
                 res.put("result", "valid");
                 res.put("user", user.toJSON());
-                JSONObject u = new JSONObject();
-                u.put("identification", user.getId());
-                u.put("admin", user.getRol().isIsAdmin());
-                request.getSession(true).setAttribute("user", u);
             } catch (SQLException | IOException ex) {
                 res.put("result", "invalid");
                 res.put("message", String.format("Las credenciales no son validas%n"));
             }
             out.println(res.toString(4));
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -93,4 +103,5 @@ public class LoginService extends HttpServlet {
     }
 
     private Optional<String> encoding;
+
 }
