@@ -85,6 +85,8 @@ nav ul li a:hover {
     }
 
     .navbar-links{
+        background-color: black;
+        position: relative;
         display: none;
         width: 100%;
     }
