@@ -60,6 +60,60 @@ nav ul li a:hover {
     color: white;
     background: rgb(4, 170, 109);
 }
+/* nav bar responsiva*/
+.toggle-button{
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px){
+    .toggle-button {
+        display: flex;
+    }
+
+    .navbar-links{
+        display: none;
+        width: 100%;
+    }
+
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navbar-links li{
+        text-align: center;
+    }
+
+    .navbar-links li a {
+        padding: .5rem 1rem;
+    }
+
+    .navbar-links.active {
+        display: flex;
+    }
+}
+
+
+/* nav bar responsiva*/
 /*
     En la siguientes seccion se procede a aplicar estilos al elemento Modal POPUP
 El cual se encuentra en el index.html y funciona como intermedio para reservar asientos
@@ -216,6 +270,9 @@ Es una imagen de banner que se presenta en medio del nav y el main content de to
         width: 100%;
         height: 100px;
     }
+    nav ul li form{
+        display:none;
+    }
     .img-section p {
         font-size: 20px;
     }
@@ -223,30 +280,6 @@ Es una imagen de banner que se presenta en medio del nav y el main content de to
         text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
         font-size: 50px;
         letter-spacing: 20px;
-    }
-}
-@media only screen and (max-width: 600px) {
-    nav {
-        display: inline-block;
-        background-color: black;
-        height: 180px;
-    }
-    nav ul li:last-child {
-        text-align: unset;
-        float: unset;
-    }
-    .img-section {
-        color: white;
-        width: 100%;
-        height: 100px;
-    }
-    .img-section p {
-        font-size: 15px;
-    }
-    .img-section p:last-child {
-        text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
-        font-size: 30px;
-        letter-spacing: 10px;
     }
 }
 /*
@@ -412,8 +445,24 @@ td {
     color: rgb(4, 170, 109);
     background: grey;
 }
-
-
+/*
+    Estilos aplicados a los elementos de tipo select
+*/
+select {
+  width: 100%;
+  height: 50px;
+  font-size: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: rgb(4, 170, 109);
+  border: none;
+  border-bottom: 2px solid rgb(3, 170, 105);
+  color: white;
+  padding: 10px;
+  appearance: none;
+  padding: 10px;
+}
 
 /*
 El siguiente bloque de estilos se aplican a todos los footer de las paginas html
@@ -421,9 +470,6 @@ El siguiente bloque de estilos se aplican a todos los footer de las paginas html
 footer {
     background: black;
     height: 60px;
-
-
-
     color: white;
     text-align: center;
     position: relative;
