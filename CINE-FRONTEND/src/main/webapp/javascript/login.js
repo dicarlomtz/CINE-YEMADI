@@ -13,7 +13,7 @@ function login() {
 }
 
 function sendForm(data) {
-    getJson('LoginService', data, handleResponse);
+    getJSON('LoginService', data, handleResponse);
 }
 
 function handleResponse(data) {

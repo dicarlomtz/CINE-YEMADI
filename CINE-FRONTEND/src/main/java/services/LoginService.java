@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.UserDAO;
 import model.entities.User;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 @WebServlet(name = "LoginService", urlPatterns = {"/LoginService"})
@@ -31,18 +32,16 @@ public class LoginService extends HttpServlet {
             try {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("user")));
                 User user = new UserDAO().loginUser(json.getString("identification"), json.getString("password"));
-                if (Objects.isNull(user)) {
-                    throw new IllegalArgumentException();
-                }
                 res.put("result", "valid");
                 res.put("user", user.toJSON());
                 JSONObject u = new JSONObject();
                 u.put("identification", user.getId());
                 u.put("admin", user.getRol().isIsAdmin());
                 request.getSession(true).setAttribute("user", u);
-            } catch (SQLException | IOException ex) {
+            } catch (IOException | IllegalArgumentException | SQLException | JSONException ex) {
+                System.out.println(ex.toString());
                 res.put("result", "invalid");
-                res.put("message", String.format("Las credenciales no son validas%n"));
+                res.put("message", "Las credenciales no son validas");
             }
             out.println(res.toString(4));
         }

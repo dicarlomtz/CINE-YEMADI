@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import model.dao.crud.UserCRUD;
 import model.entities.Rol;
 import model.entities.User;
@@ -23,7 +24,7 @@ public class UserDAO extends AbstractDAO<String, User> {
     }
 
     public User loginUser(String usuario, String clave)
-            throws SQLException, IOException {
+            throws SQLException, IOException, IllegalArgumentException {
         User user = null;
         UserCRUD ucrud = (UserCRUD) crud;
         try (Connection cnx = db.getConnection();
@@ -38,6 +39,9 @@ public class UserDAO extends AbstractDAO<String, User> {
                     throw new IllegalArgumentException();
                 }
             }
+        }
+        if (Objects.isNull(user)) {
+            throw new IllegalArgumentException();
         }
         return user;
     }
