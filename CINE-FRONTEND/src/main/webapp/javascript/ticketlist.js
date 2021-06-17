@@ -126,7 +126,7 @@ function generatePDF(datos, invoice)
         }
     });
     
-    doc.text(10, 10, 'Precio total: ' + precioTotal);
+    doc.text('Precio total: ' + precioTotal, 10, 10);
     doc.save("ticket.pdf");
 }
 
