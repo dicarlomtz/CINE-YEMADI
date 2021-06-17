@@ -1,3 +1,7 @@
+function init(){
+    setUser();
+}
+
 function validateForm() {
     var valid = true;
     var refA = document.getElementById("image");

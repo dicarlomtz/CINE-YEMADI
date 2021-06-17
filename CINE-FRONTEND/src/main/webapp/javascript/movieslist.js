@@ -1,6 +1,7 @@
 function init()
 {
     retrieveMovies();
+    setUser();
 }
 
 function retrieveMovies() {

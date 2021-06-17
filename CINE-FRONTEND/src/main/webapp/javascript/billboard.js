@@ -4,6 +4,7 @@ let seats = {};
 
 function init() {
     retrieveBillboard();
+    setUser();
 }
 
 function retrieveBillboard() {

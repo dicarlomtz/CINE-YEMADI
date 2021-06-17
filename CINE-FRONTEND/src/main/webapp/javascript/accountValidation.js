@@ -1,3 +1,7 @@
+function init() {
+    setUser();
+}
+
 /*
  * Se recolectan los datos del formulario para crear un nuevo usuario
  */

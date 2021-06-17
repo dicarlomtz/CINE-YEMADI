@@ -7,6 +7,7 @@ function init()
     }).then(function(datos){
         createSelectInvoice(datos['invoice-list']);
     });
+    setUser();
 }
 
 function createSelectInvoice(datos)

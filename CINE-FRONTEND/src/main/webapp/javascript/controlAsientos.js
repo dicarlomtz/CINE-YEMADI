@@ -7,6 +7,10 @@ const movieSelect = document.getElementById('movie');
 
 let ticketPrice = +movieSelect.value;
 
+function init(){
+    setUser();
+}
+
 //Update total and count
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected');

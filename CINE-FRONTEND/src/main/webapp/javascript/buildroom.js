@@ -1,6 +1,7 @@
 function init() {
     retrieveCinemas();
     retrieveRooms();
+    setUser();
 }
 
 function retrieveCinemas() {

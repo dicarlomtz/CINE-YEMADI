@@ -3,6 +3,7 @@ function init() {
     retrieveMovies();
     retrieveFunctions();
     roomMenuInit();
+    setUser();
 }
 
 function retrieveMovies() {

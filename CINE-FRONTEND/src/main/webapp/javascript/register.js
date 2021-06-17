@@ -1,3 +1,7 @@
+function init(){
+    setUser();
+}
+
 function getRegisterData() {
 
     let refId = document.getElementById("identification");
