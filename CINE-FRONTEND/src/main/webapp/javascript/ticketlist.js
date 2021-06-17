@@ -2,7 +2,7 @@ window.jsPDF = window.jspdf.jsPDF;
 
 function init()
 {
-    fetch('UserHistoryService').then(function(resultado) {
+    fetch('InvoiceListService').then(function(resultado) {
         return resultado.json();
     }).then(function(datos){
         createSelectInvoice(datos['invoice-list']);
@@ -138,7 +138,7 @@ function ticketsPDF()
     
     if(selectValue !== 'null')
     {
-        fetch('UserHistoryService').then(function(resultado) {
+        fetch('InvoiceListService').then(function(resultado) {
             return resultado.json();
         }).then(function(datos){
             invoice = datos['invoice-list'];
