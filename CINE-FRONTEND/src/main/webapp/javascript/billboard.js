@@ -41,8 +41,6 @@ function updateBillboard(data) {
             fdiv.setAttribute("class", "dropdown-schedules");
             fdiv.setAttribute("id", movie["id"] + "funcs");
 
-            //addFunctions(fdiv, movie["id"]);
-
             pdiv.appendChild(mdiv);
             pdiv.appendChild(fdiv);
 
@@ -71,12 +69,13 @@ function addFunctions() {
                     functions.forEach((f) => {
                         fdiv = document.createElement("DIV");
                         fdiv.setAttribute("class", "desc");
-                        
+
                         let enF = document.createElement("A");
                         enF.appendChild(document.createTextNode(f["date"]));
+                        enF.setAttribute("id", f["key"]);
                         enF.setAttribute("href", "#");
                         enF.addEventListener("click", seatSelector);
-                        
+
                         fdiv.appendChild(enF);
                         ref.appendChild(fdiv);
                     });
@@ -119,6 +118,7 @@ container.addEventListener('click', e => {
 /**MODAL ASIENTOS***/
 function seatSelector() {
     var modal = document.getElementById("myModal");
+    loadSeats(this.id);
     modal.style.display = "block";
 }
 function closeSeatSelector() {
@@ -128,4 +128,49 @@ function closeSeatSelector() {
     span.onclick = function () {
         modal.style.display = "none";
     };
-} 
+}
+
+function loadSeats(id) {
+    let func = {"id": id};
+    let data = new FormData();
+    data.append("function", JSON.stringify(func));
+    getSeatsFunc(data);
+}
+
+function getSeatsFunc(data) {
+    getJSON('FunctionSeatsService', data, displaySeats);
+}
+
+function displaySeats(data) {
+    let container = document.getElementById("seats");
+    if (container) {
+        container.innerHTML = "";
+
+        let functionSeats = data["function-seat-list"];
+        let currentRow = "";
+        let lastRow = "";
+        let row;
+
+        functionSeats.forEach(
+                (fs) => {
+            currentRow = fs["row"];
+            if (currentRow !== lastRow) {
+
+                row = document.createElement("DIV");
+                row.setAttribute("id", fs["row"]);
+                row.setAttribute("class", "row");
+
+                lastRow = currentRow;
+                container.appendChild(row);
+
+            }
+
+            let seat = document.createElement("DIV");
+            seat.setAttribute("id", fs["key"]);
+            seat.setAttribute("class", "seat");
+            row.appendChild(seat);
+            
+        });
+
+    }
+}

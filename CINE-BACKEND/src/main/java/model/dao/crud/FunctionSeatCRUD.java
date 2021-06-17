@@ -29,6 +29,10 @@ public class FunctionSeatCRUD extends AbstractCRUD {
         return DELETE_CMD;
     }
 
+    public String getListFunctionSeatsCmd(){
+        return LIST_FUNCTION_SEATS_CMD;
+    }
+    
     protected static final String LIST_CMD
             = "select "
             + "funcion_sala_cinema_id, funcion_sala_numero, funcion_fecha, fila, posicion, ocupado "
@@ -53,4 +57,9 @@ public class FunctionSeatCRUD extends AbstractCRUD {
             = "delete from bd_cinema.asiento_funcion "
             + "where funcion_sala_cinema_id = ? and funcion_sala_numero = ? and funcion_fecha = ? and fila = ? and posicion = ?; ";
 
+    protected static final String LIST_FUNCTION_SEATS_CMD
+            = "select "
+            + "funcion_sala_cinema_id, funcion_sala_numero, funcion_fecha, fila, posicion, ocupado "
+            + "from bd_cinema.asiento_funcion where funcion_sala_cinema_id = ? and funcion_sala_numero = ? and funcion_fecha = ? "
+            + "order by posicion; ";
 }

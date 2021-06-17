@@ -2,31 +2,36 @@ package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.Optional;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.FunctionDAO;
-import model.entities.FunctionList;
+import model.dao.FunctionSeatDAO;
+import model.entities.FunctionSeatList;
 import org.json.JSONObject;
 
-@WebServlet(name = "FunctionBillboardService", urlPatterns = {"/FunctionBillboardService"})
-public class FunctionBillboardService extends HttpServlet {
+@WebServlet(name = "FunctionSeatsService", urlPatterns = {"/FunctionSeatsService"})
+@MultipartConfig
+public class FunctionSeatsService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+     request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setContentType("application/json;charset=UTF-8");
+        encoding = Optional.of(request.getCharacterEncoding());
         try (PrintWriter out = response.getWriter()) {
+            JSONObject json = new JSONObject(toUTF8String(request.getParameter("function")));
             try {
-                out.println(FunctionListJSON(request.getParameter("id_movie")));
-            } catch (IOException | SQLException ex) {
+                out.println(FunctionSeatListJSON(json.getString("id")));
+            } catch (SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
-                JSONObject a = new JSONObject();
-                a.put("ms1", ex.toString());
-                out.println(a.toString(4));
+                out.println(new JSONObject());
             }
         }
     }
@@ -70,8 +75,14 @@ public class FunctionBillboardService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public String FunctionListJSON(String idMovie)
-            throws IOException, SQLException {
-        return new FunctionList(new FunctionDAO().listFunctionBillboard(idMovie)).toJSON().toString(4);
+        private String toUTF8String(String s) throws UnsupportedEncodingException {
+        return encoding.isPresent() ? s : new String(s.getBytes(), StandardCharsets.UTF_8);
     }
+
+    public String FunctionSeatListJSON(String id)
+            throws IOException, SQLException {
+        return new FunctionSeatList(new FunctionSeatDAO().listFunctionSeats(id)).toJSON().toString(4);
+    }
+
+    private Optional<String> encoding;
 }

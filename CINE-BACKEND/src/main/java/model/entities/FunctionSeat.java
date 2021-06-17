@@ -75,6 +75,7 @@ public class FunctionSeat implements Serializable {
         r.put("row", getRow());
         r.put("position", getPosition());
         r.put("available", isAvailable());
+        r.put("key", buildKey());
         return r;
     }
 

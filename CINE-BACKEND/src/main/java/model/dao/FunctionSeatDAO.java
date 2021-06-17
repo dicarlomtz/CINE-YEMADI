@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import model.dao.crud.FunctionSeatCRUD;
@@ -37,7 +38,7 @@ public class FunctionSeatDAO extends AbstractDAO<String, FunctionSeat> {
             stm.clearParameters();
             stm.setInt(index++, Integer.parseInt(parameters[0]));
             stm.setInt(index++, Integer.parseInt(parameters[1]));
-            stm.setTimestamp(index++, new Timestamp(Integer.parseInt(parameters[2])));
+            stm.setTimestamp(index++, new Timestamp(Long.parseLong(parameters[2])));
             stm.setString(index++, parameters[3]);
             stm.setInt(index++, Integer.parseInt(parameters[4]));
             try (ResultSet rs = stm.executeQuery()) {
@@ -55,8 +56,8 @@ public class FunctionSeatDAO extends AbstractDAO<String, FunctionSeat> {
     public FunctionSeat getRecord(ResultSet rs) throws SQLException, IOException {
         return new FunctionSeat(
                 new CinemaDAO().retrieve(rs.getInt("funcion_sala_cinema_id")),
-                new RoomDAO().retrieve(String.format("%d-%d", rs.getInt("sala_cinema_id"),
-                        rs.getInt("sala_numero"))),
+                new RoomDAO().retrieve(String.format("%d-%d", rs.getInt("funcion_sala_cinema_id"),
+                        rs.getInt("funcion_sala_numero"))),
                 new java.util.Date(rs.getTimestamp("funcion_fecha").getTime()),
                 rs.getString("fila").charAt(0),
                 rs.getInt("posicion"),
@@ -86,7 +87,6 @@ public class FunctionSeatDAO extends AbstractDAO<String, FunctionSeat> {
 
     public void addFunctionSeats(Function value)
             throws SQLException {
-
         try {
             FunctionSeatDAO fsd = new FunctionSeatDAO();
 
@@ -101,6 +101,27 @@ public class FunctionSeatDAO extends AbstractDAO<String, FunctionSeat> {
             System.out.println(ex.toString());
             throw new SQLException();
         }
+    }
+
+    public List<FunctionSeat> listFunctionSeats(String id)
+            throws SQLException, IOException {
+        List<FunctionSeat> r = new ArrayList<>();
+        String[] parameters = id.split("-");
+        int index = 1;
+        FunctionSeatCRUD rcrud = (FunctionSeatCRUD) getCRUD();
+        try (Connection cnx = db.getConnection();
+                PreparedStatement stm = cnx.prepareStatement(rcrud.getListFunctionSeatsCmd())) {
+            stm.clearParameters();
+            stm.setInt(index++, Integer.parseInt(parameters[0]));
+            stm.setInt(index++, Integer.parseInt(parameters[1]));
+            stm.setTimestamp(index++, new Timestamp(Long.parseLong(parameters[2])));
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    r.add(getRecord(rs));
+                }
+            }
+        }
+        return r;
     }
 
 }

@@ -60,6 +60,7 @@ public class Function implements Serializable {
         json.put("room", getRoom().toJSON());
         json.put("date", getDate().toString());
         json.put("movie", getMovie().toJSON());
+        json.put("key", buildKey());
         return json;
     }
 

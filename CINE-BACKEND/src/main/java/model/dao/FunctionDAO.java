@@ -39,7 +39,7 @@ public class FunctionDAO extends AbstractDAO<String, Function> {
             stm.clearParameters();
             stm.setInt(index++, Integer.parseInt(parameters[0]));
             stm.setInt(index++, Integer.parseInt(parameters[1]));
-            stm.setTimestamp(index++, new Timestamp(Integer.parseInt(parameters[2])));
+            stm.setTimestamp(index++, new Timestamp(Long.parseLong(parameters[2])));
             try (ResultSet rs = stm.executeQuery()) {
                 if (rs.next()) {
                     r = getRecord(rs);
@@ -98,22 +98,6 @@ public class FunctionDAO extends AbstractDAO<String, Function> {
             }
         }
         return r;
-    }
-    
-    public static void main(String[] args){
-            try {
-               String a = FunctionListJSON("Mau");
-               System.out.println(a);
-               String b = FunctionListJSON("hola");
-               System.out.println(b);
-               String c = FunctionListJSON("asdasdasdasdasd");
-               System.out.println(c);
-               String d = FunctionListJSON("asdasd");
-               System.out.println(d);
-            } catch (IOException | SQLException ex) {
-                System.err.printf("Excepción: '%s'%n", ex.getMessage());
-            }
-        
     }
 
     public static String FunctionListJSON(String idMovie)

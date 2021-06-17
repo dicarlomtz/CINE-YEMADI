@@ -33,6 +33,7 @@ C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Inv
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\crud\CustomerCRUD.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Invoice.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\FunctionDAO.java
+C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\FunctionSeatList.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Rol.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\entities\Room.java
 C:\Users\dicar\Desktop\CINE-YEMADI\CINE-BACKEND\src\main\java\model\dao\RoomDAO.java
