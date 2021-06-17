@@ -3,9 +3,9 @@ function login() {
     let refPsw = document.getElementById("password");
 
     if (refId && refPsw) {
-        if (refId.value !== "null" && refPsw !== "null") {
+        if (refId.value !== "" && refPsw !== "") {
             let data = new FormData();
-            let user = {"identification": refId.value, "password": refPsq.value};
+            let user = {"identification": refId.value, "password": refPsw.value};
             data.append("user", JSON.stringify(user));
             sendForm(data);
         }
@@ -18,5 +18,8 @@ function sendForm(data) {
 
 function handleResponse(data) {
     console.log(data["result"]);
-    alert(data["resuelt"]);
+    if (data["result"] === "valid") {
+        sessionStorage.setItem("user", data["user"]);
+    }
+    alert(data["result"]);
 }

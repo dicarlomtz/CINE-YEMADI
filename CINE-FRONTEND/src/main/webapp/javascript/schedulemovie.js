@@ -110,7 +110,7 @@ function updateMenuMovies(data) {
 function retrieveCinemaRooms() {
     let refMenu = document.getElementById("menuCinema");
     if (refMenu) {
-        if (refMenu.value !== "null") {
+        if (refMenu.value !== "null" && refMenu.value !== "") {
             let data = new FormData();
             let cinema = {"id": refMenu.value};
             data.append("cinema", JSON.stringify(cinema));
@@ -158,7 +158,7 @@ function collectFormData() {
 
     if (refMenuCinema && refMenuRoom && refMenuMovie && refDate && refTime) {
 
-        if (refMenuCinema.value !== "null" && refMenuRoom.value !== "null" && refMenuMovie.value !== "null" && refDate !== "null" && refTime !== "null") {
+        if (refMenuCinema.value !== "null" && refMenuRoom.value !== "null" && refMenuMovie.value !== "null" && refDate !== "" && refTime !== "") {
 
             let screening = {"cinema": refMenuCinema.value, "room": refMenuRoom.value, "date": refDate.value + " " + refTime.value, "movie": refMenuMovie.value};
             data.append("screening", JSON.stringify(screening));

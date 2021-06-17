@@ -78,7 +78,7 @@ function collectFormData() {
 
     if (refMenu && refNumber && refCapacity) {
 
-        if (refMenu.value !== "null" && refNumber.value !== 'null' && refCapacity.value !== 'null') {
+        if (refMenu.value !== "" && refNumber.value !== "" && refCapacity.value !== "") {
 
             //var room = new Room(refMenu.value, refNumber.value.refCapacity.value);
             let room = {"cinema": refMenu.value, "number": refNumber.value, "capacity": refCapacity.value};
