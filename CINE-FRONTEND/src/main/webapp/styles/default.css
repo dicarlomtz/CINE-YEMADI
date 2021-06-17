@@ -111,9 +111,9 @@ nav ul li a:hover {
         display: flex;
     }
 }
+/* fin nav bar responsiva*/
 
 
-/* nav bar responsiva*/
 /*
     En la siguientes seccion se procede a aplicar estilos al elemento Modal POPUP
 El cual se encuentra en el index.html y funciona como intermedio para reservar asientos
@@ -264,7 +264,7 @@ Es una imagen de banner que se presenta en medio del nav y el main content de to
     font-size: 110px;
     letter-spacing: 50px;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1100px) {
     .img-section {
         color: white;
         width: 100%;
@@ -467,16 +467,23 @@ select {
 /*
 El siguiente bloque de estilos se aplican a todos los footer de las paginas html
 */
+/*footer*/
 footer {
     background: black;
     height: 60px;
+
+
+
     color: white;
     text-align: center;
-    position: relative;
+    position: fixed;
     padding: 10px 10px 0px 10px;
     bottom: 0;
     width: 100%;
 }
+
+
+
 footer a {
     color: white;
 }
