@@ -19,7 +19,8 @@ function sendForm(data) {
 function handleResponse(data) {
     console.log(data["result"]);
     if (data["result"] === "valid") {
-        sessionStorage.setItem("user", data["user"]);
+        sessionStorage.setItem("user", JSON.stringify(data["user"]));
+        //hacer JSON.parse(sessionStorage.getSession("user")) para obtener el JSON del objeto
     }
     alert(data["result"]);
 }
