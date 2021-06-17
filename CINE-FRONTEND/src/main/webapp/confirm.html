@@ -7,8 +7,8 @@
         <link rel="stylesheet" type="text/css" href="styles/default.css">
 
     </head>
-    <body>
-     <!---SECCION CON LA BARRA DE NAVEGACION--->
+    <body >
+        <!---SECCION CON LA BARRA DE NAVEGACION--->
         <nav class="max-width navbar">
 
             <a href="#" class="toggle-button">
@@ -18,34 +18,76 @@
             </a>
 
             <ul class="navbar-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="contact.html">Contact us</a></li>
-        <li><a href="signup.html">Register</a></li>
-        <li>   
-            <form action="">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit">Search Movie</button>
-            </form>
-        </li>
-        <li><a href="login.html">Login</a></li>
-        
-      </ul>
-    </nav>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+                <li><a href="signup.html">Register</a></li>
+                <li>   
+                    <form action="">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit">Search Movie</button>
+                    </form>
+                </li>
+                <li><a href="login.html">Login</a></li>
+
+            </ul>
+        </nav>
         <!---SECCION CON EL BANNER--->
         <header class="img-section "> 
             <p> <b>NCG </b> <br> CINEMA</p>
             <p>NOW OPEN</p>
         </header> 
-        
+
         <!---SECCION CON DETALLES Y CONFIRMACION--->
         <main>
 
+            <form class="form" onsubmit="confirmBuy();">
+                <h1>Confirm</h1>
+                <input type="text" id="name" class="input-style" placeholder="Name" autofocus required/>
+                <input type="text" id="identification" maxlength="9" class="input-style" placeholder="Identification" autofocus required/>
 
+
+                <div>
+                    <input type="number" id="card" maxlength="15" class="input-style" placeholder="Card Number" autofocus/>
+
+                </div>
+                <div class="card-form" style="display: flex"> 
+
+                    <select>
+                        <option value="01">January</option>
+                        <option value="02">February </option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <select>
+                        <option value="19"> 2019</option>
+                        <option value="20"> 2020</option>
+                        <option value="21"> 2021</option>
+                        <option value="22"> 2021</option>
+                        <option value="23"> 2021</option>
+                    </select>
+
+
+
+                    <input type="text" id="CCV" class="input-style" maxlength="3" placeholder="CCV" autofocus required/>
+
+
+
+                </div>
+                <button type="submit" class="btn-submit" >Confirm</button>
+            </form>
 
         </main>
-        
-           <!---SECCION CON EL FIN DE PAGINA--->
-           <footer style=" position:fixed">
+
+        <!---SECCION CON EL FIN DE PAGINA--->
+        <footer style=" position:fixed">
             <p>
                 Total Soft Inc &copy; 2021
             </p>
