@@ -36,10 +36,10 @@ function cargarTickets(datos)
             boton.setAttribute('onclick', function() {
                 var doc = new jsPDF();
     
-                doc.text(10, 10, 'ID de factura: ' + fila['id']);
-                doc.text(10, 10, 'Fecha: ' + fila['date']);
-                doc.text(10, 10, 'Nombre del cliente: ' + fila['customer']['name'] + fila['customer']['surnames']);
-                doc.text(10, 10, 'Tarjeta: ' + fila['payment-card']['number']);
+                doc.text('ID de factura: ' + fila['id'], 10, 10);
+                doc.text('Fecha: ' + fila['date'], 10, 10);
+                doc.text('Nombre del cliente: ' + fila['customer']['name'] + fila['customer']['surnames'], 10, 10);
+                doc.text('Tarjeta: ' + fila['payment-card']['number'], 10, 10);
     
                 doc.save("ticket.pdf");
             });

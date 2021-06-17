@@ -1,3 +1,5 @@
+window.jsPDF = window.jspdf.jsPDF;
+
 function init()
 {
     fetch('InvoiceListService').then(function(resultado) {
@@ -104,22 +106,22 @@ function generatePDF(datos, invoice)
     invoice.forEach(fila => {
         if(selectValue === fila['id'])
         {
-            doc.text(10, 10, 'ID de factura: ' + fila['id']);
-            doc.text(10, 10, 'Fecha: ' + fila['date']);
-            doc.text(10, 10, 'Nombre del cliente: ' + fila['customer']['name'] + fila['customer']['surnames']);
-            doc.text(10, 10, 'Tarjeta: ' + fila['payment-card']['number']);
+            doc.text('ID de factura: ' + fila['id'], 10, 10);
+            doc.text('Fecha: ' + fila['date'], 10, 10);
+            doc.text('Nombre del cliente: ' + fila['customer']['name'] + fila['customer']['surnames'], 10, 10);
+            doc.text('Tarjeta: ' + fila['payment-card']['number'], 10, 10);
         }
     });
     
     datos.forEach(fila => {
         if(selectValue === fila['invoice']['id'])
         {
-            doc.text(10, 10, '--------------------------------------------------');
-            doc.text(10, 10, 'Cine: ' + fila['cinema']['name']);
-            doc.text(10, 10, 'Sala: ' + fila['room']['number']);
-            doc.text(10, 10, 'Asiento: ' + fila['seat']['row'] + fila['seat']['position']);
-            doc.text(10, 10, 'Precio: ' + fila['amount']);
-            doc.text(10, 10, '--------------------------------------------------');
+            doc.text('--------------------------------------------------', 10, 10);
+            doc.text('Cine: ' + fila['cinema']['name'], 10, 10);
+            doc.text('Sala: ' + fila['room']['number'], 10, 10);
+            doc.text('Asiento: ' + fila['seat']['row'] + fila['seat']['position'], 10, 10);
+            doc.text('Precio: ' + fila['amount'], 10, 10);
+            doc.text('--------------------------------------------------', 10, 10, );
             precioTotal += fila['amount'];
         }
     });
