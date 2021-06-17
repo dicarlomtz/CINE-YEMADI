@@ -77,7 +77,7 @@ function manageResponseLogin(data) {
     if(data['result'] === "valid" ){
         var id = data['rol'];
         var account = document.getElementById("account").innerHTML = id;
-        account.setAttribute("href", "buildrooms.html");
+        account.setAttribute("href", "adminpanel.html");
         
     }else{
         alert("ha ocurrido un error!");

@@ -20,6 +20,9 @@ function handleResponse(data) {
     console.log(data["result"]);
     if (data["result"] === "valid") {
         sessionStorage.setItem("user", data["user"]);
+        var accountElement = document.getElementById("account"); //se refiere al boton de hacer login
+        accountElement.innerHTML = "account";  //cambia el texto por account, deberia decir el id del que loggueo
+        accountElement.href = "adminpanel.html"; //cambia el href 
     }
     alert(data["result"]);
 }
