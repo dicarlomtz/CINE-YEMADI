@@ -1,7 +1,6 @@
 function login() {
     let refId = document.getElementById("identification");
     let refPsw = document.getElementById("password");
-
     if (refId && refPsw) {
         if (refId.value !== "" && refPsw !== "") {
             let data = new FormData();
@@ -20,9 +19,22 @@ function handleResponse(data) {
     console.log(data["result"]);
     if (data["result"] === "valid") {
         sessionStorage.setItem("user", data["user"]);
-        var accountElement = document.getElementById("account"); //se refiere al boton de hacer login
-        accountElement.innerHTML = "account";  //cambia el texto por account, deberia decir el id del que loggueo
-        accountElement.href = "adminpanel.html"; //cambia el href 
+        setUser();
     }
     alert(data["result"]);
+}
+/*
+    Esta funcion setea el id del usuario en lugar del boton de login y cambia su enlace segun el rol del que loggea
+*/
+function setUser() {
+    var user = sessionStorage.getItem("user");
+    var accountElement = document.getElementById("account"); //se refiere al boton de hacer login
+    accountElement.innerHTML = user["id"]; //cambia el texto por account, deberia decir el id del que loggueo
+
+    if (user["rol"] === 0) {
+        accountElement.href = "adminpanel.html"; //cambia el href a admin
+    } else {
+        accountElement.href = "clientpanel.html"; //cambia el href a clente
+
+    }
 }
