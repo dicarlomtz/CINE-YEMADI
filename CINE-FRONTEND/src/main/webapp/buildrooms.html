@@ -33,15 +33,15 @@
         <!---SECCION CREAR UNA SALA--->
         <main>
 
-            <form id="room" name="form" onsubmit="collectFormData()">
+            <form id="room" class="form" name="form" onsubmit="collectFormData()">
                 <select id="menuCinema" name="menuCinema" required>
                 </select>
-                <input type="number" id="number" name="number" min="1" placeholder="Numero de sala" title="Debe ingresar el numero de sala" required>
-                <input type="number" id="capacity" name="capacity" min="0" max="99" placeholder="Capacidad" title="Debe ingresar la capacidad, minimo 0 y maximo 99" required> 
-                <button type="submit">Agregar</button>
+                <input type="number" class="input-style" id="number" name="number" min="1" placeholder="Numero de sala" title="Debe ingresar el numero de sala" required>
+                <input type="number" class="input-style" id="capacity" name="capacity" min="0" max="99" placeholder="Capacidad" title="Debe ingresar la capacidad, minimo 0 y maximo 99" required> 
+                <button class="btn-submit" type="submit">Agregar</button>
             </form>
 
-            <table class="tablaGeneral">
+            <table class="tablaGeneral form">
                 <caption>Salas</caption>
                 <thead>
                     <tr>

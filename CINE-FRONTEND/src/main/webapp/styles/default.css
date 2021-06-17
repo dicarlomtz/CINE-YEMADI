@@ -1,4 +1,7 @@
-/*Todo el documento, generales*/
+/*
+Los siguientes estilos se aplican de manera general para todo el documento
+
+*/
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +19,10 @@ html {
     padding: 0 80px;
     margin: auto;
 }
-/*Nav bar*/
+/*
+El siguiente bloque se estilos se aplican en el NavBar
+La seccion que esta de primera dentro de las paginas, se reutiliza dentro de todas las paginas
+*/
 nav {
     /*background-color: rgb(28, 39, 39);*/
     height: 50px;
@@ -34,9 +40,6 @@ nav ul li a {
     padding: 7px 13px;
     border-radius: 3px;
 }
-
-
-
 nav ul li:last-child {
     text-align: right;
     float: right;
@@ -57,9 +60,65 @@ nav ul li a:hover {
     color: white;
     background: rgb(4, 170, 109);
 }
-/* pop up */
+/* nav bar responsiva*/
+.toggle-button{
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px){
+    .toggle-button {
+        display: flex;
+    }
+
+    .navbar-links{
+        display: none;
+        width: 100%;
+    }
+
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navbar-links li{
+        text-align: center;
+    }
+
+    .navbar-links li a {
+        padding: .5rem 1rem;
+    }
+
+    .navbar-links.active {
+        display: flex;
+    }
+}
 
 
+/* nav bar responsiva*/
+/*
+    En la siguientes seccion se procede a aplicar estilos al elemento Modal POPUP
+El cual se encuentra en el index.html y funciona como intermedio para reservar asientos
+
+*/
 
 .modal {
     margin-left: 40%;
@@ -69,9 +128,6 @@ nav ul li a:hover {
     left: 0;
     top: 0;
 }
-
-
-
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
@@ -80,9 +136,6 @@ nav ul li a:hover {
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
 }
-
-
-
 /* The Close Button */
 .close {
     color: #aaa;
@@ -90,18 +143,12 @@ nav ul li a:hover {
     font-size: 28px;
     font-weight: bold;
 }
-
-
-
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
-
-
-
 .movie-container {
     margin: 20px 0px;
     display: flex;
@@ -109,9 +156,6 @@ nav ul li a:hover {
     align-items: center;
     flex-direction: column
 }
-
-
-
 .movie-container select {
     appearance: none;
     -moz-appearance: none;
@@ -122,9 +166,6 @@ nav ul li a:hover {
     font-size: 14px;
     border-radius: 5px;
 }
-
-
-
 .container {
     perspective: 1000px;
     margin: 40px 0;
@@ -133,9 +174,6 @@ nav ul li a:hover {
     justify-content: center;
     align-items: center;
 }
-
-
-
 .seat {
     background-color: #444451;
     height: 12px;
@@ -145,46 +183,26 @@ nav ul li a:hover {
     border-top-right-radius: 10px;
 }
 
-
-
 .selected {
     background-color: blue;
 }
-
-
-
 .occupied {
     background-color: red;
 }
-
-
-
 .seat:nth-of-type(2) {
     margin-right: 18px;
 }
-
-
-
 .seat:nth-last-of-type(2) {
     margin-left: 18px;
 }
-
-
-
 .seat:not(.occupied):hover {
     cursor: pointer;
     transform: scale(1.2);
 }
-
-
-
 .showcase .seat:not(.occupied):hover {
     cursor: default;
     transform: scale(1);
 }
-
-
-
 .showcase {
     display: flex;
     justify-content: space-between;
@@ -194,32 +212,20 @@ nav ul li a:hover {
     border-radius: 5px;
     color: #777;
 }
-
-
-
 .showcase li {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 10px;
 }
-
-
-
 .showcase li small {
     margin-left: 2px;
 }
-
-
-
 .row {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-
-
 .screen {
     background: blue;
     height: 70px;
@@ -228,24 +234,19 @@ nav ul li a:hover {
     transform: rotateX(-45deg);
     box-shadow: 0 3px 10px rgba(255,255,255,0.7);
 }
-
-
-
 p.text {
     margin: 40px 0;
 }
-
-
-
 p.text span {
     color: #0081cb;
     font-weight: 600;
     box-sizing: content-box;
 }
+/*
+La siguente seccion de estilos se aplica en "section-img-header"
+Es una imagen de banner que se presenta en medio del nav y el main content de todas las paginas
 
-
-
-/*section-img-header*/
+*/
 .img-section {
     color: white;
     width: 100%;
@@ -269,6 +270,9 @@ p.text span {
         width: 100%;
         height: 100px;
     }
+    nav ul li form{
+        display:none;
+    }
     .img-section p {
         font-size: 20px;
     }
@@ -278,31 +282,10 @@ p.text span {
         letter-spacing: 20px;
     }
 }
-@media only screen and (max-width: 600px) {
-    nav {
-        display: inline-block;
-        background-color: black;
-        height: 180px;
-    }
-    nav ul li:last-child {
-        text-align: unset;
-        float: unset;
-    }
-    .img-section {
-        color: white;
-        width: 100%;
-        height: 100px;
-    }
-    .img-section p {
-        font-size: 15px;
-    }
-    .img-section p:last-child {
-        text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
-        font-size: 30px;
-        letter-spacing: 10px;
-    }
-}
-/*section-movies*/
+/*
+La siguente seccion de estilos se aplica en  section-movies
+Este contenido se puede visualizar en el index.html
+*/
 .section-movies {
     display: flex;
     flex-wrap: wrap;
@@ -337,9 +320,10 @@ p.text span {
     height: 95%;
 }
 
-
-
-/*drop down horarios*/
+/*
+Esta seccion se estilos se aplica en cada card que contenga una pelicula ,
+esto funciona como DropDown para visualizar los horarios de cada pelicula
+*/
 .dropdown {
     justify-content: center;
 }
@@ -350,17 +334,11 @@ p.text span {
 .dropdown-schedules {
     display: none;
 }
-
-
-
 .dropdown:hover .dropdown-schedules {
     display: block;
     border-bottom-right-radius: 10px;
     border: 5px solid black;
 }
-
-
-
 .desc {
     text-decoration: underline;
     background-color: rgb(4, 170, 109);
@@ -378,10 +356,9 @@ p.text span {
     border-radius: 5px;
     color: rgb(4, 170, 109);
 }
-
-
-
-/*login*/
+/*
+La siguiente seccion de codigo de estilos se aplican en login.html
+*/
 .form {
     background: #222;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
@@ -397,10 +374,7 @@ p.text span {
     color: white;
     text-align: center;
 }
-
-
-
-.input-login-register {
+.input-style {
     background: transparent;
     border: 0 solid;
     border-bottom: 1px solid rgb(4, 170, 109);
@@ -410,19 +384,13 @@ p.text span {
     padding: 0.5rem;
     width: calc(100% - 3rem);
 }
-
-
-
 textarea{
     width: 100%;
     height: 150px;
     display: block;
     resize: none;
 }
-
-
-
-.login-submit {
+.btn-submit {
     border: 1px solid rgb(4, 170, 109);
     border-radius: 5px;
     background: transparent;
@@ -432,20 +400,76 @@ textarea{
     min-width: 2px;
     padding: 10px;
 }
-.login-submit:hover {
+.btn-submit:hover {
     cursor: pointer;
 }
-/*register*/
+/*
+Estilo para las tablas
+estos estilos se aplican directamente en los elementos, sin necesidad de class
+*/
+table{
+    background-color: #222;;
+    color: azure;;
+    height: 100%;
+    width: 100%;
+    border:  1px solid azure;;
+    font-size: 17px;
+}
+th, td {
+    border: none;
+    border:  1px solid azure;;
+    padding: 4px 12px;
+}
+th {
+    background-color: rgb(4, 170, 109);
+    color: azure;;
+    cursor: pointer;
+}
+td {
+    height: 100px;  
+    color: azure;
+    background: #222;
+}
+.bn-table{
+    width: 100px;
+    height: 50%;
+    border: 2px solid azure;
+    background: rgb(4, 170, 109);
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.bn-table:hover{
+    color: rgb(4, 170, 109);
+    background: grey;
+}
+/*
+    Estilos aplicados a los elementos de tipo select
+*/
+select {
+  width: 100%;
+  height: 50px;
+  font-size: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: rgb(4, 170, 109);
+  border: none;
+  border-bottom: 2px solid rgb(3, 170, 105);
+  color: white;
+  padding: 10px;
+  appearance: none;
+  padding: 10px;
+}
 
-
-
-/*footer*/
+/*
+El siguiente bloque de estilos se aplican a todos los footer de las paginas html
+*/
 footer {
     background: black;
     height: 60px;
-
-
-
     color: white;
     text-align: center;
     position: relative;
@@ -453,9 +477,6 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
-
-
 footer a {
     color: white;
 }
