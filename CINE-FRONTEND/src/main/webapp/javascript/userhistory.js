@@ -1,4 +1,4 @@
-function init()
+   function init()
 {
     fetch('UserHistoryService').then(function(resultado) {
         return resultado.json();
@@ -20,19 +20,15 @@ function cargarTickets(datos)
             
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.textContent = fila['id'];
-            nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.textContent = fila['date'];
-            nuevaCelda.setAttribute('class', 'd1');
             
             nuevaCelda = nuevaFila.insertCell(-1);
-            nuevaCelda.textContent = fila['customer']['name'];
-            nuevaCelda.setAttribute('class', 'd1');
+            nuevaCelda.textContent = fila['customer']['name'] + fila['customer']['surnames'];
             
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.textContent = fila['payment-card']['number'];
-            nuevaCelda.setAttribute('class', 'd1');
             
             var boton = document.creatElement("INPUT");
             boton.setAttribute('type', 'button');
