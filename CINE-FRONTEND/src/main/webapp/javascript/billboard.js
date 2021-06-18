@@ -1,6 +1,7 @@
 const ticketPrice = 3000;
 let selectedSeats = 0;
 let seats = {};
+let purchaseData;
 
 function init() {
     retrieveBillboard();
@@ -189,31 +190,118 @@ function cleanSeats() {
 
 function purchase() {
     if (selectedSeats > 0) {
-        let data = new FormData();
+        purchaseData = new FormData();
         let user = JSON.parse(sessionStorage.getSession("user"));
         if (user) {
-            user["seats"] = seats;
             user["registered"] = true;
+            user["user"] = user;
         } else {
-            
-            //Llamar formulario
-            //Sacar datos del formulario
-            //Crear el objeto sobre user
-            user["seats"] = seats;
-            user["registered"] = false;
+            let name = document.getElementById("name");
+            let id = document.getElementById("id");
+            let surname = document.getElementById("surname");
+            if (name && id && surname) {
+                if (name.getAttribute("value") !== "" && id.getAttribute("value") !== "" && surname.getAttribute("value") !== "") {
+                    user["id"] = id.getAttribute("value");
+                    user["name"] = name.getAttribute("value");
+                    user["surname"] = surname.getAttribute("value");
+                    user["registered"] = false;
+                } else {
+                    window.location.replace("index.html");
+                    alert("No data entered");
+                }
+            } else {
+                window.location.replace("index.html");
+                alert("No data entered");
+            }
         }
         
-        data.append("user", JSON.stringify(user));
-        doPurchase(data);
+        let card = document.getElementById("card");
+        if (card) {
+            if (card.getAttribute("value") !== "") {
+                user["card"] = card.getAttribute("value");
+                user["seats"] = seats;
+            } else {
+                window.location.replace("index.html");
+                alert("No data entered");
+                purchaseData.append("user", JSON.stringify(user));
+                doPurchase();
+            }
+        } else {
+            window.location.replace("index.html");
+            alert("No data entered");
+        }
+
+
     } else {
         alert("No ha seleccionado asientos");
     }
 }
 
-function doPurchase(data){
-    getJSON("", data, invoice);
+function validatePurchase() {
+    if (selectedSeats <= 0) {
+        window.location.replace("index.html");
+        alert("No seats selected");
+    }
 }
 
-function invoice(data){
-    
+function fillForm() {
+    validatePurchase();
+    setUser();
+    let form = document.getElementById("conForm");
+
+    if (!sessionStorage.getItem("user")) {
+
+        let name = document.createElement("INPUT");
+        name.setAttribute("type", "text");
+        name.setAttribute("id", "name");
+        name.setAttribute("placeholder", "Name");
+        name.setAttribute("class", "input-style");
+        name.setAttribute("required", true);
+        form.appendChild(name);
+        
+        let surname = document.createElement("INPUT");
+        surname.setAttribute("type", "text");
+        surname.setAttribute("id", "surname");
+        surname.setAttribute("placeholder", "Surname");
+        surname.setAttribute("class", "input-style");
+        surname.setAttribute("required", true);
+        form.appendChild(surname);
+
+        let iden = document.createElement("INPUT");
+        iden.setAttribute("type", "number");
+        iden.setAttribute("id", "id");
+        iden.setAttribute("placeholder", "Identification");
+        iden.setAttribute("class", "input-style");
+        iden.setAttribute("required", true);
+        form.appendChild(iden);
+
+    }
+
+    let card = document.createElement("INPUT");
+    card.setAttribute("type", "number");
+    card.setAttribute("id", "card");
+    card.setAttribute("placeholder", "Card");
+    card.setAttribute("class", "input-style");
+    card.setAttribute("required", true);
+    form.appendChild(card);
+
+    let button = document.createElement("BUTTON");
+    button.setAttribute("type", "submit");
+    button.setAttribute("class", "btn-submit");
+    button.appendChild(document.createTextNode("Confirm"));
+    form.appendChild(button);
 }
+
+function confirmBuy() {
+    doPurchase(purchaseData);
+}
+
+function doPurchase(data) {
+    getJSON("", purchaseData, invoice);
+}
+
+function invoice(data) {
+    purchaseData = null;
+    //hacer la factura en pdf
+}
+

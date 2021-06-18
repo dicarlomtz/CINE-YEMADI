@@ -8,15 +8,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import model.dao.crud.InvoiceCRUD;
+import model.entities.Customer;
+import model.entities.FunctionSeat;
 import model.entities.Invoice;
 import model.entities.PaymentCard;
+import model.entities.Ticket;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
 
     public InvoiceDAO(Database db, AbstractCRUD crud) {
         super(db, crud);
+        i++;
     }
 
     public InvoiceDAO() throws IOException {
@@ -35,9 +43,10 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
 
     @Override
     public void setAddParameters(PreparedStatement stm, Integer id, Invoice value) throws SQLException {
-        stm.setTimestamp(1, new Timestamp(((Date) value.getDate()).getTime()));
-        stm.setString(2, value.getClient().getId());
-        stm.setString(3, value.getPaymentCard().getNumber());
+        stm.setInt(1, i++);
+        stm.setTimestamp(2, new Timestamp(((Date) value.getDate()).getTime()));
+        stm.setString(3, value.getClient().getId());
+        stm.setString(4, value.getPaymentCard().getNumber());
     }
 
     @Override
@@ -47,5 +56,38 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
         stm.setString(2, value.getPaymentCard().getNumber());
         stm.setInt(4, value.getId());
     }
+
+    public JSONArray doPurchase(JSONObject json) throws IOException, SQLException {
+
+        Invoice in = null;
+        if (json.getBoolean("registered")) {
+            JSONObject u = json.getJSONObject("user");
+            in = new Invoice(i++, new Date(), new CustomerDAO().retrieve(u.getString("id")), new PaymentCard(u.getString("card")));
+
+        } else {
+            in = new Invoice(i++, new Date(), new Customer(json.getString("id"), json.getString("surname"), json.getString("name"), "", new PaymentCard(json.getString("card"))), new PaymentCard(json.getString("card")));
+        }
+        new InvoiceDAO().add(0, in);
+        
+        JSONArray ja = new JSONArray();
+        ja.put(in.toJSON());
+
+        JSONObject jSeats = json.getJSONObject("seats");
+        List<FunctionSeat> l = new ArrayList<>();
+        FunctionSeatDAO fda = new FunctionSeatDAO();
+        for (String d : jSeats.keySet()) {
+            FunctionSeat a = new FunctionSeatDAO().retrieve(d);
+            a.setAvailable(true);
+            Ticket t = new Ticket(0, in, a.getCinema(), a.getRoom(), a.getDate(), a, jSeats.getInt(d));
+            new TicketDAO().add(0, t);
+            fda.update(a.buildKey(), a);
+            ja.put(t.toJSON());
+        }
+
+        
+        return ja;
+    }
+
+    private static int i = 1;
 
 }

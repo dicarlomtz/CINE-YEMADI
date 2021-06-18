@@ -76,6 +76,10 @@
         <servlet-name>FunctionSeatsService</servlet-name>
         <servlet-class>services.FunctionSeatsService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PurchaseService</servlet-name>
+        <servlet-class>services.PurchaseService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListService</servlet-name>
         <url-pattern>/MoviesListService</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>FunctionSeatsService</servlet-name>
         <url-pattern>/FunctionSeatsService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseService</servlet-name>
+        <url-pattern>/PurchaseService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

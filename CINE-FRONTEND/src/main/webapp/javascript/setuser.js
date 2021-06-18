@@ -13,7 +13,6 @@ function setUser() {
             accountElement.setAttribute("href", "adminpanel.html"); //cambia el href a admin
         } else {
             accountElement.setAttribute("href", "clientpanel.html"); //cambia el href a clente
-
         }
     }
 }
