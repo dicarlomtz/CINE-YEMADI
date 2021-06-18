@@ -189,11 +189,31 @@ function cleanSeats() {
 
 function purchase() {
     if (selectedSeats > 0) {
-        let user = sessionStorage.getItem("user");
+        let data = new FormData();
+        let user = JSON.parse(sessionStorage.getSession("user"));
         if (user) {
+            user["seats"] = seats;
+            user["registered"] = true;
+        } else {
             
+            //Llamar formulario
+            //Sacar datos del formulario
+            //Crear el objeto sobre user
+            user["seats"] = seats;
+            user["registered"] = false;
         }
+        
+        data.append("user", JSON.stringify(user));
+        doPurchase(data);
     } else {
         alert("No ha seleccionado asientos");
     }
+}
+
+function doPurchase(data){
+    getJSON("", data, invoice);
+}
+
+function invoice(data){
+    
 }
