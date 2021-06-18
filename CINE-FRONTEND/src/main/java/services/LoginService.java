@@ -7,12 +7,15 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.InvoiceDAO;
 import model.dao.UserDAO;
 import model.entities.User;
 import org.json.JSONException;
@@ -40,6 +43,7 @@ public class LoginService extends HttpServlet {
                 request.getSession(true).setAttribute("user", u);
             } catch (IOException | IllegalArgumentException | SQLException | JSONException ex) {
                 System.out.println(ex.toString());
+                Logger.getLogger(LoginService.class.getName()).log(Level.SEVERE, null, ex);
                 res.put("result", "invalid");
                 res.put("message", "Las credenciales no son validas");
             }

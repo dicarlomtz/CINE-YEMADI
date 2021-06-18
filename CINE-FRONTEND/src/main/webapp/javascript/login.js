@@ -6,11 +6,13 @@ function login() {
     let refId = document.getElementById("identification");
     let refPsw = document.getElementById("password");
     if (refId && refPsw) {
-        if (refId.value !== "" && refPsw !== "") {
+        if (refId.value !== null && refPsw !== null) {
             let data = new FormData();
             let user = {"identification": refId.value, "password": refPsw.value};
             data.append("user", JSON.stringify(user));
             sendForm(data);
+        } else {
+            alert("Faltan agregar datos");
         }
     }
 }
@@ -20,7 +22,6 @@ function sendForm(data) {
         method: 'POST',
         body: data
     }).then(result => {
-        alert("here");
         if (result.status === 200) {
             return result.json();
         } else {
