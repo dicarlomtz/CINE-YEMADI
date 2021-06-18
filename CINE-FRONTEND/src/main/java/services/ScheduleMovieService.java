@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -34,6 +35,7 @@ public class ScheduleMovieService extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         encoding = Optional.of(request.getCharacterEncoding());
         try (PrintWriter out = response.getWriter()) {
+            adminValidation(request, response);
             JSONObject res = new JSONObject();
             try {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("screening")));
@@ -41,7 +43,7 @@ public class ScheduleMovieService extends HttpServlet {
                 Function function = new Function(
                         new CinemaDAO().retrieve(json.getInt("cinema")),
                         new RoomDAO().retrieve(json.getString("room") + "-" + json.getString("cinema")),
-                       (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(json.getString("date")),
+                        (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(json.getString("date")),
                         new MovieDAO().retrieve(json.getString("movie"))
                 );
 
@@ -101,5 +103,13 @@ public class ScheduleMovieService extends HttpServlet {
     }
 
     private Optional<String> encoding;
+
+    public void adminValidation(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        JSONObject user = (JSONObject) request.getSession(true).getAttribute("user");
+        if (Objects.isNull(user) || !user.getBoolean("admin")) {
+            response.sendRedirect("asd.html");
+        }
+    }
 
 }

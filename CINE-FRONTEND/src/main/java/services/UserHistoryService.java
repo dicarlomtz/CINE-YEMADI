@@ -3,6 +3,7 @@ package services;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +20,13 @@ public class UserHistoryService extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession session = request.getSession(true);
         String id = (String) session.getAttribute("id");
-        
-        try(PrintWriter out = response.getWriter())
-        {
+
+        try (PrintWriter out = response.getWriter()) {
             try {
+                clientValidation(request, response);
                 out.println(InvoiceListJSON(id));
             } catch (IOException | SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
@@ -49,5 +50,13 @@ public class UserHistoryService extends HttpServlet {
     public String InvoiceListJSON(String id)
             throws IOException, SQLException {
         return new InvoiceList(new InvoiceDAO().listAll()).toJSONbyId(id).toString(4);
+    }
+
+    public void clientValidation(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        JSONObject user = (JSONObject) request.getSession(true).getAttribute("user");
+        if (Objects.isNull(user) || user.getBoolean("admin")) {
+            response.sendRedirect("asd.html");
+        }
     }
 }

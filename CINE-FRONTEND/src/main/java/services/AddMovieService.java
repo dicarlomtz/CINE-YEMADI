@@ -2,6 +2,9 @@ package services;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.dao.MovieDAO;
 import model.entities.Movie;
+import org.json.JSONObject;
 
 @WebServlet(name = "AddMovieService", urlPatterns = {"/AddMovieService"})
 @MultipartConfig()
@@ -21,7 +25,7 @@ public class AddMovieService extends HttpServlet {
 
         try {
             //  for (Part p : request.getParts()) {
-
+            adminValidation(request, response);
             String id = request.getParameter("id");
             String title = request.getParameter("title");
             String data = request.getParameter("data");
@@ -102,5 +106,13 @@ public class AddMovieService extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    public void adminValidation(HttpServletRequest request, HttpServletResponse response) 
+            throws IOException {
+        JSONObject user = (JSONObject) request.getSession(true).getAttribute("user");
+        if (Objects.isNull(user) || !user.getBoolean("admin")) {
+            response.sendRedirect("asd.html");
+        }
+    }
 
 }
