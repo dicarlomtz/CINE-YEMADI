@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -27,6 +28,7 @@ public class ChangeBillboardMovieStatus extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         encoding = Optional.of(request.getCharacterEncoding());
         try (PrintWriter out = response.getWriter()) {
+            adminValidation(request, response);
             JSONObject res = new JSONObject();
             try {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("movie")));
@@ -86,6 +88,14 @@ public class ChangeBillboardMovieStatus extends HttpServlet {
 
     private String toUTF8String(String s) throws UnsupportedEncodingException {
         return encoding.isPresent() ? s : new String(s.getBytes(), StandardCharsets.UTF_8);
+    }
+
+    public void adminValidation(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        JSONObject user = (JSONObject) request.getSession(true).getAttribute("user");
+        if (Objects.isNull(user) || !user.getBoolean("admin")) {
+            response.sendRedirect("asd.html");
+        }
     }
 
     private Optional<String> encoding;
