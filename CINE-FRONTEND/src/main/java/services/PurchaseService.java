@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -32,8 +34,10 @@ public class PurchaseService extends HttpServlet {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("user")));
                 res.put("purchase", new InvoiceDAO().doPurchase(json).toString(4));
                 res.put("result", "valid");
-            } catch (IOException | SQLException | JSONException ex) {
+            } catch (SQLException ex) {
                 res.put("result", "invalid");
+                System.out.println(ex.toString( ));
+                Logger.getLogger(PurchaseService.class.getName()).log(Level.SEVERE, null, ex);
             }
             out.println(res.toString(4));
         }

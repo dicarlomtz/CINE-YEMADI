@@ -4,7 +4,6 @@ import cr.ac.una.db.Database;
 import cr.ac.una.db.dao.AbstractDAO;
 import cr.ac.una.db.dao.crud.AbstractCRUD;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

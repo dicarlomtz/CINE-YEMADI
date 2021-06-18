@@ -174,6 +174,8 @@ function selectSeat() {
                 selectedSeats--;
                 delete seats[this.id];
             }
+            setCookie("selectedSeats", selectedSeats, 1);
+            setCookie("seats", JSON.stringify(seats), 1);
             updateSelectedCount();
         } else {
             alert("Ocuppied");
@@ -189,56 +191,51 @@ function cleanSeats() {
 }
 
 function purchase() {
-    if (selectedSeats > 0) {
-        purchaseData = new FormData();
-        let user = JSON.parse(sessionStorage.getSession("user"));
-        if (user) {
-            user["registered"] = true;
-            user["user"] = user;
-        } else {
-            let name = document.getElementById("name");
-            let id = document.getElementById("id");
-            let surname = document.getElementById("surname");
-            if (name && id && surname) {
-                if (name.getAttribute("value") !== "" && id.getAttribute("value") !== "" && surname.getAttribute("value") !== "") {
-                    user["id"] = id.getAttribute("value");
-                    user["name"] = name.getAttribute("value");
-                    user["surname"] = surname.getAttribute("value");
-                    user["registered"] = false;
-                } else {
-                    window.location.replace("index.html");
-                    alert("No data entered");
-                }
+    purchaseData = new FormData();
+    let user = sessionStorage.getItem("user");
+    if (user) {
+        let data = {};
+        data["registered"] = true;
+        data["user"] = JSON.parse(user);
+        user = data;
+    } else {
+        let name = document.getElementById("name");
+        let id = document.getElementById("id");
+        let surname = document.getElementById("surname");
+        if (name && id && surname) {
+            if (name.value !== null && id.value !== null && surname.value !== null) {
+                user = {"id": id.value, "name": name.value, "surname": surname.value, "registered": false};
             } else {
                 window.location.replace("index.html");
                 alert("No data entered");
-            }
-        }
-        
-        let card = document.getElementById("card");
-        if (card) {
-            if (card.getAttribute("value") !== "") {
-                user["card"] = card.getAttribute("value");
-                user["seats"] = seats;
-            } else {
-                window.location.replace("index.html");
-                alert("No data entered");
-                purchaseData.append("user", JSON.stringify(user));
-                doPurchase();
             }
         } else {
             window.location.replace("index.html");
             alert("No data entered");
         }
+    }
 
+    let card = document.getElementById("card");
+    if (card) {
+        if (card.value !== null) {
+            user["card"] = card.value;
+            user["seats"] = JSON.parse(getCookie("seats"));
+            purchaseData.append("user", JSON.stringify(user));
+            doPurchase();
+        } else {
+            window.location.replace("index.html");
+            alert("No data entered");
 
+        }
     } else {
-        alert("No ha seleccionado asientos");
+        window.location.replace("index.html");
+        alert("No data entered");
     }
 }
 
 function validatePurchase() {
-    if (selectedSeats <= 0) {
+    let ss = getCookie("selectedSeats");
+    if (parseInt(ss) <= 0) {
         window.location.replace("index.html");
         alert("No seats selected");
     }
@@ -249,7 +246,7 @@ function fillForm() {
     setUser();
     let form = document.getElementById("conForm");
 
-    if (!sessionStorage.getItem("user")) {
+    if (sessionStorage.getItem("user") === null) {
 
         let name = document.createElement("INPUT");
         name.setAttribute("type", "text");
@@ -258,7 +255,7 @@ function fillForm() {
         name.setAttribute("class", "input-style");
         name.setAttribute("required", true);
         form.appendChild(name);
-        
+
         let surname = document.createElement("INPUT");
         surname.setAttribute("type", "text");
         surname.setAttribute("id", "surname");
@@ -296,12 +293,14 @@ function confirmBuy() {
     doPurchase(purchaseData);
 }
 
-function doPurchase(data) {
-    getJSON("", purchaseData, invoice);
+function doPurchase() {
+    getJSON("PurchaseService", purchaseData, invoice);
+    purchaseData = null;
 }
 
 function invoice(data) {
-    purchaseData = null;
+    console.log(data);
+    alert("llegó");
     //hacer la factura en pdf
 }
 

@@ -46,7 +46,7 @@ public class FunctionSeatCRUD extends AbstractCRUD {
     protected static final String RETRIEVE_CMD
             = "select "
             + "funcion_sala_cinema_id, funcion_sala_numero, funcion_fecha, fila, posicion, ocupado "
-            + "from bd_cinema.asiento_funcion where funcion_sala_cinema_id = ? and funcion_sala_numero = ? and funcion_fecha and fila = ? and posicion = ?; ";
+            + "from bd_cinema.asiento_funcion where funcion_sala_cinema_id = ? and funcion_sala_numero = ? and funcion_fecha = ? and fila = ? and posicion = ?; ";
     
     protected static final String UPDATE_CMD
             = "update bd_cinema.asiento_funcion "

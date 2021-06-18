@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.dao.crud.InvoiceCRUD;
 import model.entities.Customer;
 import model.entities.FunctionSeat;
@@ -24,7 +26,12 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
 
     public InvoiceDAO(Database db, AbstractCRUD crud) {
         super(db, crud);
-        i++;
+        try {
+            i = listAll().size() + 1;
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+            i++;
+        }
     }
 
     public InvoiceDAO() throws IOException {
@@ -43,7 +50,7 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
 
     @Override
     public void setAddParameters(PreparedStatement stm, Integer id, Invoice value) throws SQLException {
-        stm.setInt(1, i++);
+        stm.setInt(1, id);
         stm.setTimestamp(2, new Timestamp(((Date) value.getDate()).getTime()));
         stm.setString(3, value.getClient().getId());
         stm.setString(4, value.getPaymentCard().getNumber());
@@ -62,20 +69,23 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
         Invoice in = null;
         if (json.getBoolean("registered")) {
             JSONObject u = json.getJSONObject("user");
-            in = new Invoice(i++, new Date(), new CustomerDAO().retrieve(u.getString("id")), new PaymentCard(u.getString("card")));
+            in = new Invoice(i++, new Date(), new CustomerDAO().retrieve(u.getString("id")), new PaymentCard(json.getString("card")));
 
         } else {
             in = new Invoice(i++, new Date(), new Customer(json.getString("id"), json.getString("surname"), json.getString("name"), "", new PaymentCard(json.getString("card"))), new PaymentCard(json.getString("card")));
         }
-        new InvoiceDAO().add(0, in);
+        new InvoiceDAO().add(in.getId(), in);
         
         JSONArray ja = new JSONArray();
         ja.put(in.toJSON());
 
         JSONObject jSeats = json.getJSONObject("seats");
+        System.out.println(jSeats);
+        System.out.println(json.toString(4));
         List<FunctionSeat> l = new ArrayList<>();
         FunctionSeatDAO fda = new FunctionSeatDAO();
         for (String d : jSeats.keySet()) {
+            System.out.println("Key: "+ d);
             FunctionSeat a = new FunctionSeatDAO().retrieve(d);
             a.setAvailable(true);
             Ticket t = new Ticket(0, in, a.getCinema(), a.getRoom(), a.getDate(), a, jSeats.getInt(d));
@@ -88,6 +98,6 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
         return ja;
     }
 
-    private static int i = 1;
+    private static int i = 0;
 
 }
