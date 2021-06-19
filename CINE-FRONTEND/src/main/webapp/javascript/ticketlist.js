@@ -29,7 +29,7 @@ function createSelectInvoice(datos)
             opt.appendChild(document.createTextNode(
                     fila['id'] + ' - ' + 
                     fila['date'] + ' - ' + 
-                    fila['customer']['name'] + fila['customer']['surnames']));
+                    fila['customer']['name'] + ' ' + fila['customer']['surnames']));
             refSelect.appendChild(opt);
         });
     }
@@ -93,7 +93,12 @@ function cargarTickets(datos, invoice)
         var nuevaCelda;
         
         nuevaCelda = nuevaFila.insertCell(-1);
-        nuevaCelda.setAttribute('colspan', '6');
+        nuevaCelda.setAttribute('colspan', '4');
+        
+        nuevaCelda = nuevaFila.insertCell(-1);
+        nuevaCelda.textContent = 'Total:';
+        
+        nuevaCelda = nuevaFila.insertCell(-1);
         nuevaCelda.textContent = precioTotal;
     }
 }
