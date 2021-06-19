@@ -16,3 +16,31 @@ function setUser() {
         }
     }
 }
+
+function validateAdmin() {
+    let user = sessionStorage.getItem("user");
+    if (user) {
+        user = JSON.parse(user);
+
+        if (!user["rol"]) {
+
+            //redirigir pagina de error
+        }
+    } else {
+        //Redirigir pagina de error
+    }
+}
+
+function validateCustomer() {
+    let user = sessionStorage.getItem("user");
+    if (user) {
+        user = JSON.parse(user);
+
+        if (user["rol"]) {
+
+            //redirigir pagina de error
+        }
+    } else {
+        //Redirigir pagina de error
+    }
+}

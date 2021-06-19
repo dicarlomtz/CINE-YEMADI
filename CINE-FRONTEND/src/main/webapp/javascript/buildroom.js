@@ -1,7 +1,7 @@
 function init() {
+    setUser();
     retrieveCinemas();
     retrieveRooms();
-    setUser();
 }
 
 function retrieveCinemas() {
@@ -81,12 +81,10 @@ function collectFormData() {
 
         if (refMenu.value !== "" && refNumber.value !== "" && refCapacity.value !== "") {
 
-            //var room = new Room(refMenu.value, refNumber.value.refCapacity.value);
             let room = {"cinema": refMenu.value, "number": refNumber.value, "capacity": refCapacity.value};
             data.append("room", JSON.stringify(room));
 
             sendForm(data);
-            init();
         } else {
             console.error("Faltan agregar datos");
             alert("Faltan agregar datos");
@@ -96,16 +94,11 @@ function collectFormData() {
 }
 
 function sendForm(data) {
-    getJSON('BuildRoomService', data, manageResponse);
+    getJSON('BuildRoomService', data, handleResponse);
 }
 
-function manageResponse(data) {
+function handleResponse(data) {
+    init();
     console.log(data['result']);
     alert(data["result"]);
-}
-
-function Room(cinema, number, capacity) {
-    this.cinema = cinema;
-    this.number = number;
-    this.capacity = capacity;
 }

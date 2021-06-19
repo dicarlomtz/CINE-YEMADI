@@ -56,14 +56,14 @@ function searchInvoice()
 function cargarTickets(datos, invoice)
 {
     var refTable = document.getElementById('ticketList');
-    var refFoot = document.getElementById('ticketList');
+    var refFoot = document.getElementById('ticketFoot');
     var precioTotal = 0.0;
     
     if(refTable && refFoot)
     {
         datos.forEach((fila) => {
             
-            if(invoice === fila['invoice']['id'])
+            if(invoice == fila['invoice']['id'])
             {            
                 var nuevaFila = refTable.insertRow(-1);
                 var nuevaCelda;

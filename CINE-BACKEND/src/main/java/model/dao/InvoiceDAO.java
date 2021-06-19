@@ -27,6 +27,7 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
     public InvoiceDAO(Database db, AbstractCRUD crud) {
         super(db, crud);
         try {
+            List<Invoice> a = listAll();
             i = listAll().size() + 1;
         } catch (SQLException | IOException ex) {
             Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,7 +73,10 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
             in = new Invoice(i++, new Date(), new CustomerDAO().retrieve(u.getString("id")), new PaymentCard(json.getString("card")));
 
         } else {
-            in = new Invoice(i++, new Date(), new Customer(json.getString("id"), json.getString("surname"), json.getString("name"), "", new PaymentCard(json.getString("card"))), new PaymentCard(json.getString("card")));
+            JSONObject u = json.getJSONObject("user");
+            Customer c = new Customer(u.getString("id"), u.getString("surname"), u.getString("name"), "", new PaymentCard(json.getString("card")));
+            new CustomerDAO().add(c.getId(), c);
+            in = new Invoice(i++, new Date(), c, new PaymentCard(json.getString("card")));
         }
         new InvoiceDAO().add(in.getId(), in);
         
@@ -96,6 +100,23 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
 
         
         return ja;
+    }
+    
+    public static void main(String[] args){
+       
+        try {
+        JSONObject a = new JSONObject();
+        a.put("registered", false);
+        JSONObject b = new JSONObject();
+        b.put("id", "123132");
+        b.put("surname", "123132");
+        b.put("name", "123132");
+        b.put("card", "123132");
+        a.put("user", b);
+            new InvoiceDAO().doPurchase(a);
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static int i = 0;

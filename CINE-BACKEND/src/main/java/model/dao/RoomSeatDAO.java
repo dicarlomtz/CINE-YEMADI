@@ -115,7 +115,7 @@ public class RoomSeatDAO extends AbstractDAO<String, RoomSeat> {
             for (int i = 1, r = 0, c = 0; i <= value.getCapacity(); i++, c++) {
                 if (c == 14) {
                     r++;
-                    if (r == 9) {
+                    if (r >= 9) {
                         r = 0;
                     }
                     c = 0;

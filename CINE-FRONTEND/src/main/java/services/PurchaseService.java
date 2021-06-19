@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.InvoiceDAO;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 @WebServlet(name = "PurchaseService", urlPatterns = {"/PurchaseService"})
@@ -32,7 +30,7 @@ public class PurchaseService extends HttpServlet {
             JSONObject res = new JSONObject();
             try {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("user")));
-                res.put("purchase", new InvoiceDAO().doPurchase(json).toString(4));
+                res.put("purchase", new InvoiceDAO().doPurchase(json));
                 res.put("result", "valid");
             } catch (SQLException ex) {
                 res.put("result", "invalid");

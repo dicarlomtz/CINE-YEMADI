@@ -22,7 +22,7 @@ public class FunctionSeatsService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         response.setContentType("application/json;charset=UTF-8");
         encoding = Optional.of(request.getCharacterEncoding());
         try (PrintWriter out = response.getWriter()) {
@@ -75,7 +75,7 @@ public class FunctionSeatsService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-        private String toUTF8String(String s) throws UnsupportedEncodingException {
+    private String toUTF8String(String s) throws UnsupportedEncodingException {
         return encoding.isPresent() ? s : new String(s.getBytes(), StandardCharsets.UTF_8);
     }
 

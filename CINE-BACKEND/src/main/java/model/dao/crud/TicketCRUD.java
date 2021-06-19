@@ -37,7 +37,7 @@ public class TicketCRUD extends AbstractCRUD {
             = "select "
             + "id_tiquete, factura_seq, asiento_funcion_sala_cinema_id, asiento_funcion_sala_numero, "
             + "asiento_funcion_fecha, asiento_funcion_fila, asiento_funcion_posicion, monto "
-            + "from bd_cinema.tiquete order by seq_factura; ";
+            + "from bd_cinema.tiquete order by factura_seq; ";
 
     protected static final String ADD_CMD
             = "insert into bd_cinema.tiquete "

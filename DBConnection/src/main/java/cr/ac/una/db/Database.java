@@ -59,6 +59,6 @@ public abstract class Database extends MysqlDataSource {
                 getConfigurationData());
     }
 
-    protected static final String CONFIGURATION_PATH = "/cr/ac/una/db/db.properties";
     private Properties configuration = null;
+    protected static final String CONFIGURATION_PATH = "/cr/ac/una/db/db.properties";
 }

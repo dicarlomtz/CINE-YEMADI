@@ -28,7 +28,6 @@ public class ChangeBillboardMovieStatus extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         encoding = Optional.of(request.getCharacterEncoding());
         try (PrintWriter out = response.getWriter()) {
-            adminValidation(request, response);
             JSONObject res = new JSONObject();
             try {
                 JSONObject json = new JSONObject(toUTF8String(request.getParameter("movie")));

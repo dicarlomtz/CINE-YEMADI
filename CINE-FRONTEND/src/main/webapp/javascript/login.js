@@ -18,7 +18,8 @@ function login() {
 }
 
 function sendForm(data) {
-    fetch('LoginService', {
+    getJSON('LoginService', data, handleResponse);
+    /*fetch('LoginService', {
         method: 'POST',
         body: data
     }).then(result => {
@@ -28,8 +29,7 @@ function sendForm(data) {
             console.error(`HTTP error: ${result.status}`);
         }
     }).then(
-             (re) => {   
-        console.log(re["result"]);
+            (re) => {
         if (re["result"] === "valid") {
             sessionStorage.setItem("user", JSON.stringify(re["user"]));
             //hacer JSON.parse(sessionStorage.getSession("user")) para obtener el JSON del objeto
@@ -37,9 +37,21 @@ function sendForm(data) {
             window.location.replace("index.html");
         }
         alert(re["result"]);
+        console.log(re["result"]);
     }
     ).catch(errCode => {
         console.error(errCode);
-    });
+    });*/
+}
+
+function handleResponse(data) {
+    if (data["result"] === "valid") {
+        sessionStorage.setItem("user", JSON.stringify(data["user"]));
+        //hacer JSON.parse(sessionStorage.getSession("user")) para obtener el JSON del objeto
+        //setUser();
+        window.location.replace("index.html");
+    }
+    alert(data["result"]);
+    console.log(data["result"]);
 }
 

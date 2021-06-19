@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.dao.crud.MovieCRUD;
-import model.dao.crud.RoomSeatCRUD;
 import model.entities.Movie;
-import model.entities.RoomSeat;
 
 public class MovieDAO extends AbstractDAO<String, Movie> {
 
@@ -72,7 +70,7 @@ public class MovieDAO extends AbstractDAO<String, Movie> {
         List<Movie> r = new ArrayList<>();
         MovieCRUD rcrud = (MovieCRUD) getCRUD();
         try (Connection cnx = db.getConnection();
-            PreparedStatement stm = cnx.prepareStatement(rcrud.getBillboardListMovies())) {
+                PreparedStatement stm = cnx.prepareStatement(rcrud.getBillboardListMovies())) {
             stm.clearParameters();
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {

@@ -3,7 +3,6 @@ package services;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +20,6 @@ public class TicketListService extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
-            adminValidation(request, response);
             try {
                 out.println(TicketListJSON());
             } catch (IOException | SQLException ex) {
@@ -46,14 +44,6 @@ public class TicketListService extends HttpServlet {
     public String TicketListJSON()
             throws IOException, SQLException {
         return new TicketList(new TicketDAO().listAll()).toJSON().toString(4);
-    }
-
-    public void adminValidation(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        JSONObject user = (JSONObject) request.getSession(true).getAttribute("user");
-        if (Objects.isNull(user) || !user.getBoolean("admin")) {
-            response.sendRedirect("asd.html");
-        }
     }
 
 }

@@ -22,12 +22,11 @@ public class UserHistoryService extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession(true);
-        String id = (String) session.getAttribute("id");
+        JSONObject user = (JSONObject) session.getAttribute("user");
 
         try (PrintWriter out = response.getWriter()) {
             try {
-                clientValidation(request, response);
-                out.println(InvoiceListJSON(id));
+                out.println(InvoiceListJSON(user.getString("identification")));
             } catch (IOException | SQLException ex) {
                 System.err.printf("Excepción: '%s'%n", ex.getMessage());
                 out.println(new JSONObject());

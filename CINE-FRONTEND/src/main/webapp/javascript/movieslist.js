@@ -30,7 +30,7 @@ function cargarCartelera(datos)
             nuevaCelda = nuevaFila.insertCell(-1);
             nuevaCelda.textContent = fila.data;
             nuevaCelda.setAttribute('class', 'd1');
-            
+
             var boton = document.createElement("INPUT");
             boton.setAttribute('type', 'checkbox');
             boton.setAttribute("id", `${fila.id}`);

@@ -19,20 +19,21 @@ import org.json.JSONObject;
 @WebServlet(name = "AddMovieService", urlPatterns = {"/AddMovieService"})
 @MultipartConfig()
 public class AddMovieService extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         try {
             //  for (Part p : request.getParts()) {
-            adminValidation(request, response);
             String id = request.getParameter("id");
             String title = request.getParameter("title");
             String data = request.getParameter("data");
             String s = request.getParameter("billboard");
             boolean billboard = false;
-            if (s.equals("on")) {
-                billboard = true;
+            if (!Objects.isNull(s)) {
+                if (s.equals("on")) {
+                    billboard = true;
+                }
             }
             Part p = request.getPart("image");
             //String form = p.getName();
@@ -64,7 +65,7 @@ public class AddMovieService extends HttpServlet {
             request.setAttribute("mensaje",
                     String.format("Ocurrió una excepción: '%s'", ex.getMessage()));
         }
-
+        
         response.sendRedirect("index.html");
     }
 
@@ -107,12 +108,12 @@ public class AddMovieService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public void adminValidation(HttpServletRequest request, HttpServletResponse response) 
+    public void adminValidation(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         JSONObject user = (JSONObject) request.getSession(true).getAttribute("user");
         if (Objects.isNull(user) || !user.getBoolean("admin")) {
             response.sendRedirect("asd.html");
         }
     }
-
+    
 }
