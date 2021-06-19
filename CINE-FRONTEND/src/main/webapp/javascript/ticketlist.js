@@ -37,19 +37,22 @@ function createSelectInvoice(datos)
 
 function searchInvoice()
 {
-    var selectValue = document.getElementById('selectInvoice').value;
-    
-    if(selectValue !== 'null')
+    var refSelect = document.getElementById('selectInvoice');
+
+    if (refSelect)
     {
-        fetch('TicketListService').then(function(resultado) {
-            return resultado.json();
-        }).then(function(datos){
-            cargarTickets(datos['ticket-list'], selectValue);
-        });
-    }
-    else
-    {
-        alert('Debe seleccionar una factura');
+        if (refSelect.value !== 'null')
+        {
+            fetch('TicketListService').then(function (resultado) {
+                return resultado.json();
+            }).then(function (datos) {
+                cargarTickets(datos['ticket-list'], refSelect.value);
+            });
+        }
+        else
+        {
+            alert('Debe seleccionar una factura');
+        }
     }
 }
 
