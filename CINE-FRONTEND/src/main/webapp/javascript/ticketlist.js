@@ -29,7 +29,7 @@ function createSelectInvoice(datos)
             opt.appendChild(document.createTextNode(
                     fila['id'] + ' - ' + 
                     fila['date'] + ' - ' + 
-                    fila['customer']['name'] + fila['customer']['surnames']));
+                    fila['customer']['name'] + ' ' + fila['customer']['surnames']));
             refSelect.appendChild(opt);
         });
     }
@@ -37,19 +37,22 @@ function createSelectInvoice(datos)
 
 function searchInvoice()
 {
-    var selectValue = document.getElementById('selectInvoice').value;
-    
-    if(selectValue !== 'null')
+    var refSelect = document.getElementById('selectInvoice');
+
+    if (refSelect)
     {
-        fetch('TicketListService').then(function(resultado) {
-            return resultado.json();
-        }).then(function(datos){
-            cargarTickets(datos['ticket-list'], selectValue);
-        });
-    }
-    else
-    {
-        alert('Debe seleccionar una factura');
+        if (refSelect.value !== 'null')
+        {
+            fetch('TicketListService').then(function (resultado) {
+                return resultado.json();
+            }).then(function (datos) {
+                cargarTickets(datos['ticket-list'], refSelect.value);
+            });
+        }
+        else
+        {
+            alert('Debe seleccionar una factura');
+        }
     }
 }
 
@@ -93,7 +96,12 @@ function cargarTickets(datos, invoice)
         var nuevaCelda;
         
         nuevaCelda = nuevaFila.insertCell(-1);
-        nuevaCelda.setAttribute('colspan', '6');
+        nuevaCelda.setAttribute('colspan', '4');
+        
+        nuevaCelda = nuevaFila.insertCell(-1);
+        nuevaCelda.textContent = 'Total:';
+        
+        nuevaCelda = nuevaFila.insertCell(-1);
         nuevaCelda.textContent = precioTotal;
     }
 }
