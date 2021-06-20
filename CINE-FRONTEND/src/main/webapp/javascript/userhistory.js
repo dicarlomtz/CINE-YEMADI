@@ -1,16 +1,16 @@
 function init()
 {
-    /*fetch('UserHistoryService').then(function(resultado) {
-     return resultado.json();
-     }).then(function(datos){
-     createSelectInvoice(datos['invoice-list']);
-     });*/
     retrieveInvoice();
     setUser();
 }
 
 function retrieveInvoice() {
     getJSON('UserHistoryService', {}, createSelectInvoice);
+}
+
+function retrieveTickets()
+{
+    getJSON('TicketListService', {}, cargarTickets);
 }
 
 function createSelectInvoice(datos)
@@ -47,11 +47,7 @@ function searchInvoice()
     {
         if (refSelect.value !== 'null')
         {
-            fetch('TicketListService').then(function (resultado) {
-                return resultado.json();
-            }).then(function (datos) {
-                cargarTickets(datos['ticket-list'], refSelect.value);
-            });
+            retrieveTickets();
         }
         else
         {
@@ -60,17 +56,29 @@ function searchInvoice()
     }
 }
 
-function cargarTickets(datos, invoice)
+function cargarTickets(datos)
 {
+    var refSelect = document.getElementById('selectInvoice');
     var refTable = document.getElementById('ticketList');
     var refFoot = document.getElementById('ticketFoot');
     var precioTotal = 0.0;
 
     if (refTable && refFoot)
     {
-        datos.forEach((fila) => {
+        if(refTable.rows.length !== 0 && refFoot.rows.length !== 0)
+        {
+            for(let i = 0; i < refTable.rows.length; i++)
+            {
+                refTable.deleteRow(-1);
+            }
+        
+            refTable.deleteRow(-1);
+            refFoot.deleteRow(-1);
+        }
+        
+        datos['ticket-list'].forEach((fila) => {
 
-            if (invoice == fila['invoice']['id'])
+            if(parseInt(refSelect.value) === fila['invoice']['id'])
             {
                 var nuevaFila = refTable.insertRow(-1);
                 var nuevaCelda;
@@ -100,11 +108,8 @@ function cargarTickets(datos, invoice)
         var nuevaCelda;
         
         nuevaCelda = nuevaFila.insertCell(-1);
-        nuevaCelda.setAttribute('colspan', '4');
-        
-        nuevaCelda = nuevaFila.insertCell(-1);
-        nuevaCelda.textContent = 'Total:';
-        
+        nuevaCelda.setAttribute('colspan', '5');
+
         nuevaCelda = nuevaFila.insertCell(-1);
         nuevaCelda.textContent = precioTotal;
     }
