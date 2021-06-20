@@ -120,13 +120,63 @@ function cargarTickets(datos, invoice)
 function ticketsPDF()
 {
     var refSelect = document.getElementById('selectInvoice');
+    var refTable = document.getElementById('ticketList');
 
-    if(refSelect)
+    if(refSelect && refTable)
     {
-        if(refSelect.value !== 'null')
+        if(refSelect.value !== 'null' && refTable.rows.length !== 0)
         {
             var doc = new jsPDF();
-            // Falta recuperar tabla
+            
+            for(let i = 0, k = 10; i < refTable.rows.length; i++)
+            {
+                for(let j = 0; j < refTable.rows[i].cells.length; j++, k += 10)
+                {
+                    var celda = refTable.rows[i].cells[j];
+                    
+                    switch(j)
+                    {
+                        case 0:
+                            
+                            doc.text('--------------------------------------------------', 10, k);
+                            k += 10;
+                            doc.text('Factura: ' + celda.textContent, 10, k);
+                            
+                            break;
+                            
+                        case 1:
+                            
+                            doc.text('Cine: ' + celda.textContent, 10, k);
+                            
+                            break;
+                            
+                        case 2:
+                            
+                            doc.text('Sala: ' + celda.textContent, 10, k);
+                            
+                            break;
+                            
+                        case 3:
+                            
+                            doc.text('Fecha: ' + celda.textContent, 10, k);
+                            
+                            break;
+                            
+                        case 4:
+                            
+                            doc.text('Asiento: ' + celda.textContent, 10, k);
+                            
+                            break;
+                            
+                        case 5:
+                            
+                            doc.text('Precio: ' + celda.textContent, 10, k);
+                            
+                            break;
+                    }
+                }
+            }
+            
             doc.save(`tickets_${refSelect.value}.pdf`);
         }
         else
@@ -135,38 +185,5 @@ function ticketsPDF()
         }
     }
 }
-
-/*function generatePDF(datos, invoice)
-{
-    var selectValue = document.getElementById('selectInvoice').value;
-    var doc = new jsPDF();
-    var precioTotal = 0.0;
-    
-    invoice.forEach(fila => {
-        if(selectValue === fila['id'])
-        {
-            doc.text('ID de factura: ' + fila['id'], 10, 10);
-            doc.text('Fecha: ' + fila['date'], 10, 10);
-            doc.text('Nombre del cliente: ' + fila['customer']['name'] + fila['customer']['surnames'], 10, 10);
-            doc.text('Tarjeta: ' + fila['payment-card']['number'], 10, 10);
-        }
-    });
-    
-    datos.forEach(fila => {
-        if(selectValue === fila['invoice']['id'])
-        {
-            doc.text('--------------------------------------------------', 10, 10);
-            doc.text('Cine: ' + fila['cinema']['name'], 10, 10);
-            doc.text('Sala: ' + fila['room']['number'], 10, 10);
-            doc.text('Asiento: ' + fila['seat']['row'] + fila['seat']['position'], 10, 10);
-            doc.text('Precio: ' + fila['amount'], 10, 10);
-            doc.text('--------------------------------------------------', 10, 10, );
-            precioTotal += fila['amount'];
-        }
-    });
-    
-    doc.text('Precio total: ' + precioTotal, 10, 10);
-    doc.save("ticket.pdf");
-}*/
 
 window.onload = init;
