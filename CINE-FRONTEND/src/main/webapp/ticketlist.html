@@ -45,6 +45,7 @@
             <form class="form">
                 <select id="selectInvoice"></select>
                 <button type="button" onclick="searchInvoice();" class="btn-submit" >Buscar</button>
+                <button class="btn-submit" type="button" onclick="ticketsPDF();" id="buttonPDF">Imprimir tickets</button>
             </form>
             <table class="invoicetList form" id="invocieTable">
                 <caption>Lista de Tickets</caption>
@@ -61,9 +62,6 @@
                 <tbody id="ticketList"></tbody>
                 <tfoot id="ticketFoot"></tfoot>
             </table>
-            <form class="form">
-                <button class="btn-submit" type="button" onclick="ticketsPDF();" id="buttonPDF">Imprimir tickets</button>
-            </form>
         </main>
         
            <!---SECCION CON EL FIN DE PAGINA--->

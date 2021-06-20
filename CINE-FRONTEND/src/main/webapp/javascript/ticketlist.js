@@ -2,11 +2,6 @@ window.jsPDF = window.jspdf.jsPDF;
 
 function init()
 {
-    /*fetch('UserHistoryService').then(function(resultado) {
-     return resultado.json();
-     }).then(function(datos){
-     createSelectInvoice(datos['invoice-list']);
-     });*/
     retrieveInvoice();
     setUser();
 }
@@ -111,7 +106,26 @@ function cargarTickets(datos, invoice)
     }
 }
 
-function generatePDF(datos, invoice)
+function ticketsPDF()
+{
+    var refSelect = document.getElementById('selectInvoice');
+
+    if(refSelect)
+    {
+        if(refSelect.value !== 'null')
+        {
+            var doc = new jsPDF();
+            // Falta recuperar tabla
+            doc.save(`tickets_${refSelect.value}.pdf`);
+        }
+        else
+        {
+            alert('Debe seleccionar una factura');
+        }
+    }
+}
+
+/*function generatePDF(datos, invoice)
 {
     var selectValue = document.getElementById('selectInvoice').value;
     var doc = new jsPDF();
@@ -142,34 +156,6 @@ function generatePDF(datos, invoice)
     
     doc.text('Precio total: ' + precioTotal, 10, 10);
     doc.save("ticket.pdf");
-}
-
-function ticketsPDF()
-{
-    var selectValue = document.getElementById('selectInvoice').value;
-    var invoice;
-    var tickets;
-    
-    if(selectValue !== 'null')
-    {
-        fetch('InvoiceListService').then(function(resultado) {
-            return resultado.json();
-        }).then(function(datos){
-            invoice = datos['invoice-list'];
-        });
-        
-        fetch('TicketListService').then(function(resultado) {
-            return resultado.json();
-        }).then(function(datos){
-            tickets = datos['ticket-list'];
-        });
-        
-        generatePDF(tickets, invoice);
-    }
-    else
-    {
-        alert('Debe seleccionar una factura');
-    }
-}
+}*/
 
 window.onload = init;
