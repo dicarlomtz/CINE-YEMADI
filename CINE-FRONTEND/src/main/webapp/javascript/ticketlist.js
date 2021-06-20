@@ -64,6 +64,17 @@ function cargarTickets(datos, invoice)
     
     if(refTable && refFoot)
     {
+        if(refTable.rows.length != 0 && refFoot.rows.length != 0)
+        {
+            for(let i = 0; i < refTable.rows.length; i++)
+            {
+                refTable.deleteRow(-1);
+            }
+        
+            refTable.deleteRow(-1);
+            refFoot.deleteRow(-1);
+        }
+        
         datos.forEach((fila) => {
             
             if(invoice == fila['invoice']['id'])
