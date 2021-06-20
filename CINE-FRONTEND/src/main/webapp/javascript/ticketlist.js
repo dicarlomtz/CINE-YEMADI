@@ -80,7 +80,7 @@ function cargarTickets(datos)
         
         datos['ticket-list'].forEach((fila) => {
             
-            if(refSelect.value == fila['invoice']['id'])
+            if(parseInt(refSelect.value) === fila['invoice']['id'])
             {            
                 var nuevaFila = refTable.insertRow(-1);
                 var nuevaCelda;
