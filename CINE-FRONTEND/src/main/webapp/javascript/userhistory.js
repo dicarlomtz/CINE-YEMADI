@@ -1,16 +1,16 @@
 function init()
 {
-    /*fetch('UserHistoryService').then(function(resultado) {
-     return resultado.json();
-     }).then(function(datos){
-     createSelectInvoice(datos['invoice-list']);
-     });*/
     retrieveInvoice();
     setUser();
 }
 
 function retrieveInvoice() {
     getJSON('UserHistoryService', {}, createSelectInvoice);
+}
+
+function retrieveTickets()
+{
+    getJSON('TicketListService', {}, cargarTickets);
 }
 
 function createSelectInvoice(datos)
@@ -47,11 +47,7 @@ function searchInvoice()
     {
         if (refSelect.value !== 'null')
         {
-            fetch('TicketListService').then(function (resultado) {
-                return resultado.json();
-            }).then(function (datos) {
-                cargarTickets(datos['ticket-list'], refSelect.value);
-            });
+            retrieveTickets();
         }
         else
         {
@@ -60,8 +56,9 @@ function searchInvoice()
     }
 }
 
-function cargarTickets(datos, invoice)
+function cargarTickets(datos)
 {
+    var refSelect = document.getElementById('selectInvoice');
     var refTable = document.getElementById('ticketList');
     var refFoot = document.getElementById('ticketFoot');
     var precioTotal = 0.0;
@@ -81,7 +78,7 @@ function cargarTickets(datos, invoice)
         
         datos.forEach((fila) => {
 
-            if (invoice == fila['invoice']['id'])
+            if (refSelect.value == fila['invoice']['id'])
             {
                 var nuevaFila = refTable.insertRow(-1);
                 var nuevaCelda;

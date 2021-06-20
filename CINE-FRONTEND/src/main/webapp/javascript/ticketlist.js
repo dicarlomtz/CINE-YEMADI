@@ -10,6 +10,12 @@ function retrieveInvoice() {
     getJSON('InvoiceListService', {}, createSelectInvoice);
 }
 
+
+function retrieveTickets()
+{
+    getJSON('TicketListService', {}, cargarTickets);
+}
+
 function createSelectInvoice(datos)
 {
     var refSelect = document.getElementById('selectInvoice');
@@ -43,11 +49,7 @@ function searchInvoice()
     {
         if (refSelect.value !== 'null')
         {
-            fetch('TicketListService').then(function (resultado) {
-                return resultado.json();
-            }).then(function (datos) {
-                cargarTickets(datos['ticket-list'], refSelect.value);
-            });
+            retrieveTickets();
         }
         else
         {
@@ -56,13 +58,14 @@ function searchInvoice()
     }
 }
 
-function cargarTickets(datos, invoice)
+function cargarTickets(datos)
 {
+    var refSelect = document.getElementById('selectInvoice');
     var refTable = document.getElementById('ticketList');
     var refFoot = document.getElementById('ticketFoot');
     var precioTotal = 0.0;
     
-    if(refTable && refFoot)
+    if(refSelect && refTable && refFoot)
     {
         if(refTable.rows.length != 0 && refFoot.rows.length != 0)
         {
@@ -75,9 +78,9 @@ function cargarTickets(datos, invoice)
             refFoot.deleteRow(-1);
         }
         
-        datos.forEach((fila) => {
+        datos['ticket-list'].forEach((fila) => {
             
-            if(invoice == fila['invoice']['id'])
+            if(refSelect.value == fila['invoice']['id'])
             {            
                 var nuevaFila = refTable.insertRow(-1);
                 var nuevaCelda;
