@@ -65,7 +65,7 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
         stm.setInt(4, value.getId());
     }
 
-    public JSONArray doPurchase(JSONObject json) throws IOException, SQLException {
+    public JSONObject doPurchase(JSONObject json) throws IOException, SQLException {
 
         Invoice in = null;
         if (json.getBoolean("registered")) {
@@ -75,13 +75,11 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
         } else {
             JSONObject u = json.getJSONObject("user");
             Customer c = new Customer(u.getString("id"), u.getString("surname"), u.getString("name"), "", new PaymentCard(json.getString("card")));
-            new CustomerDAO().add(c.getId(), c);
             in = new Invoice(i++, new Date(), c, new PaymentCard(json.getString("card")));
         }
         new InvoiceDAO().add(in.getId(), in);
         
         JSONArray ja = new JSONArray();
-        ja.put(in.toJSON());
 
         JSONObject jSeats = json.getJSONObject("seats");
         System.out.println(jSeats);
@@ -97,26 +95,13 @@ public class InvoiceDAO extends AbstractDAO<Integer, Invoice> {
             fda.update(a.buildKey(), a);
             ja.put(t.toJSON());
         }
-
         
-        return ja;
-    }
-    
-    public static void main(String[] args){
-       
-        try {
-        JSONObject a = new JSONObject();
-        a.put("registered", false);
-        JSONObject b = new JSONObject();
-        b.put("id", "123132");
-        b.put("surname", "123132");
-        b.put("name", "123132");
-        b.put("card", "123132");
-        a.put("user", b);
-            new InvoiceDAO().doPurchase(a);
-        } catch (IOException | SQLException ex) {
-            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        JSONObject res = new JSONObject();
+        res.put("invoice", in.toJSON());
+        res.put("tickets", ja);
+        
+        return res;
     }
 
     private static int i = 0;

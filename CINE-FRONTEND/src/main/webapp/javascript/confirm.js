@@ -1,3 +1,4 @@
+window.jsPDF = window.jspdf.jsPDF;
 let purchaseData;
 
 function purchase() {
@@ -100,7 +101,6 @@ function confirmBuy() {
 
 function doPurchase() {
     getJSON("PurchaseService", purchaseData, invoice);
-    
 }
 
 function invoice(data) {
@@ -108,6 +108,27 @@ function invoice(data) {
     setCookie("seats", null, 1);
     purchaseData = null;
     console.log(data);
-    alert("llegó");
-    //hacer la factura en pdf
+    if (data["result"] === "valid") {
+        toPdfInvoice(data["purchase"]);
+    }
+}
+
+function toPdfInvoice(data) {
+
+    let doc = new jsPDF();
+
+    doc.text('ID de factura: ' + data["invoice"]["id"], 10, 10);
+    doc.text('Fecha: ' + data["invoice"]["date"], 10, 10);
+    doc.text('Nombre del cliente: ' + data["invoice"]['customer']['name'] + data["invoice"]['customer']['surnames'], 10, 10);
+    doc.text('Tarjeta: ' + data["invoice"]['payment-card']['number'], 10, 10);
+
+    datos["tickets"].forEach(fila => {
+        doc.text('--------------------------------------------------', 10, 10);
+        doc.text('Cine: ' + fila['cinema']['name'], 10, 10);
+        doc.text('Sala: ' + fila['room']['number'], 10, 10);
+        doc.text('Asiento: ' + fila['seat']['row'] + fila['seat']['position'], 10, 10);
+        doc.text('Precio: ' + fila['amount'], 10, 10);
+        doc.text('--------------------------------------------------', 10, 10, );
+        precioTotal += fila['amount'];
+    });
 }
