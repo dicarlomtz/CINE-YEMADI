@@ -2,12 +2,17 @@ window.jsPDF = window.jspdf.jsPDF;
 
 function init()
 {
-    fetch('InvoiceListService').then(function(resultado) {
-        return resultado.json();
-    }).then(function(datos){
-        createSelectInvoice(datos['invoice-list']);
-    });
+    /*fetch('UserHistoryService').then(function(resultado) {
+     return resultado.json();
+     }).then(function(datos){
+     createSelectInvoice(datos['invoice-list']);
+     });*/
+    retrieveInvoice();
     setUser();
+}
+
+function retrieveInvoice() {
+    getJSON('InvoiceListService', {}, createSelectInvoice);
 }
 
 function createSelectInvoice(datos)
@@ -23,7 +28,7 @@ function createSelectInvoice(datos)
             refSelect.appendChild(opt);
         }
         
-        datos.forEach(fila => {
+        datos['invoice-list'].forEach(fila => {
             let opt = document.createElement('OPTION');
             opt.setAttribute('value', fila['id']);
             opt.appendChild(document.createTextNode(

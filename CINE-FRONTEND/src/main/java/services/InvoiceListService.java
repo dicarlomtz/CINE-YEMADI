@@ -44,6 +44,6 @@ public class InvoiceListService extends HttpServlet {
     
     public String InvoiceListJSON()
             throws IOException, SQLException {
-        return new InvoiceList(new InvoiceDAO().listAll()).toJSONbyId("").toString(4);
+        return new InvoiceList(new InvoiceDAO().listAll()).toJSON().toString(4);
     }
 }
