@@ -1,6 +1,7 @@
 const ticketPrice = 3000;
 let selectedSeats = 0;
 let seats = {};
+let idSelectMovie = -1;
 
 function init() {
     retrieveBillboard();
@@ -51,7 +52,7 @@ function updateBillboard(data) {
 function addFunctions() {
     let ref = document.getElementById(this.id + "funcs");
     if (ref && this) {
-
+        idSelectMovie = this.id;
         fetch(`FunctionBillboardService?id_movie=${this.id}`)
                 .then(result => {
                     if (result.status === 200) {
@@ -125,6 +126,13 @@ function getSeatsFunc(data) {
 function displaySeats(data) {
     let container = document.getElementById("seats");
     if (container) {
+        let img = document.getElementById("abtmovieImg");
+        let date = document.getElementById("abtmovieDate");
+        if(img && date){
+            img.setAttribute("src", `MovieImageService?id_movie=${idSelectMovie}`);
+            date.innerHTML = "";
+            date.appendChild(document.createTextNode(data["function-seat-list"][0]["date"]));
+        }
         container.innerHTML = "";
         let functionSeats = data["function-seat-list"];
         let currentRow = "";

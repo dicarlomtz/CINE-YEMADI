@@ -89,9 +89,10 @@ function fillForm() {
     form.appendChild(card);
 
     let button = document.createElement("BUTTON");
-    button.setAttribute("type", "submit");
+    button.setAttribute("type", "button");
     button.setAttribute("class", "btn-submit");
     button.appendChild(document.createTextNode("Confirm"));
+    button.addEventListener("click", purchase);
     form.appendChild(button);
 }
 
@@ -114,21 +115,34 @@ function invoice(data) {
 }
 
 function toPdfInvoice(data) {
-
+    
+    let row = 10;
     let doc = new jsPDF();
+    row+=10;
+    doc.text('ID de factura: ' + data["invoice"]["id"], 10, row);
+    row+=10;
+    doc.text('Fecha: ' + data["invoice"]["date"], 10, row);
+    row+=10;
+    doc.text('Nombre del cliente: ' + data["invoice"]['customer']['name'] + " " +data["invoice"]['customer']['surnames'], 10, row);
+    row+=10;
+    doc.text('Tarjeta: ' + data["invoice"]['payment-card']['number'], 10, row);
 
-    doc.text('ID de factura: ' + data["invoice"]["id"], 10, 10);
-    doc.text('Fecha: ' + data["invoice"]["date"], 10, 10);
-    doc.text('Nombre del cliente: ' + data["invoice"]['customer']['name'] + data["invoice"]['customer']['surnames'], 10, 10);
-    doc.text('Tarjeta: ' + data["invoice"]['payment-card']['number'], 10, 10);
-
-    datos["tickets"].forEach(fila => {
-        doc.text('--------------------------------------------------', 10, 10);
-        doc.text('Cine: ' + fila['cinema']['name'], 10, 10);
-        doc.text('Sala: ' + fila['room']['number'], 10, 10);
-        doc.text('Asiento: ' + fila['seat']['row'] + fila['seat']['position'], 10, 10);
-        doc.text('Precio: ' + fila['amount'], 10, 10);
-        doc.text('--------------------------------------------------', 10, 10, );
-        precioTotal += fila['amount'];
+    data["tickets"].forEach(fila => {
+        row+=10;
+        doc.text('--------------------------------------------------', 10, row);
+        row+=10;
+        doc.text('Cine: ' + fila['cinema']['name'], 10, row);
+        row+=10;
+        doc.text('Sala: ' + fila['room']['number'], 10, row);
+        row+=10;
+        doc.text('Asiento: ' + fila['seat']['row'] + fila['seat']['position'], 10, row);
+        row+=10;
+        doc.text('Precio: ' + fila['amount'], 10, row);
+        row+=10;
+        doc.text('--------------------------------------------------', 10, 10, row);
     });
+    
+    doc.save(`invoice_${data["invoice"]["id"]}.pdf`);
+    
+     window.location.replace("index.html");
 }
