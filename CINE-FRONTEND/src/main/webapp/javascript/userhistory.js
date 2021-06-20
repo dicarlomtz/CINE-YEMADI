@@ -65,7 +65,7 @@ function cargarTickets(datos)
 
     if (refTable && refFoot)
     {
-        if(refTable.rows.length != 0 && refFoot.rows.length != 0)
+        if(refTable.rows.length !== 0 && refFoot.rows.length !== 0)
         {
             for(let i = 0; i < refTable.rows.length; i++)
             {
@@ -76,7 +76,7 @@ function cargarTickets(datos)
             refFoot.deleteRow(-1);
         }
         
-        datos.forEach((fila) => {
+        datos['ticket-list'].forEach((fila) => {
 
             if (refSelect.value == fila['invoice']['id'])
             {
@@ -108,11 +108,8 @@ function cargarTickets(datos)
         var nuevaCelda;
         
         nuevaCelda = nuevaFila.insertCell(-1);
-        nuevaCelda.setAttribute('colspan', '4');
-        
-        nuevaCelda = nuevaFila.insertCell(-1);
-        nuevaCelda.textContent = 'Total:';
-        
+        nuevaCelda.setAttribute('colspan', '5');
+
         nuevaCelda = nuevaFila.insertCell(-1);
         nuevaCelda.textContent = precioTotal;
     }

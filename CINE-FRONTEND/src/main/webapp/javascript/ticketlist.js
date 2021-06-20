@@ -67,7 +67,7 @@ function cargarTickets(datos)
     
     if(refSelect && refTable && refFoot)
     {
-        if(refTable.rows.length != 0 && refFoot.rows.length != 0)
+        if(refTable.rows.length !== 0 && refFoot.rows.length !== 0)
         {
             for(let i = 0; i < refTable.rows.length; i++)
             {
@@ -110,10 +110,7 @@ function cargarTickets(datos)
         var nuevaCelda;
         
         nuevaCelda = nuevaFila.insertCell(-1);
-        nuevaCelda.setAttribute('colspan', '4');
-        
-        nuevaCelda = nuevaFila.insertCell(-1);
-        nuevaCelda.textContent = 'Total:';
+        nuevaCelda.setAttribute('colspan', '5');
         
         nuevaCelda = nuevaFila.insertCell(-1);
         nuevaCelda.textContent = precioTotal;
