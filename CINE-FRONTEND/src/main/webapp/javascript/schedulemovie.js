@@ -1,9 +1,10 @@
 function init() {
+    setUser();
+    validateAdmin();
     retrieveCinemas();
     retrieveMovies();
     retrieveFunctions();
     roomMenuInit();
-    setUser();
 }
 
 function retrieveMovies() {

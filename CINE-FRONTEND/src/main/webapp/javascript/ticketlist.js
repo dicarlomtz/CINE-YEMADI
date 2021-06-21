@@ -2,6 +2,7 @@ window.jsPDF = window.jspdf.jsPDF;
 
 function init()
 {
+    validateAdmin();
     retrieveInvoice();
     setUser();
 }

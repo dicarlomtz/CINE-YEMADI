@@ -24,7 +24,7 @@ public class AddMovieService extends HttpServlet {
             throws ServletException, IOException {
         
         try {
-            //  for (Part p : request.getParts()) {
+            
             String id = request.getParameter("id");
             String title = request.getParameter("title");
             String data = request.getParameter("data");
@@ -36,12 +36,9 @@ public class AddMovieService extends HttpServlet {
                 }
             }
             Part p = request.getPart("image");
-            //String form = p.getName();
             String fileName = p.getSubmittedFileName();
             if (fileName.isEmpty()) {
-                //request.setAttribute("mensaje",
-                //       "Se omitió la selección del archivo.");
-                // break;
+               //error
             }
             String type = p.getContentType();
             InputStream image = p.getInputStream();
@@ -50,17 +47,10 @@ public class AddMovieService extends HttpServlet {
                 MovieDAO dao = new MovieDAO();
                 try {
                     dao.add(id, new Movie(id, title, data, billboard, type, image, length));
-                    // dao.add("´Prueba", new Movie("Prueba", "´Prueba", "Prueba", true, type, image, length));
                 } catch (Exception ex) {
-                    //request.setAttribute("mensaje",
-                    //        String.format("Excepción: '%s'", ex.getMessage()));
                 }
             } else {
-                // request.setAttribute("mensaje",
-                //         "El formato del archivo es incorrecto.");
-                // break;
             }
-            //}
         } catch (IOException | ServletException ex) {
             request.setAttribute("mensaje",
                     String.format("Ocurrió una excepción: '%s'", ex.getMessage()));

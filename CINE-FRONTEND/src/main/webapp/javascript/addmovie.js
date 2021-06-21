@@ -1,5 +1,6 @@
 function init(){
     setUser();
+    validateAdmin();
 }
 
 function validateForm() {

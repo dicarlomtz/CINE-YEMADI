@@ -50,6 +50,7 @@ function purchase() {
 
 function fillForm() {
     setUser();
+    validateCustomer();
     let form = document.getElementById("conForm");
 
     if (sessionStorage.getItem("user") === null) {

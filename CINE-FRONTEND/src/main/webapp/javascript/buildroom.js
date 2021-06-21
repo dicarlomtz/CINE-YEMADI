@@ -1,5 +1,6 @@
 function init() {
     setUser();
+    validateAdmin();
     retrieveCinemas();
     retrieveRooms();
 }

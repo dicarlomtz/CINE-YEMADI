@@ -5,8 +5,10 @@ function setUser() {
     let user = sessionStorage.getItem("user");
     if (user) {
         user = JSON.parse(user);
-        var accountElement = document.getElementById("account"); //se refiere al boton de hacer login
+        let accountElement = document.getElementById("account"); //se refiere al boton de hacer login
+        let registerElement = document.getElementById("register");
         accountElement.innerHTML = "";
+        registerElement.remove();
         accountElement.appendChild(document.createTextNode(user["id"])); //cambia el texto por account, deberia decir el id del que loggueo
 
         if (user["rol"]) {

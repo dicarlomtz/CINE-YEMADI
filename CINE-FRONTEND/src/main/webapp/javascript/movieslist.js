@@ -1,7 +1,9 @@
 function init()
 {
-    retrieveMovies();
+    validateAdmin();
     setUser();
+    retrieveMovies();
+    
 }
 
 function retrieveMovies() {
