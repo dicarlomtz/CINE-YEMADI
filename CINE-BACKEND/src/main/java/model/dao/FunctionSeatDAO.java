@@ -32,22 +32,16 @@ public class FunctionSeatDAO extends AbstractDAO<String, FunctionSeat> {
             throws SQLException, IOException {
         FunctionSeat r = null;
         String[] parameters = id.split("-");
-        for (String p : parameters) {
-            System.out.println("Re: " + p);
-        }
-        int index = 1;
+        
         try (Connection cnx = db.getConnection();
                 PreparedStatement stm = cnx.prepareStatement(getCRUD().getRetrieveCmd())) {
             stm.clearParameters();
-            System.out.println("Re: " + index + " " + parameters[0]);
+            
             stm.setInt(1, Integer.parseInt(parameters[0]));
-            System.out.println("Re: " + index + " " + parameters[1]);
             stm.setInt(2, Integer.parseInt(parameters[1]));
-            System.out.println("Re: " + index + " " + parameters[2]);
             stm.setTimestamp(3, new Timestamp(Long.parseLong(parameters[2])));
-            System.out.println("Re: " + index + " " + parameters[3]);
             stm.setString(4, parameters[3]);
-            System.out.println("Re: " + index + " " + parameters[4]);
+
             stm.setInt(5, Integer.parseInt(parameters[4]));
 
             try (ResultSet rs = stm.executeQuery()) {

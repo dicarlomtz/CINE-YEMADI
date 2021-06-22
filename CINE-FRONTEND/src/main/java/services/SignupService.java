@@ -24,7 +24,7 @@ import org.json.JSONObject;
 @WebServlet(name = "SignupService", urlPatterns = {"/SignupService"})
 @MultipartConfig
 public class SignupService extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
@@ -41,7 +41,7 @@ public class SignupService extends HttpServlet {
                         json.getString("telephone"),
                         new PaymentCard(json.getString("card"))
                 );
-                new CustomerDAO().add(cust.getId(), cust);
+
                 User user = new User(
                         json.getString("identification"),
                         cust,
@@ -51,7 +51,13 @@ public class SignupService extends HttpServlet {
                 if (Objects.isNull(user)) {
                     throw new IllegalArgumentException();
                 }
+                try {
+                    new CustomerDAO().add(cust.getId(), cust);
+                } catch (Exception ex) {
+                    //Ya existe el cliente
+                }
                 new UserDAO().add(user.getId(), user);
+
                 res.put("result", "valid");
                 res.put("user", user.toJSON());
             } catch (SQLException | IOException ex) {
@@ -104,7 +110,7 @@ public class SignupService extends HttpServlet {
     private String toUTF8String(String s) throws UnsupportedEncodingException {
         return encoding.isPresent() ? s : new String(s.getBytes(), StandardCharsets.UTF_8);
     }
-    
+
     private Optional<String> encoding;
-    
+
 }
