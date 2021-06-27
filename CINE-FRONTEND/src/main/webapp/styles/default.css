@@ -123,31 +123,32 @@ El cual se encuentra en el index.html y funciona como intermedio para reservar a
 */
 
 .modal {
-    margin-left: 40%;
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 999; /* Sit on top */
+    margin-left: 30%;
+    display: none;
+    position: fixed;
+    z-index: 999;
     left: 0;
     top: 0;
 }
-/* Modal Content/Box */
+
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    background-color: rgb(28, 39, 39);
+    margin: 12% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 90%; 
 }
-/* The Close Button */
+
 .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
+
 .close:hover,
 .close:focus {
-    color: black;
+    color: red;
     text-decoration: none;
     cursor: pointer;
 }
@@ -156,7 +157,7 @@ El cual se encuentra en el index.html y funciona como intermedio para reservar a
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column
+    flex-direction: column;
 }
 .movie-container select {
     appearance: none;
@@ -168,6 +169,7 @@ El cual se encuentra en el index.html y funciona como intermedio para reservar a
     font-size: 14px;
     border-radius: 5px;
 }
+
 .container {
     perspective: 1000px;
     margin: 40px 0;
@@ -176,6 +178,7 @@ El cual se encuentra en el index.html y funciona como intermedio para reservar a
     justify-content: center;
     align-items: center;
 }
+
 .seat {
     background-color: #444451;
     height: 12px;
@@ -188,23 +191,29 @@ El cual se encuentra en el index.html y funciona como intermedio para reservar a
 .selected {
     background-color: blue;
 }
+
 .occupied {
     background-color: red;
 }
+
 .seat:nth-of-type(2) {
     margin-right: 18px;
 }
+
 .seat:nth-last-of-type(2) {
     margin-left: 18px;
 }
+
 .seat:not(.occupied):hover {
     cursor: pointer;
     transform: scale(1.2);
 }
+
 .showcase .seat:not(.occupied):hover {
     cursor: default;
     transform: scale(1);
 }
+
 .showcase {
     display: flex;
     justify-content: space-between;
@@ -214,20 +223,24 @@ El cual se encuentra en el index.html y funciona como intermedio para reservar a
     border-radius: 5px;
     color: #777;
 }
+
 .showcase li {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 10px;
 }
+
 .showcase li small {
     margin-left: 2px;
 }
+
 .row {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .screen {
     background: blue;
     height: 70px;
@@ -236,9 +249,11 @@ El cual se encuentra en el index.html y funciona como intermedio para reservar a
     transform: rotateX(-45deg);
     box-shadow: 0 3px 10px rgba(255,255,255,0.7);
 }
+
 p.text {
     margin: 40px 0;
 }
+
 p.text span {
     color: #0081cb;
     font-weight: 600;

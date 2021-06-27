@@ -55,7 +55,11 @@
                 <input type="text" class="input-style" id="id" name="id" placeholder="Identificador" required>
                 <input type="text" class="input-style" id="title" name="title" placeholder="Titulo" required>
                 <input type="text" class="input-style" id="data" name="data" placeholder="Descripcion" required>
-                <input type="checkbox" class="input-style" id="billboard" name="billboard" placeholder="En cartelera">
+                <label style="color: white;" for="billboard">
+                    Poner en cartelera
+                    <input type="checkbox" class="input-style" id="billboard" name="billboard">
+                </label><br><br>
+
                 <input type="file" class="input-style" id="image" name="image" title="Se requiere una imagen" required/>
                 <button type="submit" onclick="validateForm();" class="btn-submit" >Agregar</button>
             </form>
