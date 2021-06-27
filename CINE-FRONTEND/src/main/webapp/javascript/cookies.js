@@ -1,3 +1,13 @@
+/*
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #2, Cine
+*/
+
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));

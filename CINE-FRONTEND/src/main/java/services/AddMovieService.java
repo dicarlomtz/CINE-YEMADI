@@ -1,10 +1,18 @@
+/*
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #2, Cine
+*/
+
 package services;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;

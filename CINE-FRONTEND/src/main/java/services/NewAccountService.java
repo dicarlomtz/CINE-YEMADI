@@ -1,8 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #2, Cine
+*/
+
 package services;
 
 import java.io.IOException;
