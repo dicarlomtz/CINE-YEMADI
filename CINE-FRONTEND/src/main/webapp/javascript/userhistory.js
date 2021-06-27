@@ -2,6 +2,7 @@ function init()
 {
     retrieveInvoice();
     setUser();
+    validateCustomer();
 }
 
 function retrieveInvoice() {

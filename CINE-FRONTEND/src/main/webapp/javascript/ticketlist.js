@@ -2,9 +2,9 @@ window.jsPDF = window.jspdf.jsPDF;
 
 function init()
 {
+    setUser();
     validateAdmin();
     retrieveInvoice();
-    setUser();
 }
 
 function retrieveInvoice() {

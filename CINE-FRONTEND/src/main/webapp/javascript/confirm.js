@@ -1,44 +1,54 @@
 window.jsPDF = window.jspdf.jsPDF;
 let purchaseData;
 
+function init(){
+    setUser();
+    fillForm();
+}
+
 function purchase() {
-    purchaseData = new FormData();
-    let user = sessionStorage.getItem("user");
-    if (user) {
-        let data = {};
-        data["registered"] = true;
-        data["user"] = JSON.parse(user);
-        user = data;
-    } else {
-        let name = document.getElementById("name");
-        let id = document.getElementById("id");
-        let surname = document.getElementById("surname");
-        if (name && id && surname) {
-            if (name.value !== null && id.value !== null && surname.value !== null) {
-                user = {};
-                user["user"] = {"id": id.value, "name": name.value, "surname": surname.value};
-                user["registered"] = false;
+    if (parseInt(getCookie("selectedSeats")) > 0) {
+         purchaseData = new FormData();
+        let user = sessionStorage.getItem("user");
+        if (user) {
+            let data = {};
+            data["registered"] = true;
+            data["user"] = JSON.parse(user);
+            user = data;
+        } else {
+            let name = document.getElementById("name");
+            let id = document.getElementById("id");
+            let surname = document.getElementById("surname");
+            if (name && id && surname) {
+                if (name.value !== null && id.value !== null && surname.value !== null) {
+                    user = {};
+                    user["user"] = {"id": id.value, "name": name.value, "surname": surname.value};
+                    user["registered"] = false;
+                } else {
+                    window.location.replace("index.html");
+                    alert("No data entered");
+                }
             } else {
                 window.location.replace("index.html");
                 alert("No data entered");
             }
-        } else {
-            window.location.replace("index.html");
-            alert("No data entered");
         }
-    }
 
-    let card = document.getElementById("card");
-    if (card) {
-        if (card.value !== null) {
-            user["card"] = card.value;
-            user["seats"] = JSON.parse(getCookie("seats"));
-            purchaseData.append("user", JSON.stringify(user));
-            doPurchase();
+        let card = document.getElementById("card");
+        if (card) {
+            if (card.value !== null) {
+                user["card"] = card.value;
+                user["seats"] = JSON.parse(getCookie("seats"));
+                purchaseData.append("user", JSON.stringify(user));
+                doPurchase();
+            } else {
+                window.location.replace("index.html");
+                alert("No data entered");
+
+            }
         } else {
             window.location.replace("index.html");
             alert("No data entered");
-
         }
     } else {
         window.location.replace("index.html");
@@ -49,8 +59,6 @@ function purchase() {
 
 
 function fillForm() {
-    setUser();
-    validateCustomer();
     let form = document.getElementById("conForm");
 
     if (sessionStorage.getItem("user") === null) {
@@ -106,8 +114,8 @@ function doPurchase() {
 }
 
 function invoice(data) {
-    setCookie("selectedSeats", -1, 1);
-    setCookie("seats", null, 1);
+    setCookie("selectedSeats", 0, 1);
+    setCookie("seats", {}, 1);
     purchaseData = null;
     console.log(data);
     if (data["result"] === "valid") {
@@ -116,34 +124,34 @@ function invoice(data) {
 }
 
 function toPdfInvoice(data) {
-    
+
     let row = 10;
     let doc = new jsPDF();
-    row+=10;
+    row += 10;
     doc.text('ID de factura: ' + data["invoice"]["id"], 10, row);
-    row+=10;
+    row += 10;
     doc.text('Fecha: ' + data["invoice"]["date"], 10, row);
-    row+=10;
-    doc.text('Nombre del cliente: ' + data["invoice"]['customer']['name'] + " " +data["invoice"]['customer']['surnames'], 10, row);
-    row+=10;
+    row += 10;
+    doc.text('Nombre del cliente: ' + data["invoice"]['customer']['name'] + " " + data["invoice"]['customer']['surnames'], 10, row);
+    row += 10;
     doc.text('Tarjeta: ' + data["invoice"]['payment-card']['number'], 10, row);
 
     data["tickets"].forEach(fila => {
-        row+=10;
+        row += 10;
         doc.text('--------------------------------------------------', 10, row);
-        row+=10;
+        row += 10;
         doc.text('Cine: ' + fila['cinema']['name'], 10, row);
-        row+=10;
+        row += 10;
         doc.text('Sala: ' + fila['room']['number'], 10, row);
-        row+=10;
+        row += 10;
         doc.text('Asiento: ' + fila['seat']['row'] + fila['seat']['position'], 10, row);
-        row+=10;
+        row += 10;
         doc.text('Precio: ' + fila['amount'], 10, row);
-        row+=10;
+        row += 10;
         doc.text('--------------------------------------------------', 10, 10, row);
     });
-    
+
     doc.save(`invoice_${data["invoice"]["id"]}.pdf`);
-    
-     window.location.replace("index.html");
+
+    window.location.replace("index.html");
 }

@@ -128,7 +128,7 @@ function displaySeats(data) {
     if (container) {
         let img = document.getElementById("abtmovieImg");
         let date = document.getElementById("abtmovieDate");
-        if(img && date){
+        if (img && date) {
             img.setAttribute("src", `MovieImageService?id_movie=${idSelectMovie}`);
             date.innerHTML = "";
             date.appendChild(document.createTextNode(data["function-seat-list"][0]["date"]));
@@ -182,8 +182,6 @@ function selectSeat() {
                 selectedSeats--;
                 delete seats[this.id];
             }
-            setCookie("selectedSeats", selectedSeats, 1);
-            setCookie("seats", JSON.stringify(seats), 1);
             updateSelectedCount();
         } else {
             alert("Ocuppied");
@@ -194,19 +192,20 @@ function selectSeat() {
 function cleanSeats() {
     selectedSeats = 0;
     seats = {};
-    setCookie("selectedSeats", -1, 1);
-    setCookie("seats", "", 1);
+    setCookie("selectedSeats", 0, 1);
+    setCookie("seats", {}, 1);
 
     updateSelectedCount();
     closeSeatSelector();
 }
 
 function validatePurchase() {
-    let ss = getCookie("selectedSeats");
-    if (parseInt(ss) <= 0) {
+    if (selectedSeats <= 0) {
         window.location.replace("index.html");
         alert("No seats selected");
     } else {
+        setCookie("selectedSeats", selectedSeats, 1);
+        setCookie("seats", JSON.stringify(seats), 1);
         window.location.replace("confirm.html")
     }
 }
