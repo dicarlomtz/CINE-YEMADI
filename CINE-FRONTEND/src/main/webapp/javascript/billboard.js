@@ -1,12 +1,12 @@
 /*
-    Universidad Nacional de Costa Rica
-    Escuela de Informática
-    EIF209 Programación IV, ciclo I 2021
-    Mauricio Gutiérrez Vásquez 118260119
-    Adolfo Di Carlo Martínez Martínez 118050228
-    Yeikol Villalobos Herrera 702670531
-    Proyecto #2, Cine
-*/
+ Universidad Nacional de Costa Rica
+ Escuela de Informática
+ EIF209 Programación IV, ciclo I 2021
+ Mauricio Gutiérrez Vásquez 118260119
+ Adolfo Di Carlo Martínez Martínez 118050228
+ Yeikol Villalobos Herrera 702670531
+ Proyecto #2, Cine
+ */
 
 const ticketPrice = 3000;
 let selectedSeats = 0;
@@ -34,7 +34,7 @@ function updateBillboard(data) {
             pdiv.setAttribute("class", "movie-box dropdown");
             pdiv.setAttribute("id", movie["id"]);
 
-            pdiv.addEventListener("mouseover", addFunctions);
+            pdiv.addEventListener("mouseover", selectMovie);
 
             let mdiv = document.createElement("DIV");
             mdiv.setAttribute("class", "movie-card");
@@ -53,17 +53,24 @@ function updateBillboard(data) {
             pdiv.appendChild(fdiv);
 
             ref.appendChild(pdiv);
+            addFunctions(movie["id"]);
 
         });
 
     }
 }
 
-function addFunctions() {
-    let ref = document.getElementById(this.id + "funcs");
-    if (ref && this) {
+function selectMovie() {
+    if (this) {
         idSelectMovie = this.id;
-        fetch(`FunctionBillboardService?id_movie=${this.id}`)
+    }
+}
+
+function addFunctions(id) {
+    let ref = document.getElementById(id + "funcs");
+    if (ref) {
+
+        fetch(`FunctionBillboardService?id_movie=${id}`)
                 .then(result => {
                     if (result.status === 200) {
                         return result.json();
@@ -114,7 +121,7 @@ function seatSelector() {
 }
 
 function closeSeatSelector() {
-    // When the user clicks on <span> (x), close the modal
+
     var span = document.getElementsByClassName("close")[0];
     var modal = document.getElementById("myModal");
     span.onclick = function () {
@@ -216,7 +223,7 @@ function validatePurchase() {
     } else {
         setCookie("selectedSeats", selectedSeats, 1);
         setCookie("seats", JSON.stringify(seats), 1);
-        window.location.replace("confirm.html")
+        window.location.replace("confirm.html");
     }
 }
 
