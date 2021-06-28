@@ -44,7 +44,7 @@ public class MovieDAO extends AbstractDAO<String, Movie> {
                 rs.getBoolean("cartelera"),
                 rs.getString("tipo_imagen"),
                 rs.getBinaryStream("imagen"),
-                rs.getInt("tamaño")
+                rs.getInt("tamano")
         );
     }
 
