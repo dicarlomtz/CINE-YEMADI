@@ -12,6 +12,7 @@ const ticketPrice = 3000;
 let selectedSeats = 0;
 let seats = {};
 let idSelectMovie = -1;
+let funcMovies = {};
 
 function init() {
     retrieveBillboard();
@@ -23,6 +24,10 @@ function retrieveBillboard() {
 }
 
 function updateBillboard(data) {
+    refBtn = document.getElementById("close");
+    if (refBtn) {
+        refBtn.addEventListener("click", cleanSeats);
+    }
     ref = document.getElementById("billboard");
     if (ref) {
 
@@ -34,7 +39,7 @@ function updateBillboard(data) {
             pdiv.setAttribute("class", "movie-box dropdown");
             pdiv.setAttribute("id", movie["id"]);
 
-            pdiv.addEventListener("mouseover", selectMovie);
+           // pdiv.addEventListener("mouseover", selectMovie);
 
             let mdiv = document.createElement("DIV");
             mdiv.setAttribute("class", "movie-card");
@@ -60,10 +65,9 @@ function updateBillboard(data) {
     }
 }
 
-function selectMovie() {
-    if (this) {
-        idSelectMovie = this.id;
-    }
+function selectMovie(id) {
+
+    idSelectMovie = id;
 }
 
 function addFunctions(id) {
@@ -89,6 +93,7 @@ function addFunctions(id) {
                         enF.appendChild(document.createTextNode(f["date"]));
                         enF.setAttribute("id", f["key"]);
                         enF.setAttribute("href", "#");
+                        funcMovies[f["key"]] = id;
                         enF.addEventListener("click", seatSelector);
 
                         fdiv.appendChild(enF);
@@ -115,6 +120,7 @@ function updateSelectedCount() {
 
 /**MODAL ASIENTOS***/
 function seatSelector() {
+    selectMovie(funcMovies[this.id]);
     var modal = document.getElementById("myModal");
     loadSeats(this.id);
     modal.style.display = "block";
